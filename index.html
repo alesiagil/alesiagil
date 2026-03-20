@@ -41,7 +41,7 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: stretch; justify-content: space-between;
       padding: 0 64px;
-      height: 108px;
+      height: 97px;
       box-shadow: inset 0 -1px 0 var(--pink);
       background: var(--dark-bg-hero);
       transition: background 0.3s, box-shadow 0.3s;
@@ -60,7 +60,7 @@
       padding-top: 8px; padding-bottom: 0;
       text-decoration: none;
     }
-    .nav-logo-mark { height: 117px; width: auto; display: block; flex-shrink: 0; }
+    .nav-logo-mark { height: 105px; width: auto; display: block; flex-shrink: 0; }
     .nav-logo-svg .logo-outline { stroke: var(--pink); transition: stroke 0.3s; }
 
     /* Right cluster: links + CTA */
@@ -107,6 +107,7 @@
       position: relative;
       background: var(--dark-bg-hero);
       min-height: 100vh;
+      max-height: 820px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -164,9 +165,9 @@
     /* ─── HERO PHOTO ─────────────────────────────────── */
     .hero-photo-wrap {
       position: absolute;
-      right: -50px;
+      right: -80px;
       top: 0; bottom: 0;
-      width: 460px;
+      width: 560px;
       pointer-events: none;
       z-index: 0;
     }
@@ -175,15 +176,15 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(to right, #30071d 0%, rgba(48,7,29,0.55) 38%, transparent 68%),
-        linear-gradient(to bottom, #30071d 0%, transparent 18%),
-        linear-gradient(to top, #30071d 0%, transparent 12%);
+        linear-gradient(to right, #30071d 0%, rgba(48,7,29,0.5) 42%, transparent 72%),
+        linear-gradient(to bottom, #30071d 0%, transparent 22%),
+        linear-gradient(to top, #05071b 0%, rgba(5,7,27,0.45) 32%, transparent 58%);
       z-index: 1;
     }
     .hero-photo {
       width: 100%; height: 100%;
       object-fit: cover;
-      object-position: center top;
+      object-position: 30% top;
       display: block;
       opacity: 0.72;
     }
@@ -522,6 +523,35 @@
     .modal-actions { display: flex; align-items: center; justify-content: flex-end; margin-top: 4px; }
     .email-copied { display: none; color: var(--yellow); font-weight: 700; }
 
+    /* ─── SCROLL HINT ARROW ─────────────────────────── */
+    .scroll-hint {
+      position: absolute;
+      bottom: 28px;
+      left: var(--pad);
+      z-index: 2;
+      color: rgba(221, 224, 255, 0.4);
+      animation: scroll-bounce 2.2s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes scroll-bounce {
+      0%, 100% { transform: translateY(0); opacity: 0.4; }
+      50%       { transform: translateY(7px); opacity: 0.75; }
+    }
+
+    /* ─── NESTED TIMELINE ITEMS (same company) ──────── */
+    .timeline-item.nested .timeline-company { display: none; }
+    .timeline-item.nested .timeline-year-bg {
+      font-size: 54px;
+      opacity: 0.5;
+      padding-left: 48px;
+    }
+    .timeline-item.nested .timeline-header-row { padding-left: 48px; }
+    .timeline-item.nested .timeline-body      { padding-left: 82px; }
+    .timeline-item.nested .timeline-role {
+      font-size: 18px;
+      color: rgba(221, 224, 255, 0.75);
+    }
+
     @media (max-width: 960px) {
       :root { --pad: 64px; }
       .hero-name { font-size: 80px; }
@@ -578,6 +608,11 @@
     <div class="hero-photo-wrap">
       <img src="Images/headshot-1.JPG" class="hero-photo" alt="Alesia Gil" />
     </div>
+    <div class="scroll-hint" aria-hidden="true">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </div>
   </section>
 
   <!-- CAREER SECTION -->
@@ -592,9 +627,9 @@
       <p class="role-title">Lead Designer</p>
       <p class="role-company">Insight by Nemera · Chicago</p>
       <ul class="role-bullets">
-        <li>Led design across a suite of regulated MedTech products — embedded instruments, enterprise web platforms, and a native app — from 0→1 through FDA submission</li>
+        <li>Led design across 5+ regulated MedTech products — embedded systems, enterprise web platforms, and native desktop and mobile apps — from 0→1 through FDA submission</li>
         <li>Unified fragmented clinical workflows across multiple platforms, consistently cutting training time and reducing complexity for users</li>
-        <li>Developed a design process that cut project phase timelines by 67% — through agile research–design cycles and scalable systems built across 5+ products</li>
+        <li>Built scalable design systems that outlast any individual contributor</li>
       </ul>
       <p class="role-award">
         <span class="role-award-star">★</span>
@@ -608,8 +643,8 @@
     <!-- Timeline — always open, bullets animate on scroll -->
     <div class="timeline">
 
-      <!-- 2022–24: promotion at Insight (small year) -->
-      <div class="timeline-item promotion" id="tl1">
+      <!-- 2022–24: Senior at Insight (nested under current role) -->
+      <div class="timeline-item nested" id="tl1">
         <div class="timeline-trigger">
           <div class="timeline-year-bg">2022-24</div>
           <div class="timeline-header-row">
@@ -622,15 +657,13 @@
         <div class="timeline-body">
           <ul>
             <li>A client filed a patent for a UI component I designed — one of the rarest outcomes in product design.</li>
-            <li>Designed across 5+ product types: embedded instruments, web platforms, mobile native — all in a single regulated environment</li>
-            <li>Cut project timelines by up to 67% with a UX process rigorous enough to be adopted org-wide</li>
-            <li>Built design systems that reduced engineering uncertainty by 50%+, documented to outlast any individual contributor</li>
+            <li>Led a platform overhaul that eliminated 5 redundant tools, cut training time from days to hours, and achieved 98% user satisfaction</li>
           </ul>
         </div>
       </div>
 
-      <!-- 2019–22: new job at Insight (big year) -->
-      <div class="timeline-item new-job" id="tl2">
+      <!-- 2019–22: first role at Insight (nested under current role) -->
+      <div class="timeline-item nested" id="tl2">
         <div class="timeline-trigger">
           <div class="timeline-year-bg">2019-22</div>
           <div class="timeline-header-row">
@@ -643,14 +676,22 @@
         <div class="timeline-body">
           <ul>
             <li>The company's first dedicated digital designer — introduced UX/UI to an existing design org and established the standards and process for regulated MedTech product design</li>
-            <li>Designed 0→1 platforms for life-critical clinical workflows in regulated MedTech</li>
-            <li>Dismantled a waterfall process that was slowing delivery and replaced it with an agile UX model the org still runs on today</li>
+            <li>Recognized a waterfall process that was slowing delivery and helped replace it with an agile UX model that cut timelines by 67% — still running org-wide today</li>
           </ul>
         </div>
       </div>
 
-      <!-- 2016–19: promotion at Best Impressions (small year) -->
-      <div class="timeline-item promotion" id="tl3">
+      <!-- GWU Certificate: 2018 — between Insight (2019-22) and Best Impressions (2016-19) -->
+      <div class="education-item" id="edu">
+        <div class="edu-year-bg">2018</div>
+        <div class="edu-content">
+          <p class="edu-degree">Professional Studies Certificate, UX/UI Design</p>
+          <p class="edu-school">George Washington University</p>
+        </div>
+      </div>
+
+      <!-- 2016–19: Lead at Best Impressions (big year, new company) -->
+      <div class="timeline-item new-job" id="tl3">
         <div class="timeline-trigger">
           <div class="timeline-year-bg">2016-19</div>
           <div class="timeline-header-row">
@@ -662,15 +703,14 @@
         </div>
         <div class="timeline-body">
           <ul>
-            <li>Ran design, sales, and delivery across 10+ simultaneous client projects — the full loop, not just the craft</li>
-            <li>4.8/5 client satisfaction across fully custom, high-end work with zero margin for off-the-shelf solutions</li>
-            <li>Grew average project revenue by 20% through sharp creative instincts and knowing exactly when to push scope</li>
+            <li>Managed a rolling slate of 10+ simultaneous client projects at any given time — designing, selling, and delivering the full loop independently</li>
+            <li>4.8/5 client satisfaction on fully custom projects I drove end-to-end — from sales and briefing through design and production</li>
           </ul>
         </div>
       </div>
 
-      <!-- 2015–16: new job at Best Impressions (big year) -->
-      <div class="timeline-item new-job" id="tl4">
+      <!-- 2015–16: Designer at Best Impressions (nested under 2016-19) -->
+      <div class="timeline-item nested" id="tl4">
         <div class="timeline-trigger">
           <div class="timeline-year-bg">2015-16</div>
           <div class="timeline-header-row">
@@ -682,21 +722,12 @@
         </div>
         <div class="timeline-body">
           <ul>
-            <li>The origin: print, illustration, craft. Bespoke event branding for high-end clients — weddings, galas, luxury events</li>
-            <li>Started as the sole designer; ended as the de facto sales lead, production manager, and estimator</li>
-            <li>Grew client relationships and increased sales 5x through strong retention, satisfaction, and tailored design solutions.</li>
+            <li>Print, graphic design, illustration — bespoke visual identities and event branding for high-end clients; grew client relationships and increased sales 5x</li>
           </ul>
         </div>
       </div>
 
-      <!-- Education -->
-      <div class="education-item" id="edu">
-        <div class="edu-year-bg">2018</div>
-        <div class="edu-content">
-          <p class="edu-degree">Professional Studies Certificate, UX/UI Design</p>
-          <p class="edu-school">George Washington University</p>
-        </div>
-      </div>
+      <!-- Education: Bachelor's -->
       <div class="education-item">
         <div class="edu-year-bg">2014</div>
         <div class="edu-content">
