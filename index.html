@@ -33,6 +33,7 @@
       font-size: 17px;
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
     /* ─── NAV ──────────────────────────────────────── */
@@ -160,6 +161,36 @@
     .hero-body.visible { opacity: 1; transform: none; }
     .hero-body p + p { margin-top: 16px; }
 
+    /* ─── HERO PHOTO ─────────────────────────────────── */
+    .hero-photo-wrap {
+      position: absolute;
+      right: -50px;
+      top: 0; bottom: 0;
+      width: 460px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero-photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to right, #30071d 0%, rgba(48,7,29,0.55) 38%, transparent 68%),
+        linear-gradient(to bottom, #30071d 0%, transparent 18%),
+        linear-gradient(to top, #30071d 0%, transparent 12%);
+      z-index: 1;
+    }
+    .hero-photo {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      opacity: 0.72;
+    }
+    @media (max-width: 960px) {
+      .hero-photo-wrap { display: none; }
+    }
+
     /* ─── CAREER SECTION ────────────────────────────── */
     .career-section { background: var(--dark-bg); padding: 80px var(--pad) 120px; }
 
@@ -257,12 +288,12 @@
     .education-item::before {
       content: '';
       position: absolute;
-      left: -14px; /* centers 24px dot on 4px border: -(24/2 + 4/2) */
-      top: 56px;  /* aligns with vertical center of 88px year: 16px padding + 44px half-height */
-      width: 24px; height: 24px;
+      left: -8px; /* centers 10px dot on 4px border: -(10/2 + 4/2) */
+      top: 50px;  /* aligns with vertical center of 72px year: 16px padding + 36px half-height - 5px half-dot */
+      width: 10px; height: 10px;
       border-radius: 50%;
-      background: #1B2275;
-      opacity: 1;
+      background: #DDE0FF;
+      opacity: 0.6;
       z-index: 1;
     }
 
@@ -541,8 +572,11 @@
       <p class="hero-headline">I design complex enterprise systems<br>with clarity and intention.</p>
       <div class="hero-body">
         <p>I'm a senior product designer specializing in regulated MedTech, where the stakes are real and the workflows are unforgiving.</p>
-        <p>This portfolio is also an experiment: exploring how AI can sharpen design thinking, accelerate decisions, and build better systems — without losing the human judgment that makes design matter.</p>
+        <p>This portfolio is also an exploration: how AI can sharpen design thinking — without losing the human judgment that makes design matter.</p>
       </div>
+    </div>
+    <div class="hero-photo-wrap">
+      <img src="Images/headshot-1.JPG" class="hero-photo" alt="Alesia Gil" />
     </div>
   </section>
 
@@ -558,9 +592,9 @@
       <p class="role-title">Lead Designer</p>
       <p class="role-company">Insight by Nemera · Chicago</p>
       <ul class="role-bullets">
-        <li>Led design on an FDA-cleared enterprise platform now used by thousands of clinicians globally — from 0→1 through regulatory submission</li>
-        <li>Unified fragmented clinical workflows into a single cohesive platform, cutting training from days to hours</li>
-        <li>98%+ user satisfaction, sustained across multiple product cycles</li>
+        <li>Led design across a suite of regulated MedTech products — embedded instruments, enterprise web platforms, and a native app — from 0→1 through FDA submission</li>
+        <li>Unified fragmented clinical workflows across multiple platforms, consistently cutting training time and reducing complexity for users</li>
+        <li>Developed a design process that cut project phase timelines by 67% — through agile research–design cycles and scalable systems built across 5+ products</li>
       </ul>
       <p class="role-award">
         <span class="role-award-star">★</span>
@@ -587,7 +621,7 @@
         </div>
         <div class="timeline-body">
           <ul>
-            <li>A client filed a patent for a UI component I designed — a rare outcome, and the highest form of validation in a regulated space</li>
+            <li>A client filed a patent for a UI component I designed — one of the rarest outcomes in product design.</li>
             <li>Designed across 5+ product types: embedded instruments, web platforms, mobile native — all in a single regulated environment</li>
             <li>Cut project timelines by up to 67% with a UX process rigorous enough to be adopted org-wide</li>
             <li>Built design systems that reduced engineering uncertainty by 50%+, documented to outlast any individual contributor</li>
@@ -608,7 +642,7 @@
         </div>
         <div class="timeline-body">
           <ul>
-            <li>Joined as the company's first UX/UI designer — built the discipline from scratch: standards, process, and culture included</li>
+            <li>The company's first dedicated digital designer — introduced UX/UI to an existing design org and established the standards and process for regulated MedTech product design</li>
             <li>Designed 0→1 platforms for life-critical clinical workflows in regulated MedTech</li>
             <li>Dismantled a waterfall process that was slowing delivery and replaced it with an agile UX model the org still runs on today</li>
           </ul>
@@ -650,19 +684,26 @@
           <ul>
             <li>The origin: print, illustration, craft. Bespoke event branding for high-end clients — weddings, galas, luxury events</li>
             <li>Started as the sole designer; ended as the de facto sales lead, production manager, and estimator</li>
-            <li>Grew the division from $20K to $100K in gross sales. Solo. In under two years.</li>
+            <li>Grew client relationships and increased sales 5x through strong retention, satisfaction, and tailored design solutions.</li>
           </ul>
         </div>
       </div>
 
       <!-- Education -->
       <div class="education-item" id="edu">
-        <div class="edu-year-bg">2010-14</div>
+        <div class="edu-year-bg">2018</div>
         <div class="edu-content">
-          <p class="edu-degree">Bachelor's degree in Illustration and Graphic Design</p>
+          <p class="edu-degree">Professional Studies Certificate, UX/UI Design</p>
+          <p class="edu-school">George Washington University</p>
+        </div>
+      </div>
+      <div class="education-item">
+        <div class="edu-year-bg">2014</div>
+        <div class="edu-content">
+          <p class="edu-degree">Bachelor's, Illustration and Graphic Design</p>
           <p class="edu-school">Centro de Arte y Diseño · Caracas, Venezuela</p>
         </div>
-      </div><!-- end .education-item -->
+      </div><!-- end education -->
 
     </div><!-- end .timeline -->
 
