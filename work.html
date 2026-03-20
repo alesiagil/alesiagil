@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" sizes="512x512" href="favicon.png" />
+  <link rel="shortcut icon" href="favicon.png" />
+  <title>Work — Alesia Gil</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@1,400;1,700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --font-main:   'Inter', -apple-system, sans-serif;
+      --font-serif:  'Playfair Display', Georgia, serif;
+
+      --dark-bg:        #05071b;
+      --dark-bg-hero:   #30071d;
+      --dark-navy:      #1b2275;
+      --mid-navy:       #101548;
+      --indigo-border:  #1e2bc4;
+      --pink:           #ff1493;
+      --pink-muted:     rgba(255, 20, 147, 0.15);
+      --pink-pale:      #FFC0E2;
+      --yellow:         #ffff00;
+      --text-light:     #dde0ff;
+      --text-dim:        #DDE0FF;
+      --text-muted-dark: #DDE0FF;
+
+      --max-w: 960px;
+      --pad:   120px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-main);
+      background: var(--dark-bg);
+      color: var(--text-light);
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ──────────────────────────────────────── */
+    .site-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: stretch; justify-content: space-between;
+      padding: 0 64px;
+      height: 108px;
+      box-shadow: inset 0 -1px 0 var(--pink);
+      background: var(--dark-bg-hero);
+      transition: background 0.3s, box-shadow 0.3s;
+      overflow: visible;
+    }
+    .site-nav.scrolled {
+      background: var(--dark-bg);
+      box-shadow: inset 0 -1px 0 var(--yellow);
+    }
+    .site-nav.scrolled .nav-link { color: var(--yellow); }
+    .site-nav.scrolled .nav-cta  { border-color: var(--yellow); }
+    .site-nav.scrolled .nav-logo-svg .logo-outline { stroke: var(--yellow); }
+    .nav-right {
+      display: flex; align-items: stretch; gap: 56px;
+    }
+    .nav-logo {
+      display: flex; align-items: flex-start;
+      padding-top: 8px; padding-bottom: 0;
+      text-decoration: none;
+    }
+    .nav-logo-mark {
+      height: 117px; width: auto;
+      display: block; flex-shrink: 0;
+    }
+    .nav-logo-svg .logo-outline {
+      stroke: var(--pink);
+      transition: stroke 0.3s;
+    }
+    .nav-link {
+      font-size: 19px; font-weight: 400; color: var(--pink-pale);
+      text-decoration: none;
+      position: relative;
+      display: flex; align-items: center;
+      padding: 0;
+      box-sizing: border-box;
+      transition: transform 0.18s ease;
+    }
+    .nav-link:hover { font-weight: 900; }
+    .nav-link.active { font-weight: 900; }
+    .nav-link.active:hover { transform: translateY(-4px); }
+    .nav-link.active:active {
+      transform: translateY(2px);
+      transition: transform 0.08s ease-in;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: currentColor;
+      transform-origin: center bottom;
+      transform: scaleX(0) scaleY(0);
+      transition: transform 0.42s cubic-bezier(0.34, 1.56, 0.64, 1);
+      pointer-events: none;
+    }
+    .nav-link.active::after {
+      transform: scaleX(1) scaleY(1);
+    }
+    .nav-link.active:hover::after {
+      transform: translateY(4px) scaleX(1) scaleY(1);
+      transition: transform 0.18s ease;
+    }
+    .nav-link.active:active::after {
+      transform: translateY(-2px) scaleX(1) scaleY(1);
+      transition: transform 0.08s ease-in;
+    }
+    .nav-cta {
+      background: transparent;
+      border: 1px solid var(--pink);
+      color: white !important;
+      font-weight: 600 !important;
+      padding: 14px 28px;
+      height: auto;
+      border-radius: 10px;
+      font-size: 15px !important;
+      display: inline-flex; align-items: center;
+      align-self: center;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.2s, border-color 0.3s;
+      letter-spacing: 0.01em;
+    }
+    .nav-cta:hover { background: var(--pink-muted); border-color: var(--pink); }
+
+    /* ─── PAGE HERO ─────────────────────────────────── */
+    .page-hero {
+      position: relative;
+      background: var(--dark-bg-hero);
+      padding: 160px 180px 80px;
+      border-bottom: 1px solid var(--yellow);
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(160deg, #30071d 0%, #05071b 70%);
+      z-index: 0;
+    }
+    .page-hero-inner {
+      position: relative; z-index: 1;
+      max-width: 1440px;
+    }
+    .hero-eyebrow,
+    .page-hero .hero-eyebrow {
+      font-size: 15px; font-weight: 400;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #ffc0e2;
+      margin-bottom: 24px;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .hero-eyebrow.visible { opacity: 1; transform: none; }
+
+    .page-hero h1 {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 58px;
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--yellow);
+      letter-spacing: -0.01em;
+      margin-bottom: 24px;
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.8s ease 0.1s, transform 0.8s cubic-bezier(0.34,1.2,0.64,1) 0.1s;
+    }
+    .page-hero h1.visible { opacity: 1; transform: none; }
+
+    .hero-bar {
+      width: 60px; height: 12px;
+      background: var(--pink);
+      border-radius: 2px;
+      margin-bottom: 28px;
+      opacity: 0; transform: scaleX(0);
+      transform-origin: left;
+      transition: opacity 0.5s ease 0.3s, transform 0.6s cubic-bezier(0.34,1.4,0.64,1) 0.3s;
+    }
+    .hero-bar.visible { opacity: 1; transform: scaleX(1); }
+
+    .page-hero p {
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--text-dim);
+      max-width: 720px;
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.7s ease 0.4s, transform 0.7s ease 0.4s;
+    }
+    .page-hero p.visible { opacity: 1; transform: none; }
+
+    /* ─── WORK LIST ──────────────────────────────────── */
+    .work-list {
+      padding: 80px var(--pad) 120px;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+    .work-list-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 64px;
+    }
+
+    /* ─── CARD BASE ──────────────────────────────────── */
+    .case-card {
+      opacity: 0; transform: translateY(36px);
+      transition: opacity 0.75s ease, transform 0.75s cubic-bezier(0.34,1.2,0.64,1);
+      position: relative; /* needed for card-full-link overlay */
+    }
+    .case-card.visible { opacity: 1; transform: none; }
+    /* Full-card click overlay — transparent link covering the entire card */
+    .card-full-link {
+      position: absolute; inset: 0; z-index: 1;
+      display: block; background: transparent; border: none;
+      cursor: pointer; text-decoration: none;
+    }
+    /* Interactive elements sit above the full-card overlay */
+    .case-card .card-cta,
+    .case-card .card-cta-request,
+    .case-card .lock-overlay { position: relative; z-index: 2; }
+    .case-card:nth-child(2) { transition-delay: 0.05s; }
+    .case-card:nth-child(3) { transition-delay: 0.1s; }
+    .case-card:nth-child(4) { transition-delay: 0.15s; }
+
+    /* ─── FEATURED CARD (MatchX) ─────────────────────── */
+    .card-featured .card-image {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .card-featured .card-image img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.34,1.1,0.64,1);
+    }
+    .card-featured:hover .card-image img {
+      transform: scale(1.025);
+    }
+    .card-featured .card-image::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, rgba(48,7,29,0.35) 0%, rgba(5,7,27,0.1) 100%);
+      pointer-events: none;
+    }
+
+    .card-featured .card-content {}
+    .card-featured .card-eyebrow {
+      font-size: 15px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--text-muted-dark);
+      margin-bottom: 12px;
+    }
+    .card-featured .card-title {
+      font-size: 34px; font-weight: 900; line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--yellow);
+      margin-bottom: 6px;
+    }
+    .card-featured .card-subtitle {
+      font-size: 17px; font-weight: 300;
+      color: var(--text-light);
+      line-height: 1.4;
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+    }
+    .card-tags {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      margin-bottom: 20px;
+    }
+    .card-tag {
+      font-size: 12px; font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 40px;
+      background: rgba(221, 224, 255, 0.06);
+      border: 1px solid rgba(221, 224, 255, 0.18);
+      color: rgba(221, 224, 255, 0.7);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .card-desc {
+      font-size: 16px; font-weight: 300;
+      line-height: 1.75;
+      color: var(--text-dim);
+      max-width: 640px;
+      margin-bottom: 28px;
+    }
+    .card-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 15px; font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--yellow);
+      text-decoration: none;
+      position: relative;
+      transition: gap 0.2s ease;
+    }
+    .card-cta::after {
+      content: '';
+      position: absolute; bottom: -3px; left: 0;
+      width: 100%; height: 1px;
+      background: var(--yellow);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s cubic-bezier(0.34,1.3,0.64,1);
+    }
+    .card-cta:hover { gap: 12px; }
+    .card-cta:hover::after { transform: scaleX(1); }
+
+    /* ─── HALF CARDS (Apheresis / Blood Banking / AngioJet) ─ */
+    .card-half {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+    .card-half.flip {
+      direction: rtl;
+    }
+    .card-half.flip > * {
+      direction: ltr;
+    }
+
+    .card-half .card-image {
+      aspect-ratio: 16 / 9;
+      position: relative;
+      background: linear-gradient(135deg, #12153a 0%, #0d1030 40%, #1a0a18 100%);
+    }
+    .card-half .card-image img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      display: block;
+    }
+    .card-half .card-image::after {
+      content: '';
+      position: absolute; inset: 0;
+    }
+
+    /* NDA cards (Apheresis, AngioJet, Blood Bank) — blurred with rounded mask */
+    .card-nda .card-image {
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .card-nda .card-image img {
+      filter: blur(5px) saturate(0.8);
+      transform: scale(1.05);
+      transition: transform 0.6s cubic-bezier(0.34,1.1,0.64,1);
+    }
+    .card-nda:hover .card-image img {
+      transform: scale(1.075);
+    }
+
+    /* Blood bank only — light warm overlay to counter the grey */
+    .card-blood-bank .card-image::after {
+      background: rgba(255, 192, 226, 0.13);
+    }
+    /* Blood bank — softer blur than other NDA cards */
+    .card-blood-bank .card-image img {
+      filter: blur(3px) saturate(0.85);
+    }
+
+    /* NDA lock badge — icon only */
+    .lock-overlay {
+      position: absolute;
+      bottom: 12px; left: 12px;
+      z-index: 2;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(221, 224, 255, 0.7);
+      background: rgba(5, 7, 27, 0.72);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(221, 224, 255, 0.18);
+    }
+    .lock-overlay svg { opacity: 0.85; flex-shrink: 0; width: 20px; height: 20px; }
+
+    /* Unlocked half cards — rounded mask on container, no overlay */
+    .card-half.unlocked .card-image {
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .card-half.unlocked .card-image img {
+      transition: transform 0.6s cubic-bezier(0.34,1.1,0.64,1);
+    }
+    .card-half.unlocked:hover .card-image img {
+      transform: scale(1.025);
+    }
+    .card-half.unlocked .card-image::after {
+      display: none;
+    }
+
+    /* Request Access CTA button */
+    .card-cta-request {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 15px; font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--pink);
+      background: none; border: none; padding: 0;
+      cursor: pointer; font-family: var(--font-main);
+      position: relative;
+      transition: gap 0.2s ease;
+      margin-top: 4px;
+    }
+    .card-cta-request::after {
+      content: '';
+      position: absolute; bottom: -3px; left: 0;
+      width: 100%; height: 1px;
+      background: var(--pink);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s cubic-bezier(0.34,1.3,0.64,1);
+    }
+    .card-cta-request:hover { gap: 12px; }
+    .card-cta-request:hover::after { transform: scaleX(1); }
+
+    /* ─── REQUEST ACCESS MODAL ───────────────────────── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 500;
+      background: rgba(5, 7, 27, 0.88);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .modal-overlay.open {
+      opacity: 1; pointer-events: all;
+    }
+    .modal-card {
+      background: #0d1030;
+      border: 1px solid var(--indigo-border);
+      border-radius: 16px;
+      padding: 48px 48px;
+      max-width: 560px; width: 100%;
+      position: relative;
+      transform: translateY(24px);
+      transition: transform 0.35s cubic-bezier(0.34,1.2,0.64,1);
+    }
+    .modal-overlay.open .modal-card {
+      transform: translateY(0);
+    }
+    .modal-close {
+      position: absolute; top: 16px; right: 20px;
+      background: none; border: none; cursor: pointer;
+      color: var(--text-muted-dark);
+      font-size: 18px; line-height: 1;
+      padding: 4px;
+      transition: color 0.15s;
+      font-family: var(--font-main);
+    }
+    .modal-close:hover { color: var(--text-light); }
+    .modal-eyebrow {
+      font-size: 14px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--text-muted-dark);
+      margin-bottom: 10px;
+    }
+    .modal-title {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 29px; font-weight: 700;
+      color: var(--yellow);
+      margin-bottom: 32px;
+      line-height: 1.1;
+    }
+    .modal-desc {
+      font-size: 15px; font-weight: 300;
+      color: var(--text-dim);
+      line-height: 1.65;
+      margin-bottom: 28px;
+    }
+    .modal-form { display: flex; flex-direction: column; gap: 24px; }
+    .modal-row { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    .modal-field { display: flex; flex-direction: column; gap: 6px; }
+    .modal-label {
+      font-size: 14px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-muted-dark);
+    }
+    .modal-input, .modal-textarea {
+      background: rgba(5, 7, 27, 0.7);
+      border: 1px solid rgba(30, 43, 196, 0.45);
+      border-radius: 8px;
+      color: var(--text-light);
+      font-family: var(--font-main);
+      font-size: 15px; font-weight: 300;
+      padding: 14px 20px;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .modal-input::placeholder, .modal-textarea::placeholder { color: rgba(221,224,255,0.25); }
+    .modal-input:focus, .modal-textarea:focus { border-color: var(--pink); }
+    .modal-textarea { resize: vertical; min-height: 140px; }
+    .modal-submit {
+      margin-top: 4px;
+      background: var(--pink);
+      border: none; border-radius: 10px;
+      color: white;
+      font-family: var(--font-main);
+      font-size: 15px; font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 13px 24px;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+      align-self: flex-start;
+    }
+    .modal-submit:hover { opacity: 0.85; }
+    .modal-submit:active { transform: scale(0.97); }
+    .modal-success {
+      display: none;
+      text-align: center;
+      padding: 12px 0 4px;
+    }
+    .modal-success-check {
+      width: 48px; height: 48px;
+      border: 2px solid var(--yellow);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 20px;
+      color: var(--yellow);
+    }
+    .modal-success h3 {
+      font-size: 18px; font-weight: 700;
+      color: var(--text-light);
+      margin-bottom: 8px;
+    }
+    .modal-success p {
+      font-size: 15px; font-weight: 300;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    /* Modal actions row — password link left, submit right */
+    .modal-actions {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      margin-top: 8px;
+    }
+    .modal-password-btn {
+      font-size: 13px; font-weight: 500;
+      color: rgba(221, 224, 255, 0.35);
+      background: none; border: none; padding: 0;
+      cursor: pointer; font-family: var(--font-main);
+      transition: color 0.2s;
+    }
+    .modal-password-btn:hover { color: rgba(221, 224, 255, 0.75); }
+    .modal-error {
+      font-size: 12px; font-weight: 500;
+      color: var(--pink); margin-top: 6px; display: none;
+    }
+
+    /* Contact links in Get in Touch modal */
+    .contact-links {
+      display: flex; flex-direction: column; gap: 20px;
+      margin-bottom: 24px;
+      align-items: flex-start;
+    }
+    .contact-link-item {
+      display: inline-flex; align-items: center; gap: 10px;
+      color: var(--text-light); text-decoration: none;
+      font-size: 15px; font-weight: 400;
+      padding: 11px 14px; border-radius: 10px;
+      background: rgba(221, 224, 255, 0.04);
+      border: 1px solid rgba(221, 224, 255, 0.1);
+      transition: background 0.2s, border-color 0.2s;
+      max-width: 340px;
+      width: 100%;
+      justify-content: flex-start;
+    }
+    .contact-link-item:hover {
+      background: rgba(221, 224, 255, 0.08);
+      border-color: rgba(221, 224, 255, 0.22);
+    }
+    .contact-link-item svg { flex-shrink: 0; opacity: 0.6; }
+    .contact-email-btn { justify-content: space-between; }
+    .contact-email-btn .copy-icon { margin-left: auto; opacity: 0.5; flex-shrink: 0; }
+    .email-copied { display: none; color: var(--yellow); font-weight: 700; }
+    .contact-divider {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 24px;
+    }
+    .contact-divider::before, .contact-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: rgba(221, 224, 255, 0.1);
+    }
+    .contact-divider span {
+      font-size: 14px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(221, 224, 255, 0.28); white-space: nowrap;
+    }
+
+    .card-half .card-content {
+      padding: 8px 0;
+    }
+    .card-half .card-eyebrow {
+      font-size: 15px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(221, 224, 255, 0.45);
+      margin-bottom: 10px;
+    }
+    .card-half .card-title {
+      font-size: 24px; font-weight: 900; line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--yellow);
+      margin-bottom: 6px;
+    }
+    .card-half .card-subtitle {
+      font-size: 18px; font-weight: 700;
+      color: #DDE0FF;
+      line-height: 1.45;
+      margin-bottom: 12px;
+      letter-spacing: 0;
+    }
+    .card-half .card-desc {
+      font-size: 15px; font-weight: 400;
+      line-height: 1.7;
+      color: #DDE0FF;
+      margin-bottom: 20px;
+      max-width: 100%;
+    }
+
+    /* ─── DIVIDER ────────────────────────────────────── */
+    .work-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      margin: 0;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────── */
+    .site-footer {
+      border-top: 1px solid var(--pink);
+      padding: 40px var(--pad);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-left {
+      font-size: 16px;
+      color: var(--text-muted-dark);
+    }
+    .footer-right {
+      font-size: 16px;
+      color: var(--text-muted-dark);
+    }
+    .footer-right a {
+      color: var(--yellow);
+      text-decoration: none;
+      font-weight: 600;
+      transition: opacity 0.2s;
+    }
+    .footer-right a:hover { opacity: 0.7; }
+    .footer-linkedin {
+      display: inline-flex; align-items: center; gap: 7px;
+      color: var(--yellow);
+      text-decoration: none;
+      font-size: 16px; font-weight: 600;
+      transition: opacity 0.2s;
+    }
+    .footer-linkedin:hover { opacity: 0.7; }
+    .footer-linkedin svg { flex-shrink: 0; }
+
+    /* ─── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 960px) {
+      :root { --pad: 48px; }
+      .page-hero h1 { font-size: 43px; }
+      .card-half {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .card-half.flip { direction: ltr; }
+      .card-half.flip > * { direction: ltr; }
+      .card-half .card-image { max-width: 100%; }
+    }
+    @media (max-width: 600px) {
+      :root { --pad: 20px; }
+      .site-nav { padding: 0 20px; }
+      .page-hero { padding: 110px 20px 56px; }
+      .page-hero h1 { font-size: 34px; }
+      .work-list { padding: 48px 20px 80px; }
+      .card-half .card-title { font-size: 18px; }
+      .card-half .card-subtitle { font-size: 15px; }
+      .modal-card { padding: 28px 20px; }
+      .modal-row { grid-template-columns: 1fr; }
+      .modal-title { font-size: 25px; }
+      .site-footer { flex-direction: column; gap: 16px; padding: 28px 20px; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="site-nav" id="siteNav">
+    <a href="index.html" class="nav-logo">
+      <svg class="nav-logo-mark nav-logo-svg" viewBox="0 0 204 118" fill="none"
+           xmlns="http://www.w3.org/2000/svg" aria-label="AG Logo">
+        <path class="logo-outline" d="M174.457 1C181.771 1 187.7 6.92897 187.7 14.2422V19.4541C196.729 23.6025 203.004 32.7238 203.004 43.3145C203.004 53.905 196.729 63.0232 187.7 67.1719V88.457C187.7 95.7699 181.77 101.699 174.457 101.699H100.236C100.176 101.699 100.12 101.696 100.089 101.694C100.07 101.693 100.057 101.692 100.049 101.691V101.692C100.029 101.694 99.9704 101.699 99.9053 101.699H82.3799C77.6083 110.791 68.0814 117.001 57.0957 117.001C46.1097 117.001 36.5813 110.791 31.8096 101.699H14.2842C4.07467 101.699 -2.30572 90.6438 2.79785 81.8008L45.6094 7.63281C50.7142 -1.21063 63.4753 -1.2105 68.5801 7.63281L86.9932 39.5312V14.2422C86.9932 6.92916 92.9232 1.00043 100.236 1H174.457Z" stroke-width="2"/>
+        <path d="M87.9946 14.2416C87.9946 7.48076 93.4758 2 100.237 2H174.458C181.219 2 186.701 7.48076 186.701 14.2416V88.4564C186.701 95.2172 181.219 100.698 174.458 100.698H100.237C93.4758 100.698 87.9946 95.2172 87.9946 88.4564V14.2416Z" fill="#370821"/>
+        <path d="M147.677 68.5638C133.732 68.5638 122.427 57.2597 122.427 43.3155C122.427 29.3712 133.732 18.0671 147.677 18.0671H176.754C180.284 18.0671 183.646 18.7918 186.698 20.1005V66.5304C183.646 67.8391 180.284 68.5638 176.754 68.5638H147.677Z" fill="#830042"/>
+        <path d="M186.698 66.5303V20.1003C195.699 23.9604 202.004 32.9016 202.004 43.3153C202.004 53.729 195.699 62.6702 186.698 66.5303Z" fill="#FF1493"/>
+        <path d="M46.4757 8.13268C51.1956 -0.0442398 62.9953 -0.0442208 67.7152 8.1327L110.526 82.2999C115.246 90.4769 109.346 100.698 99.9062 100.698H14.2847C4.8449 100.698 -1.05492 90.4768 3.66496 82.2999L46.4757 8.13268Z" fill="#830042"/>
+        <path d="M32.325 100.7L81.7744 100.7C77.2833 109.815 67.899 116.087 57.0497 116.087C46.2003 116.087 36.816 109.815 32.325 100.7Z" fill="#370821"/>
+        <path d="M32.3249 100.7C30.5185 97.0336 29.5038 92.9071 29.5038 88.5436C29.5038 73.3317 41.8365 61 57.0496 61C72.2628 61 84.5954 73.3317 84.5954 88.5436C84.5954 92.9071 83.5807 97.0336 81.7743 100.7H32.3249Z" fill="#FF1493"/>
+      </svg>
+    </a>
+    <div class="nav-right">
+      <a href="work.html" class="nav-link active">Work</a>
+      <a href="#" class="nav-cta" onclick="openContactModal(); return false;">Get in Touch</a>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <p class="hero-eyebrow">Case Studies</p>
+      <h1>My work in<br>MedTech.</h1>
+      <div class="hero-bar"></div>
+      <p>The best design thinking is tested in the hardest environments. Mine happens to be MedTech — where clarity, precision, and trust aren't nice-to-haves. They save lives.</p>
+    </div>
+  </section>
+
+  <!-- WORK LIST -->
+  <section class="work-list">
+    <div class="work-list-inner">
+
+      <!-- ── Card 1: MatchX — image left ──────────────── -->
+      <article class="case-card card-half unlocked">
+        <a class="card-full-link" href="matchx.html" aria-label="View MatchX case study"></a>
+        <a href="matchx.html" class="card-image" style="text-decoration:none; display:block;">
+          <img src="thumbnails/matchx-thumbnail.png"
+               alt="MatchX transplant analytics dashboard"
+               loading="lazy" />
+        </a>
+        <div class="card-content">
+          <p class="card-eyebrow">Transplant Analytics</p>
+          <h2 class="card-title">MatchX</h2>
+          <p class="card-subtitle">The full immunogenetic story of every patient.</p>
+          <p class="card-desc">Histocompatibility labs have always worked in fragments; results here, history there, crossmatch elsewhere. MatchX consolidates the complete picture of a patient in one place for the first time.</p>
+          <a href="matchx.html" class="card-cta">View Case Study →</a>
+        </div>
+      </article>
+
+      <hr class="work-divider" />
+
+      <!-- ── Card 2: Next Gen Apheresis — image right ─── -->
+      <article class="case-card card-half flip card-nda">
+        <button class="card-full-link" onclick="openModal('Next Gen Apheresis')" aria-label="Request access to Next Gen Apheresis"></button>
+        <div class="card-image">
+          <img src="thumbnails/solo-thumbnail.png"
+               alt="Next-generation apheresis system — password protected"
+               loading="lazy" />
+          <div class="lock-overlay">
+            <svg width="20" height="20" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="6" width="10" height="8" rx="1.5" stroke="currentColor" stroke-width="1.4"/>
+              <path d="M3.5 6V4a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+        <div class="card-content">
+          <p class="card-eyebrow">Blood Collection</p>
+          <h2 class="card-title">Next Gen Apheresis</h2>
+          <p class="card-subtitle">Speed for experts. Clarity for beginners.</p>
+          <p class="card-desc">A next-generation GUI designed for operators of all levels, across platelet, plasma, and red blood cell collection.</p>
+          <button class="card-cta-request" onclick="openModal('Next Gen Apheresis')">Request Access →</button>
+        </div>
+      </article>
+
+      <hr class="work-divider" />
+
+      <!-- ── Card 3: Next Gen AngioJet — image left ───── -->
+      <article class="case-card card-half card-nda">
+        <button class="card-full-link" onclick="openModal('Next Gen AngioJet')" aria-label="Request access to Next Gen AngioJet"></button>
+        <div class="card-image">
+          <img src="thumbnails/angiojet-thumbnail.png"
+               alt="AngioJet thrombectomy system interface — password protected"
+               loading="lazy" />
+          <div class="lock-overlay">
+            <svg width="20" height="20" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="6" width="10" height="8" rx="1.5" stroke="currentColor" stroke-width="1.4"/>
+              <path d="M3.5 6V4a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+        <div class="card-content">
+          <p class="card-eyebrow">Cardiovascular Intervention</p>
+          <h2 class="card-title">Next Gen AngioJet</h2>
+          <p class="card-subtitle">From Complexity to Clarity in Vascular Surgery</p>
+          <p class="card-desc">Streamlining high-risk thrombectomy procedures with a device interface that enhances safety, reduces cognitive load, and supports confident decision-making in the OR.</p>
+          <button class="card-cta-request" onclick="openModal('Next Gen AngioJet')">Request Access →</button>
+        </div>
+      </article>
+
+      <hr class="work-divider" />
+
+      <!-- ── Card 4: Next Gen Blood Bank — image right ── -->
+      <article class="case-card card-half flip card-blood-bank card-nda">
+        <button class="card-full-link" onclick="openModal('Next Gen Blood Bank')" aria-label="Request access to Next Gen Blood Bank"></button>
+        <div class="card-image">
+          <img src="thumbnails/replicant-thumbnail.png"
+               alt="Next-generation blood banking automation — password protected"
+               loading="lazy" />
+          <div class="lock-overlay">
+            <svg width="20" height="20" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="6" width="10" height="8" rx="1.5" stroke="currentColor" stroke-width="1.4"/>
+              <path d="M3.5 6V4a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+        <div class="card-content">
+          <p class="card-eyebrow">Blood Banking</p>
+          <h2 class="card-title">Next Gen Blood Bank</h2>
+          <p class="card-subtitle">Less manual. Less risk. More reliable blood banking.</p>
+          <p class="card-desc">A redesigned end-to-end workflow that automates manual handoffs, reduces error risk, and builds confidence across every role in the transfusion lab.</p>
+          <button class="card-cta-request" onclick="openModal('Next Gen Blood Bank')">Request Access →</button>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <p class="footer-left">© 2026 Alesia Gil · UX/UI Product Designer Portfolio</p>
+    <a href="https://linkedin.com/in/alesiagil" class="footer-linkedin" target="_blank" rel="noopener" aria-label="LinkedIn — alesiagil">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+      </svg>
+      <span>alesiagil</span>
+    </a>
+  </footer>
+
+  <!-- REQUEST ACCESS MODAL -->
+  <div class="modal-overlay" id="requestModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+      <p class="modal-eyebrow" id="modalProject"></p>
+      <h2 class="modal-title" id="modalTitle">Request Access</h2>
+      <p class="modal-desc">This project is protected. Drop me a note and I'll be happy to walk you through the work — ideally over a conversation.</p>
+      <form class="modal-form" id="requestForm">
+        <div class="modal-row">
+          <div class="modal-field">
+            <label class="modal-label" for="reqName">Name</label>
+            <input class="modal-input" id="reqName" type="text" placeholder="Your name" required />
+          </div>
+          <div class="modal-field">
+            <label class="modal-label" for="reqCompany">Company</label>
+            <input class="modal-input" id="reqCompany" type="text" placeholder="Where you work" />
+          </div>
+        </div>
+        <div class="modal-field">
+          <label class="modal-label" for="reqEmail">Email</label>
+          <input class="modal-input" id="reqEmail" type="email" placeholder="you@company.com" required />
+        </div>
+        <div class="modal-field">
+          <label class="modal-label" for="reqMessage">Message <span style="font-weight:300;text-transform:none;letter-spacing:0;font-size: 12px;">(optional)</span></label>
+          <textarea class="modal-textarea" id="reqMessage" placeholder="Tell me a bit about yourself or what you're working on..."></textarea>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="modal-password-btn" id="reqPasswordBtn">Have a password?</button>
+          <button class="modal-submit" type="submit">Send Request →</button>
+        </div>
+      </form>
+      <div class="modal-success" id="modalSuccess">
+        <div class="modal-success-check">✓</div>
+        <h3>Request sent.</h3>
+        <p>Thanks for reaching out —<br>I'll get back to you shortly.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PASSWORD MODAL -->
+  <div class="modal-overlay" id="passwordModal" role="dialog" aria-modal="true">
+    <div class="modal-card" style="max-width:380px;">
+      <button class="modal-close" id="pwModalClose" aria-label="Close">✕</button>
+      <p class="modal-eyebrow" id="pwModalProject"></p>
+      <h2 class="modal-title">Enter Password</h2>
+      <p class="modal-desc">Have a password? Enter it below to access this case study directly.</p>
+      <div class="modal-field">
+        <label class="modal-label" for="pwInput">Password</label>
+        <input class="modal-input" id="pwInput" type="password" placeholder="••••••••" />
+        <p class="modal-error" id="pwError">Incorrect password — try again or request access.</p>
+      </div>
+      <div class="modal-actions" style="margin-top:20px;">
+        <button type="button" class="modal-password-btn" id="pwBackBtn">← Back to request</button>
+        <button class="modal-submit" onclick="checkPassword()">Unlock →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- GET IN TOUCH MODAL -->
+  <div class="modal-overlay" id="contactModal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button class="modal-close" id="contactModalClose" aria-label="Close">✕</button>
+      <p class="modal-eyebrow">Let's connect</p>
+      <h2 class="modal-title">Get in Touch</h2>
+      <div class="contact-links">
+        <a href="https://linkedin.com/in/alesiagil" target="_blank" rel="noopener" class="contact-link-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+          <span>linkedin.com/in/alesiagil</span>
+        </a>
+        <button class="contact-link-item contact-email-btn" onclick="copyEmail(event)">
+          <span class="email-label">alesiagil@gmail.com</span>
+          <span class="email-copied">Copied!</span>
+          <svg class="copy-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" xmlns="http://www.w3.org/2000/svg">
+            <rect x="9" y="9" width="13" height="13" rx="2"/>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+        </button>
+      </div>
+      <div class="contact-divider"><span>Or send a message</span></div>
+      <form class="modal-form" id="contactForm">
+        <div class="modal-row">
+          <div class="modal-field">
+            <label class="modal-label" for="ctName">Name</label>
+            <input class="modal-input" id="ctName" type="text" placeholder="Your name" required />
+          </div>
+          <div class="modal-field">
+            <label class="modal-label" for="ctEmail">Email</label>
+            <input class="modal-input" id="ctEmail" type="email" placeholder="you@company.com" required />
+          </div>
+        </div>
+        <div class="modal-field">
+          <label class="modal-label" for="ctMessage">Message</label>
+          <textarea class="modal-textarea" id="ctMessage" placeholder="What's on your mind?" required></textarea>
+        </div>
+        <div class="modal-actions">
+          <span></span>
+          <button class="modal-submit" type="submit">Send →</button>
+        </div>
+      </form>
+      <div class="modal-success" id="contactSuccess">
+        <div class="modal-success-check">✓</div>
+        <h3>Message sent.</h3>
+        <p>Thanks for reaching out —<br>I'll get back to you shortly.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ── Nav: transitions to dark/yellow once hero scrolls out
+    const nav      = document.getElementById('siteNav');
+    const pageHero = document.querySelector('.page-hero');
+    const NAV_H    = 80;
+    function updateNav() {
+      const trigger = pageHero.offsetTop + pageHero.offsetHeight - NAV_H;
+      nav.classList.toggle('scrolled', window.scrollY >= trigger);
+    }
+    window.addEventListener('scroll', updateNav, { passive: true });
+    updateNav();
+
+    // Intersection observer for all animated elements
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    // Hero elements
+    document.querySelectorAll('.hero-eyebrow, .page-hero h1, .hero-bar, .page-hero p').forEach(el => {
+      io.observe(el);
+    });
+
+    // Cards — staggered per card
+    const cards = document.querySelectorAll('.case-card');
+    const cardIO = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          cardIO.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    cards.forEach(card => cardIO.observe(card));
+
+    // ── Request Access Modal
+    const modal       = document.getElementById('requestModal');
+    const modalClose  = document.getElementById('modalClose');
+    const modalProjEl = document.getElementById('modalProject');
+    const requestForm = document.getElementById('requestForm');
+    const modalSuccess = document.getElementById('modalSuccess');
+
+    function openModal(projectName) {
+      modalProjEl.textContent = projectName;
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => document.getElementById('reqName').focus(), 120);
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        requestForm.reset();
+        requestForm.style.display = '';
+        modalSuccess.style.display = 'none';
+      }, 300);
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+    // ── Password Modal
+    // Set your password here ↓
+    const PORTFOLIO_PASSWORD = 'Ale$1@';
+    const CASE_STUDY_URLS = {
+      'Next Gen Apheresis':  'solo.html',
+      'Next Gen AngioJet':   'angiojet.html',
+      'Next Gen Blood Bank': 'replicant.html',
+    };
+
+    let _pwProject = '';
+    const pwModal   = document.getElementById('passwordModal');
+    const pwInput   = document.getElementById('pwInput');
+    const pwError   = document.getElementById('pwError');
+    const pwProjEl  = document.getElementById('pwModalProject');
+    const pwBackBtn = document.getElementById('pwBackBtn');
+
+    function openPasswordModal(projectName) {
+      _pwProject = projectName;
+      pwProjEl.textContent = projectName;
+      pwInput.value = '';
+      pwError.style.display = 'none';
+      pwModal.classList.add('open');
+      setTimeout(() => pwInput.focus(), 120);
+    }
+    function closePasswordModal() {
+      pwModal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function checkPassword() {
+      if (pwInput.value === PORTFOLIO_PASSWORD) {
+        window.location.href = CASE_STUDY_URLS[_pwProject] || '#';
+      } else {
+        pwError.style.display = 'block';
+        pwInput.value = '';
+        pwInput.focus();
+      }
+    }
+
+    document.getElementById('pwModalClose').addEventListener('click', closePasswordModal);
+    pwModal.addEventListener('click', (e) => { if (e.target === pwModal) closePasswordModal(); });
+    pwInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') checkPassword(); });
+    pwBackBtn.addEventListener('click', () => { closePasswordModal(); openModal(_pwProject); });
+    document.getElementById('reqPasswordBtn').addEventListener('click', () => {
+      const proj = modalProjEl.textContent;
+      closeModal();
+      openPasswordModal(proj);
+    });
+
+    // ── Copy email to clipboard
+    function copyEmail(e) {
+      e.preventDefault();
+      navigator.clipboard.writeText('alesiagil@gmail.com').then(() => {
+        const btn = e.currentTarget;
+        const original = btn.querySelector('.email-label');
+        const copied = btn.querySelector('.email-copied');
+        if (original) original.style.display = 'none';
+        if (copied) copied.style.display = 'block';
+        setTimeout(() => {
+          if (original) original.style.display = '';
+          if (copied) copied.style.display = 'none';
+        }, 2000);
+      });
+    }
+
+    // ── Contact Modal
+    const contactModal   = document.getElementById('contactModal');
+    const contactForm    = document.getElementById('contactForm');
+    const contactSuccess = document.getElementById('contactSuccess');
+
+    function openContactModal() {
+      contactModal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => document.getElementById('ctName').focus(), 120);
+    }
+    function closeContactModal() {
+      contactModal.classList.remove('open');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        contactForm.reset();
+        contactForm.style.display = '';
+        contactSuccess.style.display = 'none';
+      }, 300);
+    }
+
+    document.getElementById('contactModalClose').addEventListener('click', closeContactModal);
+    contactModal.addEventListener('click', (e) => { if (e.target === contactModal) closeContactModal(); });
+
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name    = document.getElementById('ctName').value.trim();
+      const email   = document.getElementById('ctEmail').value.trim();
+      const message = document.getElementById('ctMessage').value.trim();
+      const submitBtn = contactForm.querySelector('.modal-submit');
+      submitBtn.textContent = 'Sending…';
+      submitBtn.disabled = true;
+      let sent = false;
+      if (FORMSPREE_ID !== 'YOUR_FORM_ID') {
+        try {
+          const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({ name, email, message, _subject: `Portfolio message from ${name}` })
+          });
+          if (res.ok) sent = true;
+        } catch (_) {}
+      }
+      if (!sent) {
+        const subj = encodeURIComponent(`Portfolio message from ${name}`);
+        const body = encodeURIComponent(`From: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+        window.location.href = `mailto:alesiagil@gmail.com?subject=${subj}&body=${body}`;
+      }
+      submitBtn.textContent = 'Send →';
+      submitBtn.disabled = false;
+      contactForm.style.display = 'none';
+      contactSuccess.style.display = 'block';
+    });
+
+    // Global Escape key — closes whichever modal is open
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { closeModal(); closePasswordModal(); closeContactModal(); }
+    });
+
+    // ── To activate email delivery:
+    // 1. Go to https://formspree.io and sign up with alesiagil@gmail.com
+    // 2. Create a new form — you'll get an ID like "xrgveabc"
+    // 3. Replace YOUR_FORM_ID below with that ID
+    const FORMSPREE_ID = 'xojkpkpj';
+
+    requestForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name    = document.getElementById('reqName').value.trim();
+      const company = document.getElementById('reqCompany').value.trim();
+      const email   = document.getElementById('reqEmail').value.trim();
+      const message = document.getElementById('reqMessage').value.trim();
+      const project = modalProjEl.textContent;
+
+      const submitBtn = requestForm.querySelector('.modal-submit');
+      submitBtn.textContent = 'Sending…';
+      submitBtn.disabled = true;
+
+      let sent = false;
+
+      if (FORMSPREE_ID !== 'YOUR_FORM_ID') {
+        try {
+          const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({
+              name, email,
+              company: company || '—',
+              message: message || '(none provided)',
+              project,
+              _subject: `Portfolio Access Request — ${project}`
+            })
+          });
+          if (res.ok) sent = true;
+        } catch (_) {}
+      }
+
+      if (!sent) {
+        // Fallback: open pre-composed email in mail client
+        const subj = encodeURIComponent(`Portfolio Access Request — ${project}`);
+        const body = encodeURIComponent(
+          `Hi Alesia,\n\nI'd like to request access to your ${project} case study.\n\nName: ${name}\nCompany: ${company || '—'}\nEmail: ${email}\n\nMessage:\n${message || '(none provided)'}\n`
+        );
+        window.location.href = `mailto:alesiagil@gmail.com?subject=${subj}&body=${body}`;
+      }
+
+      submitBtn.textContent = 'Send Request →';
+      submitBtn.disabled = false;
+      requestForm.style.display = 'none';
+      modalSuccess.style.display = 'block';
+    });
+  </script>
+</body>
+</html>
