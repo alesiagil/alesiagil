@@ -121,10 +121,10 @@
       width: 100%; height: 100%;
       z-index: 0; display: block;
     }
-    .hero-inner { position: relative; z-index: 1; max-width: var(--max-w); }
+    .hero-inner { position: relative; z-index: 1; max-width: 520px; }
 
     .hero-name {
-      font-size: 90px; font-weight: 900;
+      font-size: 72px; font-weight: 900;
       line-height: 0.95;
       letter-spacing: 0.02em; /* tad of tracking */
       color: var(--pink-pale);
@@ -144,7 +144,7 @@
     .hero-bar.visible { opacity: 1; transform: scaleX(1); }
 
     .hero-headline {
-      font-size: 29px; font-weight: 700;
+      font-size: 22px; font-weight: 700;
       line-height: 1.3; letter-spacing: -0.02em;
       color: var(--pink-pale);
       margin-bottom: 28px;
@@ -154,7 +154,7 @@
     .hero-headline.visible { opacity: 1; transform: none; }
 
     .hero-body {
-      font-size: 15px; font-weight: 300;
+      font-size: 12px; font-weight: 300;
       line-height: 1.8; color: var(--pink-pale);
       max-width: 700px;
       opacity: 0; transform: translateY(16px);
@@ -220,13 +220,13 @@
     }
 
     .role-title {
-      font-size: 29px; font-weight: 900;
+      font-size: 18px; font-weight: 700;
       line-height: 1.15;
       letter-spacing: -0.02em; color: #DDE0FF;
       margin-bottom: 0;
     }
     .role-company {
-      font-size: 16px; font-weight: 400;
+      font-size: 12px; font-weight: 400;
       color: rgba(221, 224, 255, 0.6); margin-bottom: 20px;
     }
 
@@ -236,7 +236,7 @@
       max-width: 680px;
     }
     .role-bullets li {
-      font-size: 16px; font-weight: 400; /* matches hero paragraph */
+      font-size: 12px; font-weight: 400;
       color: #DDE0FF; line-height: 1.6;
       padding-left: 18px; position: relative;
     }
@@ -245,7 +245,7 @@
     }
 
     .role-award {
-      font-size: 16px; font-weight: 400; color: #DDE0FF;
+      font-size: 12px; font-weight: 400; color: #DDE0FF;
       display: flex; align-items: flex-start; gap: 8px;
     }
     .role-award-star { color: var(--yellow); flex-shrink: 0; }
@@ -263,8 +263,7 @@
     /* ─── TIMELINE ──────────────────────────────────── */
     .timeline {
       max-width: var(--max-w);
-      /* Left border: thick indigo, matching design */
-      border-left: 4px solid #1B2275;
+      border-left: 4px solid rgba(27, 34, 117, 0.8); /* matches year text opacity */
     }
 
     .timeline-item {
@@ -284,18 +283,18 @@
       padding-top: 16px;
     }
 
-    /* Dot marker on the left border — centered on the year number */
+    /* Dot marker on the left border — centered on the 4px line */
     .timeline-item { position: relative; }
     .timeline-item::before,
     .education-item::before {
       content: '';
       position: absolute;
-      left: -8px; /* centers 10px dot on 4px border: -(10/2 + 4/2) */
-      top: 50px;  /* aligns with vertical center of 72px year: 16px padding + 36px half-height - 5px half-dot */
+      left: -7px; /* (4px border / 2) - (10px dot / 2) = 2 - 5 = -3 from outer edge = -7 from inner */
+      top: 50px;
       width: 10px; height: 10px;
       border-radius: 50%;
-      background: #DDE0FF;
-      opacity: 0.6;
+      background: #1B2275;
+      opacity: 1;
       z-index: 1;
     }
 
@@ -318,17 +317,17 @@
 
     .timeline-meta { display: flex; flex-direction: column; gap: 0; }
     .timeline-role {
-      display: block; font-size: 21px; font-weight: 700;
+      display: block; font-size: 18px; font-weight: 700;
       line-height: 1.2;
       letter-spacing: -0.01em; color: #DDE0FF;
     }
     .timeline-company {
-      display: block; font-size: 16px; font-weight: 400; color: rgba(221, 224, 255, 0.6);
+      display: block; font-size: 12px; font-weight: 400; color: rgba(221, 224, 255, 0.6);
     }
 
     .timeline-body {
       padding: 8px 28px 28px 62px;
-      font-size: 15px; font-weight: 400;
+      font-size: 12px; font-weight: 400;
       line-height: 1.75; color: #DDE0FF;
       max-width: 720px;
     }
@@ -370,7 +369,7 @@
       font-size: 18px; font-weight: 700; letter-spacing: -0.01em;
       color: #DDE0FF; margin-bottom: 0;
     }
-    .edu-school { font-size: 16px; font-weight: 400; color: rgba(221, 224, 255, 0.6); }
+    .edu-school { font-size: 12px; font-weight: 400; color: rgba(221, 224, 255, 0.6); }
 
     /* ─── TIMELINE CTA ──────────────────────────────── */
     .timeline-cta {
@@ -560,7 +559,7 @@
     .timeline-item.nested .timeline-body      { padding-left: 82px; }
     .timeline-item.nested .timeline-role {
       font-size: 18px;
-      color: rgba(221, 224, 255, 0.75);
+      color: #DDE0FF;
     }
 
     @media (max-width: 960px) {
