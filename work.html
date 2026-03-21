@@ -58,7 +58,7 @@
 
     /* ─── NAV ──────────────────────────────────────── */
     .site-nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 10001;
       display: flex; align-items: stretch; justify-content: space-between;
       padding: 0 64px;
       height: 78px;
@@ -389,10 +389,8 @@
     /* NDA lock badge — icon only */
     .lock-overlay {
       position: absolute;
-      bottom: 14px; left: 14px;
+      bottom: 12px; left: 12px;
       z-index: 2;
-      display: flex; align-items: center; justify-content: center;
-      line-height: 0;
       color: rgba(221, 224, 255, 1);
       background: rgba(5, 7, 27, 0.72);
       backdrop-filter: blur(10px);
@@ -401,7 +399,13 @@
       border-radius: 50%;
       border: 1px solid rgba(221, 224, 255, 0.18);
     }
-    .lock-overlay svg { display: block; opacity: 1; flex-shrink: 0; width: 20px; height: 20px; }
+    .lock-overlay svg {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      display: block; opacity: 1;
+      width: 14px; height: 16px;
+    }
 
     /* Unlocked half cards — rounded mask on container, no overlay */
     .card-half.unlocked .card-image {
@@ -661,7 +665,7 @@
     /* ─── FOOTER ─────────────────────────────────────── */
     .site-footer {
       border-top: 1px solid var(--pink);
-      padding: 40px var(--pad);
+      padding: 32px var(--pad);
       display: flex; justify-content: space-between; align-items: center;
     }
     .footer-left {
@@ -683,7 +687,7 @@
       display: inline-flex; align-items: center; gap: 7px;
       color: var(--yellow);
       text-decoration: none;
-      font-size: 16px; font-weight: 600;
+      font-size: 14px; font-weight: 600;
       transition: opacity 0.2s;
     }
     .footer-linkedin:hover { opacity: 0.7; }

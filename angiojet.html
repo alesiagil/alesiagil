@@ -71,7 +71,7 @@
 
     /* ─── NAV ─────────────────────────────────────────── */
     .site-nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 10001;
       display: flex; align-items: stretch; justify-content: space-between;
       padding: 0 64px;
       height: 78px;
@@ -725,10 +725,10 @@
     .site-footer {
       background: var(--dark-bg);
       border-top: 1px solid var(--pink);
-      padding: 40px 48px;
+      padding: 32px 48px;
       display: flex; justify-content: space-between; align-items: center;
     }
-    .footer-left { font-size: 16px; color: rgba(221, 224, 255, 0.35); }
+    .footer-left { font-size: 14px; color: rgba(221, 224, 255, 0.35); }
     .footer-right { font-size: 16px; }
     .footer-right a { color: var(--yellow); text-decoration: none; font-weight: 600; transition: opacity 0.2s; }
     .footer-right a:hover { opacity: 0.7; }
@@ -736,7 +736,7 @@
       display: inline-flex; align-items: center; gap: 7px;
       color: var(--yellow);
       text-decoration: none;
-      font-size: 16px; font-weight: 600;
+      font-size: 14px; font-weight: 600;
       transition: opacity 0.2s;
     }
     .footer-linkedin:hover { opacity: 0.7; }
