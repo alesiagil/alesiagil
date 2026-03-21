@@ -495,6 +495,7 @@
       background: none; border: none; cursor: pointer;
       color: rgba(221,224,255,0.5); font-size: 18px; line-height: 1;
       padding: 4px; transition: color 0.15s; font-family: inherit;
+      z-index: 1;
     }
     .modal-close:hover { color: #dde0ff; }
     .modal-eyebrow {
@@ -654,14 +655,14 @@
       background: none; cursor: pointer;
     }
     .nav-mobile-cta {
-      display: inline-block; padding: 12px 18px;
+      display: block; padding: 12px 18px;
       color: white; text-decoration: none;
       font-size: 16px; font-weight: 600;
       background: transparent;
       border: 1px solid var(--pink);
       border-radius: 10px; cursor: pointer;
-      text-align: left; font-family: inherit;
-      margin-top: 8px;
+      text-align: center; font-family: inherit;
+      margin-top: 8px; width: 100%;
       transition: background 0.2s;
     }
     .nav-mobile-cta:hover { background: var(--pink-muted); }
@@ -678,7 +679,7 @@
       .nav-hamburger { display: flex; }
       .nav-right { display: none; }
       .nav-mobile-menu { display: flex; }
-      .hero { padding: 88px 24px 56px; min-height: auto; max-height: none; }
+      .hero { padding: 88px 24px 56px; min-height: 520px; max-height: none; }
       .hero-name { font-size: 56px; }
       .hero-headline { font-size: 18px; }
       .timeline-section { padding: 48px 24px; }
@@ -694,12 +695,11 @@
       .current-year { flex-wrap: nowrap; white-space: nowrap; }
       /* Footer copyright smaller */
       .footer-left { font-size: 11px; }
-      /* Contact modal: icon-only staggered buttons */
-      .contact-links { flex-direction: row; gap: 12px; margin-bottom: 20px; align-items: flex-start; }
-      .contact-link-item { width: 52px; height: 52px; max-width: none; padding: 14px; justify-content: center; }
-      .contact-link-item span { display: none; }
-      .contact-link-item svg { opacity: 1; }
-      .contact-links .contact-email-btn { margin-top: 10px; }
+      /* Hero photo: show on mobile at right side */
+      .hero-photo-wrap { display: block; width: 55%; }
+      .hero-photo { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+      /* Hide scroll hint label on mobile */
+      .scroll-hint { display: none; }
       /* Modal actions: stack */
       .modal-actions { flex-direction: column; align-items: stretch; gap: 10px; }
       .modal-actions .modal-submit { width: 100%; }

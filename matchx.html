@@ -992,78 +992,102 @@
       background: none; cursor: pointer;
     }
     .nav-mobile-cta {
-      display: inline-block; padding: 12px 18px;
+      display: block; padding: 12px 18px;
       color: white; text-decoration: none;
       font-size: 16px; font-weight: 600;
       background: transparent;
       border: 1px solid var(--pink);
       border-radius: 10px; cursor: pointer;
-      text-align: left; font-family: inherit;
-      margin-top: 8px;
+      text-align: center; font-family: inherit;
+      margin-top: 8px; width: 100%;
       transition: background 0.2s;
     }
     .nav-mobile-cta:hover { background: var(--pink-muted); }
 
-    /* ─── FLOATING KEBAB NAV (mobile) ─────────────────── */
-    .kebab-nav {
+    /* ─── BOTTOM SHEET NAV (mobile) ─────────────────── */
+    .sheet-trigger {
       display: none;
-      position: fixed; bottom: 24px; right: 24px; z-index: 10002;
-      flex-direction: column; align-items: flex-end; gap: 10px;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 10002;
+      align-items: center; justify-content: center; gap: 8px;
+      background: rgba(5,7,27,0.97);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(255,255,0,0.18);
+      padding: 14px 24px;
+      cursor: pointer;
+      border-left: none; border-right: none; border-bottom: none;
+      font-family: inherit; color: rgba(255,255,0,0.75);
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
-    .kebab-menu-items {
-      display: flex; flex-direction: column; align-items: flex-end; gap: 8px;
+    .sheet-trigger-icon { transition: transform 0.3s ease; }
+    .sheet-trigger.open .sheet-trigger-icon { transform: rotate(180deg); }
+    .sheet-backdrop {
+      position: fixed; inset: 0; z-index: 10003;
+      background: rgba(5,7,27,0.65);
+      backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
       opacity: 0; pointer-events: none;
-      transform: translateY(12px);
-      transition: opacity 0.25s ease, transform 0.25s ease;
+      transition: opacity 0.3s ease;
     }
-    .kebab-menu-items.open { opacity: 1; pointer-events: all; transform: translateY(0); }
-    .kebab-pill {
-      background: rgba(5,7,27,0.85);
-      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,0,0.3);
-      border-radius: 20px; padding: 8px 16px;
-      font-size: 13px; font-weight: 600; color: #dde0ff;
-      text-decoration: none; white-space: nowrap;
-      transition: border-color 0.2s, color 0.2s;
+    .sheet-backdrop.open { opacity: 1; pointer-events: all; }
+    .sheet-panel {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 10004;
+      background: #0d1030;
+      border: 1px solid rgba(255,255,0,0.12);
+      border-radius: 20px 20px 0 0;
+      padding-bottom: 20px;
+      transform: translateY(100%);
+      transition: transform 0.35s cubic-bezier(0.34,1.2,0.64,1);
+      pointer-events: none;
     }
-    .kebab-pill.active { color: var(--yellow); border-color: var(--yellow); }
-    .kebab-btn {
-      width: 52px; height: 52px; border-radius: 50%;
-      background: rgba(5, 7, 27, 0.92);
-      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--yellow);
-      color: var(--yellow); cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-      flex-shrink: 0;
+    .sheet-panel.open { transform: translateY(0); pointer-events: all; }
+    .sheet-handle {
+      width: 36px; height: 4px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 2px;
+      margin: 14px auto 16px;
     }
-    .kebab-btn svg {
-      transition: transform 0.3s ease;
+    .sheet-links { display: flex; flex-direction: column; }
+    .sheet-link {
+      padding: 15px 28px;
+      font-size: 16px; font-weight: 500;
+      color: rgba(221,224,255,0.65);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: block;
+      transition: color 0.2s;
     }
-    .kebab-btn.open svg { transform: rotate(90deg); }
-    .kebab-backdrop {
-      display: none;
-      position: fixed; inset: 0; z-index: 10001;
-      background: rgba(5,7,27,0.6);
-      backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
-      opacity: 0; transition: opacity 0.25s ease;
-    }
-    .kebab-backdrop.open { opacity: 1; }
+    .sheet-link:last-child { border-bottom: none; }
+    .sheet-link.sh-active { color: var(--yellow); }
+    .sheet-link:active { color: white; }
 
+    /* ── SW nav bar (mobile) ── */
+    .sw-arrows {
+      display: none;
+      align-items: center; justify-content: space-between;
+      width: 100%; margin-top: 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      background: rgba(5,7,27,0.85);
+      padding: 14px 16px;
+      border-radius: 0 0 12px 12px;
+    }
+    .sw-arr-center {
+      flex: 1; text-align: center;
+    }
     .sw-arr-btn {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 50%; width: 44px; height: 44px;
-      color: white; cursor: pointer;
+      background: none; border: none;
+      color: rgba(255,255,255,0.4); cursor: pointer;
       display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s;
+      padding: 6px 10px;
+      transition: color 0.2s;
       flex-shrink: 0;
     }
-    .sw-arr-btn:hover { background: rgba(255,255,255,0.16); }
+    .sw-arr-btn:hover { color: white; }
     .sw-arr-label {
-      font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.5);
-      letter-spacing: 0.05em;
+      font-size: 13px; font-weight: 700; color: var(--yellow);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      display: inline-block;
+      padding-bottom: 3px;
+      border-bottom: 2px solid var(--yellow);
     }
 
     @media (max-width: 1100px) {
@@ -1131,7 +1155,7 @@
       .cases-grid { grid-template-columns: 1fr; gap: 32px; }
       /* SW Walkthrough: mobile carousel */
       .showcase-steps { display: none; }
-      .sw-arrows { display: flex; }
+      .sw-arrows { display: flex !important; }
       .rotate-cta { display: flex; }
       /* Dot nav: hide on mobile */
       .dot-nav { display: none !important; }
@@ -1148,8 +1172,6 @@
       /* Section bridge match rest of padding */
       .section-bridge { padding: 32px 24px; }
       .section-bridge p { font-size: 20px; }
-      /* SW arrow label (step name) */
-      .sw-arr-label { font-size: 15px; color: rgba(255,255,255,0.8); letter-spacing: 0.03em; }
       /* Request access modal: stack actions */
       .modal-actions { flex-direction: column; align-items: stretch; gap: 10px; }
       .modal-password-btn { text-align: center; width: 100%; padding: 8px 0; }
@@ -1160,16 +1182,10 @@
       .modal-row { grid-template-columns: 1fr; }
       .modal-title { font-size: 25px; }
       .modal-submit { align-self: stretch; width: 100%; }
-      /* Contact modal: icon-only staggered buttons */
-      .contact-links { flex-direction: row; gap: 12px; margin-bottom: 20px; align-items: flex-start; }
-      .contact-link-item { width: 52px; height: 52px; max-width: none; padding: 14px; justify-content: center; }
-      .contact-link-item span { display: none; }
-      .contact-link-item svg { opacity: 1; }
-      /* Stagger: email button slightly lower */
-      .contact-links .contact-email-btn { margin-top: 10px; }
       /* Footer */
       .site-footer { flex-direction: column; gap: 16px; padding: 28px 20px; }
-      .kebab-nav { display: flex; }
+      /* Bottom sheet nav trigger */
+      .sheet-trigger { display: flex; }
     }
     @media (orientation: landscape) and (max-height: 560px) {
       .site-nav { display: none !important; }
@@ -1263,8 +1279,9 @@
     .modal-close {
       position: absolute; top: 16px; right: 20px;
       background: none; border: none; cursor: pointer;
-      color: rgba(221,224,255,0.5); font-size: 22px; line-height: 1;
+      color: rgba(221,224,255,0.5); font-size: 18px; line-height: 1;
       padding: 4px; transition: color 0.15s; font-family: inherit;
+      z-index: 1;
     }
     .modal-close:hover { color: #dde0ff; }
     .modal-eyebrow {
@@ -1274,7 +1291,7 @@
     }
     .modal-title {
       font-family: 'Playfair Display', Georgia, serif;
-      font-style: italic; font-size: 35px; font-weight: 700;
+      font-style: italic; font-size: 29px; font-weight: 700;
       color: #ffff00; margin-bottom: 32px; line-height: 1.1;
     }
     .modal-form { display: flex; flex-direction: column; gap: 24px; }
@@ -1349,7 +1366,6 @@
       font-size: 14px; font-weight: 700; letter-spacing: 0.1em;
       text-transform: uppercase; color: rgba(221,224,255,0.28); white-space: nowrap;
     }
-    .modal-actions { display: flex; align-items: center; justify-content: flex-end; margin-top: 4px; }
 
   </style>
 </head>
@@ -1413,13 +1429,15 @@
     </div>
 
     <!-- Mobile SW carousel arrows -->
-    <div class="sw-arrows" style="display:none; align-items:center; justify-content:space-between; width:100%; margin-top:16px; gap:16px;">
+    <div class="sw-arrows" id="swArrows">
       <button class="sw-arr-btn" id="swPrev" aria-label="Previous screen">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
       </button>
-      <span class="sw-arr-label" id="swArrLabel">Worklist</span>
+      <div class="sw-arr-center">
+        <span class="sw-arr-label" id="swArrLabel">Worklist</span>
+      </div>
       <button class="sw-arr-btn" id="swNext" aria-label="Next screen">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
       </button>
     </div>
     <!-- Rotate to preview CTA -->
@@ -1782,14 +1800,12 @@
     <div class="landscape-exit" style="display:none; position:fixed; top:12px; right:12px; z-index:20001;">
       <a href="#training" style="background:rgba(5,7,27,0.85); border:1px solid var(--yellow); color:var(--yellow); border-radius:8px; padding:8px 14px; font-size:13px; font-weight:700; text-decoration:none;">Exit Preview</a>
     </div>
-    <!-- Mobile: prominent fullscreen button -->
-    <a class="proto-fullscreen-btn"
-       href="https://www.figma.com/proto/rMUUZWB5ISb88OdUoxXvqN/MatchX-Training-Tool-AG?page-id=0%3A1&node-id=6-56458&starting-point-node-id=6%3A56458"
-       target="_blank" rel="noopener"
-       style="display:none; align-items:center; justify-content:center; gap:12px; margin: 0 0 20px; background:var(--pink); border-radius:12px; padding:18px 24px; text-decoration:none; color:white; font-size:16px; font-weight:700; letter-spacing:0.02em;">
+    <!-- Mobile: fullscreen button (Fullscreen API, fallback to new tab) -->
+    <button class="proto-fullscreen-btn" id="protoFullscreenBtn"
+       style="display:none; align-items:center; justify-content:center; gap:12px; margin: 0 0 20px; background:var(--pink); border-radius:12px; padding:18px 24px; cursor:pointer; border:none; color:white; font-size:16px; font-weight:700; letter-spacing:0.02em; font-family:inherit; width:100%;">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-      Open Training Tool
-    </a>
+      Open Training Tool Fullscreen
+    </button>
     <div class="training-embed-wrap fade-up" style="transition-delay: 0.15s;">
       <div class="training-embed">
         <div class="embed-activate" id="embedActivate">
@@ -2447,58 +2463,74 @@
         embedOverlay.style.display = '';
       });
     }
-  </script>
 
-  <!-- Mobile floating kebab nav -->
-  <div class="kebab-backdrop" id="kebabBackdrop"></div>
-  <nav class="kebab-nav" id="kebabNav">
-    <div class="kebab-menu-items" id="kebabItems">
-      <a class="kebab-pill" href="#s0">SW Walkthrough</a>
-      <a class="kebab-pill" href="#s1">Key Insights</a>
-      <a class="kebab-pill" href="#s2">Aha! Moments</a>
-      <a class="kebab-pill" href="#s3">Key Decisions</a>
-      <a class="kebab-pill" href="#s4">Key Features</a>
-      <a class="kebab-pill" href="#training">Beyond the Product</a>
-      <a class="kebab-pill" href="#outcomes">Outcomes</a>
-    </div>
-    <button class="kebab-btn" id="kebabBtn" aria-label="Open navigation menu" aria-expanded="false">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-        <circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/>
-      </svg>
-    </button>
-  </nav>
-
-  <script>
-    // ── Mobile kebab nav
-    const kebabBtn = document.getElementById('kebabBtn');
-    const kebabItems = document.getElementById('kebabItems');
-    const kebabBackdrop = document.getElementById('kebabBackdrop');
-    function closeKebab() {
-      if (!kebabBtn) return;
-      kebabBtn.classList.remove('open');
-      kebabBtn.setAttribute('aria-expanded', 'false');
-      kebabItems.classList.remove('open');
-      kebabBackdrop.classList.remove('open');
-      setTimeout(() => { if (!kebabBtn.classList.contains('open')) kebabBackdrop.style.display = ''; }, 280);
-      document.body.style.overflow = '';
-    }
-    if (kebabBtn && kebabItems) {
-      kebabBtn.addEventListener('click', () => {
-        const isOpen = kebabBtn.classList.contains('open');
-        if (isOpen) {
-          closeKebab();
-        } else {
-          kebabBtn.classList.add('open');
-          kebabBtn.setAttribute('aria-expanded', 'true');
-          kebabItems.classList.add('open');
-          kebabBackdrop.style.display = 'block';
-          requestAnimationFrame(() => kebabBackdrop.classList.add('open'));
-          document.body.style.overflow = 'hidden';
+    // ── Mobile fullscreen button
+    const protoFullscreenBtn = document.getElementById('protoFullscreenBtn');
+    if (protoFullscreenBtn) {
+      protoFullscreenBtn.addEventListener('click', () => {
+        const iframe = document.querySelector('.training-embed iframe');
+        if (iframe) {
+          const fsReq = iframe.requestFullscreen || iframe.webkitRequestFullscreen || iframe.mozRequestFullScreen || iframe.msRequestFullscreen;
+          if (fsReq) {
+            fsReq.call(iframe).catch(() => {
+              window.open('https://www.figma.com/proto/rMUUZWB5ISb88OdUoxXvqN/MatchX-Training-Tool-AG?page-id=0%3A1&node-id=6-56458&starting-point-node-id=6%3A56458', '_blank');
+            });
+          } else {
+            window.open('https://www.figma.com/proto/rMUUZWB5ISb88OdUoxXvqN/MatchX-Training-Tool-AG?page-id=0%3A1&node-id=6-56458&starting-point-node-id=6%3A56458', '_blank');
+          }
         }
       });
-      kebabBackdrop.addEventListener('click', closeKebab);
-      kebabItems.querySelectorAll('.kebab-pill').forEach(pill => {
-        pill.addEventListener('click', closeKebab);
+    }
+  </script>
+
+  <!-- Mobile bottom sheet nav -->
+  <button class="sheet-trigger" id="sheetTrigger" aria-label="Open section navigation" aria-expanded="false">
+    <span>Sections</span>
+    <svg class="sheet-trigger-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"/>
+    </svg>
+  </button>
+  <div class="sheet-backdrop" id="sheetBackdrop"></div>
+  <div class="sheet-panel" id="sheetPanel" role="dialog" aria-modal="true" aria-label="Page sections">
+    <div class="sheet-handle"></div>
+    <nav class="sheet-links">
+      <a class="sheet-link" href="#s0">SW Walkthrough</a>
+      <a class="sheet-link" href="#s1">Key Insights</a>
+      <a class="sheet-link" href="#s2">Aha! Moments</a>
+      <a class="sheet-link" href="#s3">Key Decisions</a>
+      <a class="sheet-link" href="#s4">Key Features</a>
+      <a class="sheet-link" href="#training">Beyond the Product</a>
+      <a class="sheet-link" href="#outcomes">Outcomes</a>
+    </nav>
+  </div>
+
+  <script>
+    // ── Mobile bottom sheet nav
+    const sheetTrigger = document.getElementById('sheetTrigger');
+    const sheetBackdrop = document.getElementById('sheetBackdrop');
+    const sheetPanel = document.getElementById('sheetPanel');
+
+    function openSheet() {
+      sheetTrigger.classList.add('open');
+      sheetTrigger.setAttribute('aria-expanded', 'true');
+      sheetBackdrop.classList.add('open');
+      sheetPanel.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeSheet() {
+      sheetTrigger.classList.remove('open');
+      sheetTrigger.setAttribute('aria-expanded', 'false');
+      sheetBackdrop.classList.remove('open');
+      sheetPanel.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    if (sheetTrigger) {
+      sheetTrigger.addEventListener('click', () => {
+        sheetTrigger.classList.contains('open') ? closeSheet() : openSheet();
+      });
+      sheetBackdrop.addEventListener('click', closeSheet);
+      sheetPanel.querySelectorAll('.sheet-link').forEach(link => {
+        link.addEventListener('click', closeSheet);
       });
     }
   </script>
