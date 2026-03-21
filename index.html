@@ -21,7 +21,7 @@
       --pink-pale:      #FFC0E2;
       --yellow:         #ffff00;
       --text-light:     #dde0ff;
-      --pad: 180px;
+      --pad: 135px;
       --max-w: 1100px;
     }
 
@@ -57,7 +57,7 @@
     /* Logo — left side */
     .nav-logo {
       display: flex; align-items: flex-start;
-      padding-top: 8px; padding-bottom: 0;
+      padding-top: 6px; padding-bottom: 0;
       text-decoration: none;
     }
     .nav-logo-mark { height: 84px; width: auto; display: block; flex-shrink: 0; }
@@ -966,15 +966,15 @@
         { bx:0.80, by:0.55, ax:0.25, ay:0.32, freq:0.00025, ph:2.10, r:0.85, c:[10, 14, 68]  }, // deep navy
         { bx:0.50, by:0.72, ax:0.35, ay:0.22, freq:0.00040, ph:1.10, r:0.68, c:[48,  8, 60]  }, // dark violet
         { bx:0.22, by:0.78, ax:0.20, ay:0.38, freq:0.00055, ph:3.40, r:0.52, c:[98, 16, 40]  }, // warm rose
-        { bx:0.88, by:0.22, ax:0.22, ay:0.28, freq:0.00030, ph:4.70, r:0.58, c:[ 8, 18, 88]  }, // bright navy
+        { bx:0.88, by:0.22, ax:0.22, ay:0.28, freq:0.00030, ph:4.70, r:0.58, c:[ 8, 12, 48]  }, // muted navy
         { bx:0.60, by:0.42, ax:0.28, ay:0.30, freq:0.00038, ph:5.80, r:0.48, c:[36,  5, 28]  }, // darkest wine
       ];
 
       function draw(t) {
         const W = canvas.width, H = canvas.height, M = Math.max(W, H);
 
-        // base fill — very dark navy-black
-        ctx.fillStyle = '#040512';
+        // base fill — matches career section background exactly
+        ctx.fillStyle = '#05071b';
         ctx.fillRect(0, 0, W, H);
 
         orbs.forEach(orb => {
@@ -1000,6 +1000,13 @@
           ctx.fillStyle = g2;
           ctx.fillRect(0, 0, W, H);
         });
+
+        // Bottom fade — blend seamlessly into the career section (#05071b)
+        const fade = ctx.createLinearGradient(0, H * 0.5, 0, H);
+        fade.addColorStop(0, 'rgba(5,7,27,0)');
+        fade.addColorStop(1, 'rgba(5,7,27,1)');
+        ctx.fillStyle = fade;
+        ctx.fillRect(0, 0, W, H);
       }
 
       let startTs = null;
