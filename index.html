@@ -615,21 +615,77 @@
       color: #DDE0FF;
     }
 
+    /* ─── HAMBURGER / MOBILE NAV ──────────────────────── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer;
+      padding: 8px; align-self: center;
+      position: relative; z-index: 2;
+    }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--pink-pale); border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.2s ease;
+    }
+    .site-nav.scrolled .nav-hamburger span { background: var(--yellow); }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-mobile-menu {
+      display: none;
+      position: fixed; top: 60px; left: 0; right: 0;
+      background: var(--dark-bg-hero);
+      border-bottom: 1px solid var(--yellow);
+      flex-direction: column; padding: 8px 24px 20px;
+      z-index: 10000;
+      transform: translateY(-10px); opacity: 0; pointer-events: none;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+    .nav-mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: all; }
+    .nav-mobile-link {
+      display: block; padding: 18px 0;
+      color: var(--pink-pale); text-decoration: none;
+      font-size: 20px; font-weight: 500;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: none; cursor: pointer;
+    }
+    .nav-mobile-cta {
+      display: block; padding: 18px 0;
+      color: white; text-decoration: none;
+      font-size: 20px; font-weight: 600;
+      background: none; border: none; cursor: pointer;
+      text-align: left; font-family: inherit;
+      border-bottom: none;
+    }
+
     @media (max-width: 960px) {
       :root { --pad: 64px; }
       .hero-name { font-size: 80px; }
       .hero-headline { font-size: 23px; }
     }
     @media (max-width: 600px) {
-      :root { --pad: 20px; }
-      .site-nav { padding: 0 20px; }
-      .hero { padding: 100px 20px 60px; }
-      .hero-name { font-size: 60px; }
+      :root { --pad: 24px; }
+      .site-nav { padding: 0 20px; height: 60px; }
+      .nav-logo-mark { height: 48px; }
+      .nav-hamburger { display: flex; }
+      .nav-right { display: none; }
+      .nav-mobile-menu { display: flex; }
+      .hero { padding: 88px 24px 56px; min-height: auto; max-height: none; }
+      .hero-name { font-size: 56px; }
       .hero-headline { font-size: 18px; }
-      .timeline-section { padding: 60px 20px; }
+      .timeline-section { padding: 48px 24px; }
+      .timeline-cta-btn { display: flex; width: 100%; justify-content: center; box-sizing: border-box; }
       .modal-row { grid-template-columns: 1fr; }
-      .modal-card { padding: 28px 20px; }
+      .modal-card { padding: 24px 20px; }
       .modal-title { font-size: 25px; }
+      .modal-overlay.open .modal-close { position: fixed; top: 14px; right: 14px; z-index: 20002; }
+      .contact-links { flex-direction: row; gap: 10px; margin-bottom: 20px; }
+      .contact-link-item { width: auto; max-width: none; padding: 12px; }
+      .contact-link-item span { display: none; }
+      .contact-link-item svg { opacity: 1; }
+      .modal-actions { justify-content: stretch; }
+      .modal-actions .modal-submit { width: 100%; }
       .site-footer { flex-direction: column; gap: 16px; padding: 28px 20px; }
     }
 
@@ -651,11 +707,19 @@
         <path d="M32.3249 100.7C30.5185 97.0336 29.5038 92.9071 29.5038 88.5436C29.5038 73.3317 41.8365 61 57.0496 61C72.2628 61 84.5954 73.3317 84.5954 88.5436C84.5954 92.9071 83.5807 97.0336 81.7743 100.7H32.3249Z" fill="#FF1493"/>
       </svg>
     </a>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
     <div class="nav-right">
       <a href="work.html" class="nav-link">Work</a>
       <a href="#" class="nav-cta" onclick="openContactModal(); return false;">Get in Touch</a>
     </div>
   </nav>
+
+  <div class="nav-mobile-menu" id="navMobileMenu" aria-hidden="true">
+    <a href="work.html" class="nav-mobile-link">Work</a>
+    <button class="nav-mobile-cta" onclick="openContactModal(); closeNav();">Get in Touch</button>
+  </div>
 
   <!-- HERO -->
   <section class="hero">
@@ -960,6 +1024,31 @@
     }
     window.addEventListener('scroll', updateNav, { passive: true });
     updateNav();
+
+    // ── Hamburger / Mobile nav
+    const hamburger = document.getElementById('navHamburger');
+    const mobileMenu = document.getElementById('navMobileMenu');
+    function closeNav() {
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      mobileMenu.classList.remove('open');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    function openNav() {
+      hamburger.classList.add('open');
+      hamburger.setAttribute('aria-expanded', 'true');
+      mobileMenu.classList.add('open');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+    }
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', () => {
+        if (hamburger.classList.contains('open')) { closeNav(); } else { openNav(); }
+      });
+      document.addEventListener('click', (e) => {
+        if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) closeNav();
+      });
+    }
 
     // ── Fade-in observer
     const io = new IntersectionObserver((entries) => {
