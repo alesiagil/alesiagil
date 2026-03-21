@@ -167,10 +167,12 @@
     .hero-photo-wrap {
       position: absolute;
       right: -80px;
-      top: 0; bottom: 0;
+      top: 140px; bottom: 80px;
       width: 500px;
       pointer-events: none;
       z-index: 0;
+      border-radius: 4px;
+      overflow: hidden;
     }
     .hero-photo-wrap::before {
       content: '';
@@ -178,8 +180,8 @@
       inset: 0;
       background:
         linear-gradient(to right, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.35) 30%, transparent 58%),
-        linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 25%),
-        linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 35%);
+        linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 20%),
+        linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 20%);
       z-index: 1;
     }
     .hero-photo {
