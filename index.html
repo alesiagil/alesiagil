@@ -166,11 +166,17 @@
     /* ─── HERO PHOTO ─────────────────────────────────── */
     .hero-photo-wrap {
       position: absolute;
-      right: 80px;
-      top: 140px; bottom: 80px; /* overridden by JS to match hero-inner exactly */
-      width: 300px;
+      right: -80px;
+      top: 0; bottom: 0;
+      width: 500px;
       pointer-events: none;
       z-index: 0;
+    }
+    .hero-photo-wrap::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.3) 28%, transparent 55%);
+      z-index: 1;
     }
     .hero-photo {
       width: 100%; height: 100%;
@@ -923,18 +929,6 @@
     }, { threshold: 0.4 });
 
     document.querySelectorAll('.timeline-body').forEach(b => bulletObs.observe(b));
-
-    // ── Sync photo height to hero content block
-    function syncPhotoHeight() {
-      const inner = document.querySelector('.hero-inner');
-      const wrap  = document.querySelector('.hero-photo-wrap');
-      if (!inner || !wrap) return;
-      wrap.style.top    = inner.offsetTop + 'px';
-      wrap.style.height = inner.offsetHeight + 'px';
-      wrap.style.bottom = 'auto';
-    }
-    syncPhotoHeight();
-    window.addEventListener('resize', syncPhotoHeight, { passive: true });
 
     // ── Scroll hint: hide on click or any scroll
     const scrollHint = document.querySelector('.scroll-hint');
