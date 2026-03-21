@@ -36,6 +36,18 @@
       overflow-x: hidden;
     }
 
+    /* ─── GRAIN TEXTURE ─────────────────────────────── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
     /* ─── NAV ──────────────────────────────────────── */
     .site-nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -177,6 +189,15 @@
       position: absolute; inset: 0;
       background: linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.3) 28%, transparent 55%);
       z-index: 1;
+    }
+    .hero-photo-wrap::after {
+      content: '';
+      position: absolute; inset: 0;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.09;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
     }
     .hero-photo {
       width: auto;
@@ -934,7 +955,18 @@
     function hideScrollHint() {
       if (scrollHint) scrollHint.classList.add('hidden');
     }
-    if (scrollHint) scrollHint.addEventListener('click', hideScrollHint);
+    if (scrollHint) {
+      scrollHint.addEventListener('click', function(e) {
+        e.preventDefault();
+        hideScrollHint();
+        const target = document.getElementById('careerSection');
+        const nav = document.querySelector('.site-nav');
+        if (target && nav) {
+          const top = target.getBoundingClientRect().top + window.scrollY - nav.offsetHeight;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    }
     window.addEventListener('scroll', function onFirstScroll() {
       hideScrollHint();
       window.removeEventListener('scroll', onFirstScroll);
