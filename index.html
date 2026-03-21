@@ -107,7 +107,7 @@
       position: relative;
       background: var(--dark-bg-hero);
       min-height: 100vh;
-      max-height: 820px;
+      max-height: 720px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -154,7 +154,7 @@
     .hero-headline.visible { opacity: 1; transform: none; }
 
     .hero-body {
-      font-size: 17px; font-weight: 300;
+      font-size: 15px; font-weight: 300;
       line-height: 1.8; color: var(--pink-pale);
       max-width: 700px;
       opacity: 0; transform: translateY(16px);
@@ -168,7 +168,7 @@
       position: absolute;
       right: -80px;
       top: 0; bottom: 0;
-      width: 660px;
+      width: 500px;
       pointer-events: none;
       z-index: 0;
     }
@@ -194,7 +194,7 @@
     }
 
     /* ─── CAREER SECTION ────────────────────────────── */
-    .career-section { background: var(--dark-bg); padding: 80px var(--pad) 120px; }
+    .career-section { background: var(--dark-bg); padding: 80px var(--pad) 120px; scroll-margin-top: 97px; }
 
     /* ─── CURRENT ROLE ──────────────────────────────── */
     .current-role {
@@ -328,7 +328,7 @@
 
     .timeline-body {
       padding: 8px 28px 28px 62px;
-      font-size: 17px; font-weight: 400;
+      font-size: 15px; font-weight: 400;
       line-height: 1.75; color: #DDE0FF;
       max-width: 720px;
     }
@@ -529,6 +529,7 @@
       position: absolute;
       bottom: 32px;
       left: var(--pad);
+      transition: opacity 0.5s ease;
       z-index: 2;
       color: var(--yellow);
       display: flex; flex-direction: column; align-items: center; gap: 6px;
@@ -546,6 +547,7 @@
       50%       { transform: translateY(8px); }
     }
     .scroll-hint:hover { opacity: 0.75; }
+    .scroll-hint.hidden { opacity: 0; pointer-events: none; }
 
     /* ─── NESTED TIMELINE ITEMS (same company) ──────── */
     .timeline-item.nested .timeline-company { display: none; }
@@ -618,7 +620,7 @@
     <div class="hero-photo-wrap">
       <img src="Images/headshot-1.JPG" class="hero-photo" alt="Alesia Gil" />
     </div>
-    <a class="scroll-hint" href="#currentRole" aria-label="Scroll to timeline">
+    <a class="scroll-hint" href="#careerSection" aria-label="Scroll to timeline">
       <span class="scroll-hint-label">my journey</span>
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="6 9 12 15 18 9"></polyline>
@@ -627,7 +629,7 @@
   </section>
 
   <!-- CAREER SECTION -->
-  <section class="career-section">
+  <section class="career-section" id="careerSection">
 
     <!-- Current Role -->
     <div class="current-role" id="currentRole">
@@ -931,6 +933,17 @@
     }, { threshold: 0.4 });
 
     document.querySelectorAll('.timeline-body').forEach(b => bulletObs.observe(b));
+
+    // ── Scroll hint: hide on click or any scroll
+    const scrollHint = document.querySelector('.scroll-hint');
+    function hideScrollHint() {
+      if (scrollHint) scrollHint.classList.add('hidden');
+    }
+    if (scrollHint) scrollHint.addEventListener('click', hideScrollHint);
+    window.addEventListener('scroll', function onFirstScroll() {
+      hideScrollHint();
+      window.removeEventListener('scroll', onFirstScroll);
+    }, { passive: true });
   </script>
 
   <script>
