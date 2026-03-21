@@ -1127,6 +1127,11 @@
     }
     .modal-success h3 { font-size: 18px; font-weight: 700; color: #dde0ff; margin-bottom: 8px; }
     .modal-success p { font-size: 15px; font-weight: 300; color: rgba(221,224,255,0.7); line-height: 1.6; }
+    .modal-desc { font-size: 15px; font-weight: 300; color: rgba(221,224,255,0.7); line-height: 1.65; margin-bottom: 28px; }
+    .modal-actions { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
+    .modal-password-btn { font-size: 13px; font-weight: 500; color: rgba(221,224,255,0.35); background: none; border: none; padding: 0; cursor: pointer; font-family: inherit; transition: color 0.2s; }
+    .modal-password-btn:hover { color: rgba(221,224,255,0.75); }
+    .modal-error { font-size: 12px; font-weight: 500; color: #ff1493; margin-top: 6px; display: none; }
     .contact-links { display: flex; flex-direction: column; gap: 20px; margin-bottom: 24px; align-items: flex-start; }
     .contact-link-item {
       display: inline-flex; align-items: center; gap: 10px;
@@ -1608,7 +1613,7 @@
     <div class="more-inner">
       <p class="more-heading">More case studies</p>
       <div class="cases-grid">
-        <a class="case-card" href="#" onclick="return false;">
+        <a class="case-card" href="#" onclick="openModal('Next Gen AngioJet'); return false;">
           <div class="case-card-img">
             <img src="thumbnails/angiojet-thumbnail.png" alt="Next Gen AngioJet — password protected" />
             <div class="lock-overlay">
@@ -1621,7 +1626,7 @@
           <h3>Next Gen AngioJet</h3>
           <p>From Complexity to Clarity in Vascular Surgery — streamlining high-risk thrombectomy procedures with a device interface that enhances safety, reduces cognitive load, and supports confident decision-making in the OR.</p>
         </a>
-        <a class="case-card" href="#" onclick="return false;">
+        <a class="case-card" href="#" onclick="openModal('Next Gen Apheresis'); return false;">
           <div class="case-card-img">
             <img src="thumbnails/solo-thumbnail.png" alt="Next Gen Apheresis — password protected" />
             <div class="lock-overlay">
@@ -1634,7 +1639,7 @@
           <h3>Next Gen Apheresis</h3>
           <p>Speed for experts. Clarity for beginners. — A next-generation GUI designed for operators of all levels, across platelet, plasma, and red blood cell collection.</p>
         </a>
-        <a class="case-card" href="#" onclick="return false;">
+        <a class="case-card" href="#" onclick="openModal('Next Gen Blood Bank'); return false;">
           <div class="case-card-img">
             <img src="thumbnails/replicant-thumbnail.png" alt="Next Gen Blood Bank — password protected" />
             <div class="lock-overlay">
@@ -1914,6 +1919,64 @@
     })();
   </script>
 
+  <!-- REQUEST ACCESS MODAL -->
+  <div class="modal-overlay" id="requestModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+      <p class="modal-eyebrow" id="modalProject"></p>
+      <h2 class="modal-title" id="modalTitle">Request Access</h2>
+      <p class="modal-desc">This project is protected. Drop me a note and I'll be happy to walk you through the work — ideally over a conversation.</p>
+      <form class="modal-form" id="requestForm">
+        <div class="modal-row">
+          <div class="modal-field">
+            <label class="modal-label" for="reqName">Name</label>
+            <input class="modal-input" id="reqName" type="text" placeholder="Your name" required />
+          </div>
+          <div class="modal-field">
+            <label class="modal-label" for="reqCompany">Company</label>
+            <input class="modal-input" id="reqCompany" type="text" placeholder="Where you work" />
+          </div>
+        </div>
+        <div class="modal-field">
+          <label class="modal-label" for="reqEmail">Email</label>
+          <input class="modal-input" id="reqEmail" type="email" placeholder="you@company.com" required />
+        </div>
+        <div class="modal-field">
+          <label class="modal-label" for="reqMessage">Message <span style="font-weight:300;text-transform:none;letter-spacing:0;font-size:12px;">(optional)</span></label>
+          <textarea class="modal-textarea" id="reqMessage" placeholder="Tell me a bit about yourself or what you're working on..."></textarea>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="modal-password-btn" id="reqPasswordBtn">Have a password?</button>
+          <button class="modal-submit" type="submit">Send Request →</button>
+        </div>
+      </form>
+      <div class="modal-success" id="modalSuccess">
+        <div class="modal-success-check">✓</div>
+        <h3>Request sent.</h3>
+        <p>Thanks for reaching out —<br>I'll get back to you shortly.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PASSWORD MODAL -->
+  <div class="modal-overlay" id="passwordModal" role="dialog" aria-modal="true">
+    <div class="modal-card" style="max-width:380px;">
+      <button class="modal-close" id="pwModalClose" aria-label="Close">✕</button>
+      <p class="modal-eyebrow" id="pwModalProject"></p>
+      <h2 class="modal-title">Enter Password</h2>
+      <p class="modal-desc">Have a password? Enter it below to access this case study directly.</p>
+      <div class="modal-field">
+        <label class="modal-label" for="pwInput">Password</label>
+        <input class="modal-input" id="pwInput" type="password" placeholder="••••••••" />
+        <p class="modal-error" id="pwError">Incorrect password — try again or request access.</p>
+      </div>
+      <div class="modal-actions" style="margin-top:20px;">
+        <button type="button" class="modal-password-btn" id="pwBackBtn">← Back to request</button>
+        <button class="modal-submit" onclick="checkPassword()">Unlock →</button>
+      </div>
+    </div>
+  </div>
+
   <!-- GET IN TOUCH MODAL -->
   <div class="modal-overlay" id="contactModal" role="dialog" aria-modal="true">
     <div class="modal-card">
@@ -1980,6 +2043,63 @@
         }, 2000);
       });
     }
+
+    // ── Request Access Modal
+    const modal        = document.getElementById('requestModal');
+    const modalClose   = document.getElementById('modalClose');
+    const modalProjEl  = document.getElementById('modalProject');
+    const requestForm  = document.getElementById('requestForm');
+    const modalSuccess = document.getElementById('modalSuccess');
+
+    function openModal(projectName) {
+      modalProjEl.textContent = projectName;
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => document.getElementById('reqName').focus(), 120);
+    }
+    function closeModal() {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+      setTimeout(() => { requestForm.reset(); requestForm.style.display = ''; modalSuccess.style.display = 'none'; }, 300);
+    }
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+    requestForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = { name: document.getElementById('reqName').value, company: document.getElementById('reqCompany').value, email: document.getElementById('reqEmail').value, message: document.getElementById('reqMessage').value, project: modalProjEl.textContent };
+      try {
+        await fetch('https://formspree.io/f/xojkpkpj', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(data) });
+      } catch(err) {}
+      requestForm.style.display = 'none';
+      modalSuccess.style.display = 'block';
+    });
+
+    // ── Password Modal
+    const PORTFOLIO_PASSWORD = 'Ale$1@';
+    const CASE_STUDY_URLS = { 'Next Gen Apheresis': 'solo.html', 'Next Gen AngioJet': 'angiojet.html', 'Next Gen Blood Bank': 'replicant.html' };
+    let _pwProject = '';
+    const pwModal   = document.getElementById('passwordModal');
+    const pwInput   = document.getElementById('pwInput');
+    const pwError   = document.getElementById('pwError');
+    const pwProjEl  = document.getElementById('pwModalProject');
+    const pwBackBtn = document.getElementById('pwBackBtn');
+
+    function openPasswordModal(projectName) {
+      _pwProject = projectName; pwProjEl.textContent = projectName;
+      pwInput.value = ''; pwError.style.display = 'none';
+      pwModal.classList.add('open'); setTimeout(() => pwInput.focus(), 120);
+    }
+    function closePasswordModal() { pwModal.classList.remove('open'); document.body.style.overflow = ''; }
+    function checkPassword() {
+      if (pwInput.value === PORTFOLIO_PASSWORD) { window.location.href = CASE_STUDY_URLS[_pwProject] || '#'; }
+      else { pwError.style.display = 'block'; pwInput.value = ''; pwInput.focus(); }
+    }
+    document.getElementById('pwModalClose').addEventListener('click', closePasswordModal);
+    pwModal.addEventListener('click', (e) => { if (e.target === pwModal) closePasswordModal(); });
+    pwInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') checkPassword(); });
+    pwBackBtn.addEventListener('click', () => { closePasswordModal(); openModal(_pwProject); });
+    document.getElementById('reqPasswordBtn').addEventListener('click', () => { const proj = modalProjEl.textContent; closeModal(); openPasswordModal(proj); });
 
     // ── Get in Touch Modal
     const contactModal   = document.getElementById('contactModal');
