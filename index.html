@@ -23,6 +23,7 @@
       --text-light:     #dde0ff;
       --pad: 135px;
       --max-w: 1100px;
+      --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
     html { scroll-behavior: smooth; }
@@ -43,8 +44,8 @@
       inset: 0;
       pointer-events: none;
       z-index: 9999;
-      opacity: 0.07;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.10;
+      background-image: var(--grain);
       background-size: 200px 200px;
     }
 
@@ -67,10 +68,31 @@
     .site-nav.scrolled .nav-logo-svg .logo-outline { stroke: var(--yellow); }
 
     /* Logo — left side */
+    .site-nav::after {
+      content: '';
+      position: absolute; inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.12;
+      mix-blend-mode: overlay;
+      background-image: var(--grain);
+      background-size: 200px 200px;
+    }
     .nav-logo {
       display: flex; align-items: flex-start;
       padding-top: 6px; padding-bottom: 0;
       text-decoration: none;
+      position: relative;
+    }
+    .nav-logo::after {
+      content: '';
+      position: absolute; inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.28;
+      mix-blend-mode: overlay;
+      background-image: var(--grain);
+      background-size: 200px 200px;
     }
     .nav-logo-mark { height: 84px; width: auto; display: block; flex-shrink: 0; }
     .nav-logo-svg .logo-outline { stroke: var(--pink); transition: stroke 0.3s; }
@@ -141,8 +163,18 @@
       letter-spacing: 0.02em; /* tad of tracking */
       color: var(--pink-pale);
       margin-bottom: 20px;
+      position: relative;
       opacity: 0; transform: translateY(32px);
       transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.34,1.2,0.64,1);
+    }
+    .hero-name::after {
+      content: '';
+      position: absolute; inset: 0;
+      pointer-events: none;
+      opacity: 0.25;
+      mix-blend-mode: overlay;
+      background-image: var(--grain);
+      background-size: 200px 200px;
     }
     .hero-name.visible { opacity: 1; transform: none; }
 
@@ -196,7 +228,7 @@
       pointer-events: none;
       z-index: 2;
       opacity: 0.18;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-image: var(--grain);
       background-size: 200px 200px;
     }
     /* Colorize the B&W photo by painting gradient palette colors on top */
@@ -335,9 +367,19 @@
       font-weight: 900; line-height: 1; letter-spacing: -0.04em;
       padding-left: 28px;
       pointer-events: none; user-select: none;
+      position: relative;
     }
     /* All years: same size, same 80% opacity — uniform, intentional */
     .timeline-year-bg { font-size: 72px; color: #1B2275; opacity: 0.8; }
+    .timeline-year-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      pointer-events: none;
+      opacity: 0.30;
+      mix-blend-mode: overlay;
+      background-image: var(--grain);
+      background-size: 200px 200px;
+    }
 
     /* Header row: chevron + meta, sits below the year with breathing room */
     .timeline-header-row {
