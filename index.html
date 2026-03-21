@@ -115,10 +115,11 @@
       border-bottom: 1px solid var(--yellow);
       overflow: hidden;
     }
-    .hero::before {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(160deg, #30071d 0%, #05071b 70%);
-      z-index: 0;
+    /* ::before removed — canvas handles animated gradient */
+    #hero-canvas {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      z-index: 0; display: block;
     }
     .hero-inner { position: relative; z-index: 1; max-width: var(--max-w); }
 
@@ -604,6 +605,7 @@
 
   <!-- HERO -->
   <section class="hero">
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
     <div class="hero-inner">
       <h1 class="hero-name">Alesia Gil</h1>
       <div class="hero-bar"></div>
@@ -929,6 +931,76 @@
     }, { threshold: 0.4 });
 
     document.querySelectorAll('.timeline-body').forEach(b => bulletObs.observe(b));
+  </script>
+
+  <script>
+    // ── Hero canvas: flowing motion gradient
+    (function () {
+      const canvas = document.getElementById('hero-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const DPR = Math.min(window.devicePixelRatio || 1, 1.5);
+
+      function resize() {
+        const p = canvas.parentElement;
+        canvas.width  = p.offsetWidth  * DPR;
+        canvas.height = p.offsetHeight * DPR;
+      }
+
+      // 6 orbs — RGB tuned to blend between #30071d (wine) and #05071b (navy)
+      // slightly brightened so movement reads against the dark base
+      const orbs = [
+        { bx:0.15, by:0.30, ax:0.30, ay:0.28, freq:0.00032, ph:0.00, r:0.95, c:[78, 13, 46]  }, // deep wine
+        { bx:0.80, by:0.55, ax:0.25, ay:0.32, freq:0.00025, ph:2.10, r:0.85, c:[10, 14, 68]  }, // deep navy
+        { bx:0.50, by:0.72, ax:0.35, ay:0.22, freq:0.00040, ph:1.10, r:0.68, c:[48,  8, 60]  }, // dark violet
+        { bx:0.22, by:0.78, ax:0.20, ay:0.38, freq:0.00055, ph:3.40, r:0.52, c:[98, 16, 40]  }, // warm rose
+        { bx:0.88, by:0.22, ax:0.22, ay:0.28, freq:0.00030, ph:4.70, r:0.58, c:[ 8, 18, 88]  }, // bright navy
+        { bx:0.60, by:0.42, ax:0.28, ay:0.30, freq:0.00038, ph:5.80, r:0.48, c:[36,  5, 28]  }, // darkest wine
+      ];
+
+      function draw(t) {
+        const W = canvas.width, H = canvas.height, M = Math.max(W, H);
+
+        // base fill — very dark navy-black
+        ctx.fillStyle = '#040512';
+        ctx.fillRect(0, 0, W, H);
+
+        orbs.forEach(orb => {
+          // two-sine movement per axis → organic figure-drift, never loops cleanly
+          const x = (orb.bx
+            + Math.sin(t * orb.freq          + orb.ph) * orb.ax
+            + Math.sin(t * orb.freq * 1.73   + orb.ph + 2.3) * orb.ax * 0.28
+          ) * W;
+          const y = (orb.by
+            + Math.cos(t * orb.freq * 0.87   + orb.ph + 1.4) * orb.ay
+            + Math.cos(t * orb.freq * 2.09   + orb.ph + 0.7) * orb.ay * 0.24
+          ) * H;
+
+          const rad  = orb.r * M;
+          const [r, g, b] = orb.c;
+          const g2 = ctx.createRadialGradient(x, y, 0, x, y, rad);
+          g2.addColorStop(0,    `rgba(${r},${g},${b},0.92)`);
+          g2.addColorStop(0.35, `rgba(${r},${g},${b},0.50)`);
+          g2.addColorStop(0.70, `rgba(${r},${g},${b},0.14)`);
+          g2.addColorStop(1,    `rgba(${r},${g},${b},0)`);
+
+          ctx.globalCompositeOperation = 'source-over';
+          ctx.fillStyle = g2;
+          ctx.fillRect(0, 0, W, H);
+        });
+      }
+
+      let startTs = null;
+      function animate(ts) {
+        if (!startTs) startTs = ts;
+        draw(ts - startTs);
+        requestAnimationFrame(animate);
+      }
+
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+      requestAnimationFrame(animate);
+    })();
   </script>
 </body>
 </html>
