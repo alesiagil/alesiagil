@@ -974,13 +974,16 @@
       display: none;
       position: fixed; top: 60px; left: 0; right: 0;
       background: var(--dark-bg-hero);
-      border-bottom: 1px solid var(--yellow);
+      border-bottom: 1px solid var(--pink);
       flex-direction: column; padding: 8px 24px 20px;
-      z-index: 10000;
+      z-index: 10002;
       transform: translateY(-10px); opacity: 0; pointer-events: none;
       transition: transform 0.25s ease, opacity 0.25s ease;
     }
     .nav-mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: all; }
+    .site-nav.scrolled + .nav-mobile-menu { background: var(--dark-bg); border-bottom-color: var(--yellow); }
+    .site-nav.scrolled + .nav-mobile-menu .nav-mobile-cta { border-color: var(--yellow); }
+    .site-nav.scrolled + .nav-mobile-menu .nav-mobile-link { color: var(--yellow); }
     .nav-mobile-link {
       display: block; padding: 18px 0;
       color: var(--pink-pale); text-decoration: none;
@@ -989,13 +992,17 @@
       background: none; cursor: pointer;
     }
     .nav-mobile-cta {
-      display: block; padding: 18px 0;
+      display: inline-block; padding: 12px 18px;
       color: white; text-decoration: none;
-      font-size: 20px; font-weight: 600;
-      background: none; border: none; cursor: pointer;
+      font-size: 16px; font-weight: 600;
+      background: transparent;
+      border: 1px solid var(--pink);
+      border-radius: 10px; cursor: pointer;
       text-align: left; font-family: inherit;
-      border-bottom: none;
+      margin-top: 8px;
+      transition: background 0.2s;
     }
+    .nav-mobile-cta:hover { background: var(--pink-muted); }
 
     /* ─── FLOATING KEBAB NAV (mobile) ─────────────────── */
     .kebab-nav {
@@ -1022,9 +1029,9 @@
     .kebab-pill.active { color: var(--yellow); border-color: var(--yellow); }
     .kebab-btn {
       width: 52px; height: 52px; border-radius: 50%;
-      background: rgba(27, 34, 117, 0.75);
+      background: rgba(5, 7, 27, 0.92);
       backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      border: 2px solid var(--yellow);
+      border: 1px solid var(--yellow);
       color: var(--yellow); cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       transition: background 0.2s;
@@ -1091,7 +1098,7 @@
       .hero h1 { font-size: 36px; }
       /* No horizontal scroll */
       body { overflow-x: hidden; }
-      .decisions-img-full-wrap { left: 0; margin-left: 0; width: 100%; padding: 32px 24px 40px; }
+      .decisions-img-full-wrap { left: 0; margin-left: -24px; width: calc(100% + 48px); padding: 24px 24px 32px; }
       /* Side padding for all sections */
       #s1, #s2, #s3, #s4 { padding-left: 24px; padding-right: 24px; }
       .outcomes-section { padding-left: 24px; padding-right: 24px; }
@@ -1128,27 +1135,48 @@
       .rotate-cta { display: flex; }
       /* Dot nav: hide on mobile */
       .dot-nav { display: none !important; }
-      /* Prototype: portrait rotate CTA */
-      .proto-rotate-cta { display: flex; }
-      .training-embed iframe { height: clamp(300px, 60vh, 500px); }
+      /* Prototype: always show iframe on mobile, add fullscreen button */
+      .training-embed iframe { height: clamp(280px, 55vh, 480px); }
+      .proto-rotate-cta { display: none; }
+      .proto-fullscreen-btn { display: flex !important; }
+      /* Horizontal scroll block */
+      html { overflow-x: hidden; }
+      /* From-to section: restore padding and fix heading */
+      .from-to-section { padding: 48px 24px !important; }
+      .comparison-wrap { padding: 0 !important; }
+      .from-to-heading { font-size: 22px; line-height: 1.25; max-width: 100%; }
+      /* Section bridge match rest of padding */
+      .section-bridge { padding: 32px 24px; }
+      .section-bridge p { font-size: 20px; }
+      /* SW arrow label (step name) */
+      .sw-arr-label { font-size: 15px; color: rgba(255,255,255,0.8); letter-spacing: 0.03em; }
+      /* Request access modal: stack actions */
+      .modal-actions { flex-direction: column; align-items: stretch; gap: 10px; }
+      .modal-password-btn { text-align: center; width: 100%; padding: 8px 0; }
+      /* Footer copyright smaller */
+      .footer-left { font-size: 11px !important; }
       /* Modals */
       .modal-card { padding: 24px 20px; }
       .modal-row { grid-template-columns: 1fr; }
       .modal-title { font-size: 25px; }
-      .modal-overlay.open .modal-close { position: fixed; top: 14px; right: 14px; z-index: 20002; }
       .modal-submit { align-self: stretch; width: 100%; }
+      /* Contact modal: icon-only staggered buttons */
+      .contact-links { flex-direction: row; gap: 12px; margin-bottom: 20px; align-items: flex-start; }
+      .contact-link-item { width: 52px; height: 52px; max-width: none; padding: 14px; justify-content: center; }
+      .contact-link-item span { display: none; }
+      .contact-link-item svg { opacity: 1; }
+      /* Stagger: email button slightly lower */
+      .contact-links .contact-email-btn { margin-top: 10px; }
       /* Footer */
       .site-footer { flex-direction: column; gap: 16px; padding: 28px 20px; }
       .kebab-nav { display: flex; }
-    }
-    @media (max-width: 600px) and (orientation: portrait) {
-      .training-embed iframe { display: none; }
-      .proto-rotate-cta { display: flex; }
     }
     @media (orientation: landscape) and (max-height: 560px) {
       .site-nav { display: none !important; }
       .landscape-exit { display: flex !important; }
     }
+
+    .proto-fullscreen-btn { display: none; }
 
     /* ── Hero entrance ── */
     .hero-eyebrow  { opacity: 0; animation: heroFadeUp 1.0s cubic-bezier(0.34,1.4,0.64,1) 0.2s forwards; }
@@ -1389,7 +1417,7 @@
       <button class="sw-arr-btn" id="swPrev" aria-label="Previous screen">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
       </button>
-      <span class="sw-arr-label" id="swArrLabel">1 / 8</span>
+      <span class="sw-arr-label" id="swArrLabel">Worklist</span>
       <button class="sw-arr-btn" id="swNext" aria-label="Next screen">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
       </button>
@@ -1754,6 +1782,14 @@
     <div class="landscape-exit" style="display:none; position:fixed; top:12px; right:12px; z-index:20001;">
       <a href="#training" style="background:rgba(5,7,27,0.85); border:1px solid var(--yellow); color:var(--yellow); border-radius:8px; padding:8px 14px; font-size:13px; font-weight:700; text-decoration:none;">Exit Preview</a>
     </div>
+    <!-- Mobile: prominent fullscreen button -->
+    <a class="proto-fullscreen-btn"
+       href="https://www.figma.com/proto/rMUUZWB5ISb88OdUoxXvqN/MatchX-Training-Tool-AG?page-id=0%3A1&node-id=6-56458&starting-point-node-id=6%3A56458"
+       target="_blank" rel="noopener"
+       style="display:none; align-items:center; justify-content:center; gap:12px; margin: 0 0 20px; background:var(--pink); border-radius:12px; padding:18px 24px; text-decoration:none; color:white; font-size:16px; font-weight:700; letter-spacing:0.02em;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+      Open Training Tool
+    </a>
     <div class="training-embed-wrap fade-up" style="transition-delay: 0.15s;">
       <div class="training-embed">
         <div class="embed-activate" id="embedActivate">
@@ -2047,6 +2083,7 @@
       shCur = (n + shImgs.length) % shImgs.length;
       shImgs[shCur].classList.add('sh-active');
       shSteps[shCur].classList.add('sh-cur');
+      updateSwLabel();
     }
 
     function scheduleShAuto() {
@@ -2072,8 +2109,8 @@
     const swNext = document.getElementById('swNext');
     const swArrLabel = document.getElementById('swArrLabel');
     function updateSwLabel() {
-      const total = shImgs.length;
-      if (swArrLabel) swArrLabel.textContent = `${shCur + 1} / ${total}`;
+      if (!swArrLabel) return;
+      swArrLabel.textContent = shSteps[shCur] ? shSteps[shCur].textContent : `${shCur + 1} / ${shImgs.length}`;
     }
     if (swPrev && swNext) {
       swPrev.addEventListener('click', () => {
@@ -2161,8 +2198,8 @@
 
   <!-- REQUEST ACCESS MODAL -->
   <div class="modal-overlay" id="requestModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
     <div class="modal-card">
-      <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
       <p class="modal-eyebrow" id="modalProject"></p>
       <h2 class="modal-title" id="modalTitle">Request Access</h2>
       <p class="modal-desc">This project is protected. Drop me a note and I'll be happy to walk you through the work — ideally over a conversation.</p>
@@ -2200,8 +2237,8 @@
 
   <!-- PASSWORD MODAL -->
   <div class="modal-overlay" id="passwordModal" role="dialog" aria-modal="true">
+    <button class="modal-close" id="pwModalClose" aria-label="Close">✕</button>
     <div class="modal-card" style="max-width:380px;">
-      <button class="modal-close" id="pwModalClose" aria-label="Close">✕</button>
       <p class="modal-eyebrow" id="pwModalProject"></p>
       <h2 class="modal-title">Enter Password</h2>
       <p class="modal-desc">Have a password? Enter it below to access this case study directly.</p>
@@ -2219,8 +2256,8 @@
 
   <!-- GET IN TOUCH MODAL -->
   <div class="modal-overlay" id="contactModal" role="dialog" aria-modal="true">
+    <button class="modal-close" id="contactModalClose" aria-label="Close">✕</button>
     <div class="modal-card">
-      <button class="modal-close" id="contactModalClose" aria-label="Close">✕</button>
       <p class="modal-eyebrow">Let's connect</p>
       <h2 class="modal-title">Get in Touch</h2>
       <div class="contact-links">
@@ -2412,6 +2449,25 @@
     }
   </script>
 
+  <!-- Mobile floating kebab nav -->
+  <div class="kebab-backdrop" id="kebabBackdrop"></div>
+  <nav class="kebab-nav" id="kebabNav">
+    <div class="kebab-menu-items" id="kebabItems">
+      <a class="kebab-pill" href="#s0">SW Walkthrough</a>
+      <a class="kebab-pill" href="#s1">Key Insights</a>
+      <a class="kebab-pill" href="#s2">Aha! Moments</a>
+      <a class="kebab-pill" href="#s3">Key Decisions</a>
+      <a class="kebab-pill" href="#s4">Key Features</a>
+      <a class="kebab-pill" href="#training">Beyond the Product</a>
+      <a class="kebab-pill" href="#outcomes">Outcomes</a>
+    </div>
+    <button class="kebab-btn" id="kebabBtn" aria-label="Open navigation menu" aria-expanded="false">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/>
+      </svg>
+    </button>
+  </nav>
+
   <script>
     // ── Mobile kebab nav
     const kebabBtn = document.getElementById('kebabBtn');
@@ -2446,25 +2502,6 @@
       });
     }
   </script>
-
-  <!-- Mobile floating kebab nav -->
-  <div class="kebab-backdrop" id="kebabBackdrop"></div>
-  <nav class="kebab-nav" id="kebabNav">
-    <div class="kebab-menu-items" id="kebabItems">
-      <a class="kebab-pill" href="#s0">SW Walkthrough</a>
-      <a class="kebab-pill" href="#s1">Key Insights</a>
-      <a class="kebab-pill" href="#s2">Aha! Moments</a>
-      <a class="kebab-pill" href="#s3">Key Decisions</a>
-      <a class="kebab-pill" href="#s4">Key Features</a>
-      <a class="kebab-pill" href="#training">Beyond the Product</a>
-      <a class="kebab-pill" href="#outcomes">Outcomes</a>
-    </div>
-    <button class="kebab-btn" id="kebabBtn" aria-label="Open navigation menu" aria-expanded="false">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-        <circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/>
-      </svg>
-    </button>
-  </nav>
 
 </body>
 </html>

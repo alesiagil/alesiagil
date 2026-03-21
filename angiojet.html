@@ -765,13 +765,16 @@
       display: none;
       position: fixed; top: 60px; left: 0; right: 0;
       background: var(--dark-bg-hero);
-      border-bottom: 1px solid var(--yellow);
+      border-bottom: 1px solid var(--pink);
       flex-direction: column; padding: 8px 24px 20px;
-      z-index: 10000;
+      z-index: 10002;
       transform: translateY(-10px); opacity: 0; pointer-events: none;
       transition: transform 0.25s ease, opacity 0.25s ease;
     }
     .nav-mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: all; }
+    .site-nav.scrolled + .nav-mobile-menu { background: var(--dark-bg); border-bottom-color: var(--yellow); }
+    .site-nav.scrolled + .nav-mobile-menu .nav-mobile-cta { border-color: var(--yellow); }
+    .site-nav.scrolled + .nav-mobile-menu .nav-mobile-link { color: var(--yellow); }
     .nav-mobile-link {
       display: block; padding: 18px 0;
       color: var(--pink-pale); text-decoration: none;
@@ -780,13 +783,17 @@
       background: none; cursor: pointer;
     }
     .nav-mobile-cta {
-      display: block; padding: 18px 0;
+      display: inline-block; padding: 12px 18px;
       color: white; text-decoration: none;
-      font-size: 20px; font-weight: 600;
-      background: none; border: none; cursor: pointer;
+      font-size: 16px; font-weight: 600;
+      background: transparent;
+      border: 1px solid var(--pink);
+      border-radius: 10px; cursor: pointer;
       text-align: left; font-family: inherit;
-      border-bottom: none;
+      margin-top: 8px;
+      transition: background 0.2s;
     }
+    .nav-mobile-cta:hover { background: var(--pink-muted); }
 
     /* ─── RESPONSIVE ──────────────────────────────────── */
     @media (max-width: 1100px) {
@@ -825,10 +832,22 @@
       .quotes-grid { grid-template-columns: 1fr; gap: 40px; }
       .dot-nav { display: none !important; }
       .section-title { font-size: 26px; }
+      /* Horizontal scroll block */
+      html { overflow-x: hidden; }
+      /* Footer copyright smaller */
+      .footer-left { font-size: 11px; }
+      /* Contact modal: icon-only staggered buttons */
+      .contact-links { flex-direction: row; gap: 12px; align-items: flex-start; }
+      .contact-link-item { width: 52px; height: 52px; max-width: none; padding: 14px; justify-content: center; }
+      .contact-link-item span { display: none; }
+      .contact-links .contact-email-btn { margin-top: 10px; }
+      /* Modal actions: stack */
+      .modal-actions { flex-direction: column; align-items: stretch; gap: 10px; }
+      .modal-password-btn { text-align: center; width: 100%; padding: 8px 0; }
+      .modal-actions .modal-submit { width: 100%; }
       .modal-row { grid-template-columns: 1fr; }
       .modal-card { padding: 24px 20px; }
       .modal-title { font-size: 25px; }
-      .modal-overlay.open .modal-close { position: fixed; top: 14px; right: 14px; z-index: 20002; }
       .modal-submit { align-self: stretch; width: 100%; }
       .site-footer { flex-direction: column; gap: 16px; padding: 28px 20px; }
     }
@@ -2302,8 +2321,8 @@
 
   <!-- GET IN TOUCH MODAL -->
   <div class="modal-overlay" id="contactModal" role="dialog" aria-modal="true">
+    <button class="modal-close" id="contactModalClose" aria-label="Close">✕</button>
     <div class="modal-card">
-      <button class="modal-close" id="contactModalClose" aria-label="Close">✕</button>
       <p class="modal-eyebrow">Let's connect</p>
       <h2 class="modal-title">Get in Touch</h2>
       <div class="contact-links">
