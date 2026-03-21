@@ -389,10 +389,11 @@
     /* NDA lock badge — icon only */
     .lock-overlay {
       position: absolute;
-      bottom: 12px; left: 12px;
+      bottom: 14px; left: 14px;
       z-index: 2;
       display: flex; align-items: center; justify-content: center;
-      color: rgba(221, 224, 255, 0.7);
+      line-height: 0;
+      color: rgba(221, 224, 255, 1);
       background: rgba(5, 7, 27, 0.72);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
@@ -400,7 +401,7 @@
       border-radius: 50%;
       border: 1px solid rgba(221, 224, 255, 0.18);
     }
-    .lock-overlay svg { opacity: 0.85; flex-shrink: 0; width: 20px; height: 20px; }
+    .lock-overlay svg { display: block; opacity: 1; flex-shrink: 0; width: 20px; height: 20px; }
 
     /* Unlocked half cards — rounded mask on container, no overlay */
     .card-half.unlocked .card-image {
