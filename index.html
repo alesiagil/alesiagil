@@ -163,18 +163,8 @@
       letter-spacing: 0.02em; /* tad of tracking */
       color: var(--pink-pale);
       margin-bottom: 20px;
-      position: relative;
       opacity: 0; transform: translateY(32px);
       transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.34,1.2,0.64,1);
-    }
-    .hero-name::after {
-      content: '';
-      position: absolute; inset: 0;
-      pointer-events: none;
-      opacity: 0.25;
-      mix-blend-mode: overlay;
-      background-image: var(--grain);
-      background-size: 200px 200px;
     }
     .hero-name.visible { opacity: 1; transform: none; }
 
@@ -367,19 +357,9 @@
       font-weight: 900; line-height: 1; letter-spacing: -0.04em;
       padding-left: 28px;
       pointer-events: none; user-select: none;
-      position: relative;
     }
     /* All years: same size, same 80% opacity — uniform, intentional */
     .timeline-year-bg { font-size: 72px; color: #1B2275; opacity: 0.8; }
-    .timeline-year-bg::after {
-      content: '';
-      position: absolute; inset: 0;
-      pointer-events: none;
-      opacity: 0.30;
-      mix-blend-mode: overlay;
-      background-image: var(--grain);
-      background-size: 200px 200px;
-    }
 
     /* Header row: chevron + meta, sits below the year with breathing room */
     .timeline-header-row {
