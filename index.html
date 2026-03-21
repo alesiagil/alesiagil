@@ -166,25 +166,18 @@
     /* ─── HERO PHOTO ─────────────────────────────────── */
     .hero-photo-wrap {
       position: absolute;
-      right: -60px;
+      right: 80px;
       top: 140px; bottom: 80px; /* overridden by JS to match hero-inner exactly */
-      width: 420px;
+      width: 300px;
       pointer-events: none;
       z-index: 0;
-    }
-    .hero-photo-wrap::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.3) 28%, transparent 52%);
-      z-index: 1;
     }
     .hero-photo {
       width: 100%; height: 100%;
       object-fit: cover;
       object-position: center top;
       display: block;
-      opacity: 0.9;
-      filter: grayscale(1);
+      opacity: 0.92;
       mix-blend-mode: luminosity;
     }
     @media (max-width: 960px) {
@@ -615,7 +608,7 @@
       </div>
     </div>
     <div class="hero-photo-wrap">
-      <img src="Images/headshot-1.JPG" class="hero-photo" alt="Alesia Gil" />
+      <img src="Images/Home/headshot-3.png" class="hero-photo" alt="Alesia Gil" />
     </div>
     <a class="scroll-hint" href="#careerSection" aria-label="Scroll to timeline">
       <span class="scroll-hint-label">my journey</span>
