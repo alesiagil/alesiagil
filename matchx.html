@@ -27,6 +27,7 @@
       --yellow:         #ffff00;
       --text-light:     #dde0ff;
       --text-pink-pale: #ffc0e2;
+      --pink-pale:      #ffc0e2;
 
       /* ── Light mode ── */
       --bg:             #ffffff;
@@ -1018,6 +1019,11 @@
       font-family: inherit; color: var(--pink);
       font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
       text-transform: uppercase;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .sheet-trigger.sheet-visible {
+      opacity: 1; pointer-events: all;
     }
     .sheet-trigger-icon { transition: transform 0.3s ease; }
     .sheet-trigger.open .sheet-trigger-icon { transform: rotate(180deg); }
@@ -1121,6 +1127,7 @@
       /* Hero */
       .hero { padding: 88px 24px 56px; }
       .hero h1 { font-size: 36px; }
+      .back-btn-wrap { top: 68px; left: 24px; }
       /* No horizontal scroll */
       body { overflow-x: hidden; }
       .decisions-img-full-wrap { left: 0; margin-left: -24px; width: calc(100% + 48px); padding: 24px 24px 32px; }
@@ -2506,8 +2513,17 @@
   </div>
 
   <script>
-    // ── Mobile bottom sheet nav
+    // ── Show sheet trigger only after hero scrolls out of view
     const sheetTrigger = document.getElementById('sheetTrigger');
+    const heroEl = document.querySelector('.hero');
+    if (sheetTrigger && heroEl) {
+      new IntersectionObserver((entries) => {
+        // When hero is no longer intersecting, show the trigger; hide it when back in view
+        sheetTrigger.classList.toggle('sheet-visible', !entries[0].isIntersecting);
+      }, { threshold: 0 }).observe(heroEl);
+    }
+
+    // ── Mobile bottom sheet nav
     const sheetBackdrop = document.getElementById('sheetBackdrop');
     const sheetPanel = document.getElementById('sheetPanel');
 
