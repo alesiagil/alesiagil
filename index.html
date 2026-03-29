@@ -456,9 +456,13 @@
       margin-bottom: 24px;
     }
     .footer-status {
-      font-size: 14px; font-weight: 600; color: var(--yellow);
+      font-size: 14px; font-weight: 400; color: var(--yellow);
       display: flex; align-items: center; gap: 8px;
+      background: none; border: none; cursor: pointer;
+      padding: 0; font-family: inherit;
+      transition: opacity 0.2s;
     }
+    .footer-status:hover { opacity: 0.7; }
     .footer-status-dot {
       width: 8px; height: 8px; border-radius: 50%;
       background: #22c55e;
@@ -474,7 +478,7 @@
     .footer-link {
       display: inline-flex; align-items: center; gap: 6px;
       color: var(--yellow); text-decoration: none;
-      font-size: 13px; font-weight: 600;
+      font-size: 13px; font-weight: 400;
       transition: opacity 0.2s;
     }
     .footer-link:hover { opacity: 0.7; }
@@ -946,10 +950,10 @@
   <!-- FOOTER -->
   <footer class="site-footer">
     <div class="footer-top">
-      <p class="footer-status">
+      <button class="footer-status" onclick="openContactModal()">
         <span class="footer-status-dot"></span>
         Open to opportunities
-      </p>
+      </button>
       <div class="footer-links">
         <a href="https://linkedin.com/in/alesiagil" class="footer-link" target="_blank" rel="noopener" aria-label="LinkedIn">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
