@@ -43,6 +43,7 @@
       --max-w:     1200px;
       --pad:       120px;
       --pad-sm:    48px;
+      --fs-body: clamp(13px, 0.35vw + 9px, 15px);
     }
 
     html { scroll-behavior: smooth; }
@@ -51,9 +52,11 @@
       font-family: var(--font-main);
       background: var(--bg);
       color: var(--text);
-      font-size: 17px;
+      font-size: clamp(14px, 0.4vw + 9.5px, 16px);
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
     }
 
     /* ─── GRAIN TEXTURE ─────────────────────────────── */
@@ -229,7 +232,7 @@
       margin-bottom: 40px;
     }
     .hero-subtitle {
-      font-size: 17px; font-weight: 300; line-height: 1.6;
+      font-size: var(--fs-body); font-weight: 300; line-height: 1.6;
       color: white;
       max-width: 600px;
     }
@@ -284,7 +287,7 @@
       display: flex; flex-direction: column; align-items: center; gap: 56px;
     }
     .approach-text {
-      color: var(--text-light); font-size: 16px; line-height: 1.75;
+      color: var(--text-light); font-size: var(--fs-body); line-height: 1.75;
       max-width: 860px; text-align: center;
     }
     .approach-text strong { color: var(--yellow); font-weight: 700; }
@@ -541,7 +544,7 @@
       font-size: 18px; color: var(--text);
       letter-spacing: -0.02em;
     }
-    .split-text p { font-size: 15px; line-height: 1.75; color: var(--text-muted); }
+    .split-text p { font-size: var(--fs-body); line-height: 1.75; color: var(--text-muted); }
     .split-text p strong { color: inherit; font-weight: 700; }
 
     .split-img {
@@ -633,7 +636,7 @@
       color: var(--text); margin-bottom: 14px;
       letter-spacing: -0.03em;
     }
-    .feature-text p { font-size: 16px; line-height: 1.75; color: var(--text-muted); }
+    .feature-text p { font-size: var(--fs-body); line-height: 1.75; color: var(--text-muted); }
 
     .feature-img {
       border-radius: 12px; overflow: hidden;
@@ -838,9 +841,9 @@
       color: var(--text); max-width: 620px; margin-bottom: 24px;
       letter-spacing: -0.02em;
     }
-    .outcomes-inner p { font-size: 15px; line-height: 1.75; color: var(--text-muted); max-width: 640px; }
+    .outcomes-inner p { font-size: var(--fs-body); line-height: 1.75; color: var(--text-muted); max-width: 640px; }
     .outcomes-inner .challenge-list { max-width: 640px; }
-    .outcomes-inner .challenge-list li { font-size: 15px; color: var(--text-muted); }
+    .outcomes-inner .challenge-list li { font-size: var(--fs-body); color: var(--text-muted); }
     .outcomes-inner p strong { color: inherit; font-weight: 700; }
 
     /* ─── QUOTES CALLOUT (dark) ──────────────────────── */

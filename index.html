@@ -23,6 +23,7 @@
       --text-light:     #dde0ff;
       --pad: 135px;
       --max-w: 1100px;
+      --fs-body: clamp(13px, 0.35vw + 9px, 15px);
       --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
@@ -31,9 +32,11 @@
       font-family: var(--font-main);
       background: var(--dark-bg);
       color: var(--text-light);
-      font-size: 17px;
+      font-size: clamp(14px, 0.4vw + 9.5px, 16px);
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
       overflow-x: hidden;
     }
 
@@ -188,7 +191,7 @@
     .hero-headline.visible { opacity: 1; transform: none; }
 
     .hero-body {
-      font-size: 12px; font-weight: 300;
+      font-size: var(--fs-body); font-weight: 300;
       line-height: 1.8; color: var(--pink-pale);
       max-width: 700px;
       opacity: 0; transform: translateY(16px);
@@ -279,7 +282,7 @@
       margin-bottom: 0;
     }
     .role-company {
-      font-size: 12px; font-weight: 400;
+      font-size: calc(var(--fs-body) - 2px); font-weight: 400;
       color: rgba(221, 224, 255, 0.6); margin-bottom: 20px;
     }
 
@@ -289,7 +292,7 @@
       max-width: 680px;
     }
     .role-bullets li {
-      font-size: 12px; font-weight: 400;
+      font-size: var(--fs-body); font-weight: 400;
       color: #DDE0FF; line-height: 1.6;
       padding-left: 18px; position: relative;
     }
@@ -298,7 +301,7 @@
     }
 
     .role-award {
-      font-size: 12px; font-weight: 400; color: #DDE0FF;
+      font-size: var(--fs-body); font-weight: 400; color: #DDE0FF;
       display: flex; align-items: flex-start; gap: 8px;
     }
     .role-award-star { color: var(--yellow); flex-shrink: 0; }
@@ -375,12 +378,12 @@
       letter-spacing: -0.01em; color: #DDE0FF;
     }
     .timeline-company {
-      display: block; font-size: 12px; font-weight: 400; color: rgba(221, 224, 255, 0.6);
+      display: block; font-size: calc(var(--fs-body) - 2px); font-weight: 400; color: rgba(221, 224, 255, 0.6);
     }
 
     .timeline-body {
       padding: 8px 28px 28px 62px;
-      font-size: 12px; font-weight: 400;
+      font-size: var(--fs-body); font-weight: 400;
       line-height: 1.75; color: #DDE0FF;
       max-width: 720px;
     }
@@ -422,7 +425,7 @@
       font-size: 18px; font-weight: 700; letter-spacing: -0.01em;
       color: #DDE0FF; margin-bottom: 0;
     }
-    .edu-school { font-size: 12px; font-weight: 400; color: rgba(221, 224, 255, 0.6); }
+    .edu-school { font-size: calc(var(--fs-body) - 2px); font-weight: 400; color: rgba(221, 224, 255, 0.6); }
 
     /* ─── TIMELINE CTA ──────────────────────────────── */
     .timeline-cta {
@@ -802,7 +805,7 @@
       <p class="hero-headline">I design complex enterprise systems<br>with clarity and intention.</p>
       <div class="hero-body">
         <p>I'm a senior product designer specializing in regulated MedTech, where the stakes are real and the workflows are unforgiving.</p>
-        <p>From device GUIs to enterprise platforms, I turn high-complexity, high-consequence systems into tools people trust — and actually want to use.</p>
+        <p>From device GUIs to enterprise platforms, I turn high-complexity,<br>high-consequence systems into tools people trust — and actually want to use.</p>
       </div>
     </div>
     <div class="hero-photo-wrap">
