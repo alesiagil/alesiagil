@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" sizes="512x512" href="../favicon.png" />
   <link rel="shortcut icon" href="../favicon.png" />
-  <title>From Complexity to Clarity in Vascular Surgery — Alesia Gil</title>
+  <title>AutoElite Thrombectomy System Console — Alesia Gil</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -38,8 +38,8 @@
       --border:         #e4e2f0;
 
       /* ── Layout ── */
-      --max-w:     960px;
-      --pad:       80px;
+      --max-w:     1200px;
+      --pad:       120px;
       --pad-sm:    48px;
       --fs-body: clamp(13px, 0.35vw + 9px, 15px);
     }
@@ -367,7 +367,7 @@
       position: fixed;
       right: 28px; top: 50%;
       transform: translateY(-50%);
-      z-index: 200;
+      z-index: 10001;
       display: flex; flex-direction: column; align-items: flex-end;
       gap: 0;
       /* Hidden until past hero */
@@ -458,18 +458,11 @@
     .section-label.drawn::after { transform: scaleX(1); }
 
     /* ─── SECTION NUMBERS ───────────────────────────── */
-    .section-num {
-      position: absolute; top: -16px; right: 0;
-      font-size: 200px; font-weight: 900; line-height: 1;
-      letter-spacing: -0.06em; pointer-events: none; user-select: none;
-      color: var(--text-secondary); opacity: 0;
-      transition: opacity 1s ease 0.4s;
-    }
-    .section-num.drawn { opacity: 0.08; }
+    .section-num { display: none; }
 
     /* ─── INTERSTITIAL STRIP ─────────────────────────── */
     .section-bridge { background: var(--bg-tint); padding: 56px var(--pad); text-align: center; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .section-bridge p { font-size: 32px; font-weight: 900; line-height: 1.25; color: var(--text); max-width: 680px; margin: 0 auto; letter-spacing: -0.03em; }
+    .section-bridge p { font-size: 26px; font-weight: 900; line-height: 1.25; color: var(--text); max-width: 680px; margin: 0 auto; letter-spacing: -0.03em; }
     .section-bridge strong { color: var(--pink); font-weight: 900; }
 
     /* Split layout */
@@ -482,13 +475,13 @@
     .split.flip > * { direction: ltr; }
 
     .split-text h3 {
-      font-size: 25px; font-weight: 900; line-height: 1.2;
+      font-size: 20px; font-weight: 900; line-height: 1.2;
       color: var(--text); margin-bottom: 16px; letter-spacing: -0.02em;
     }
     .split-text h3.aha {
       font-family: var(--font-main);
       font-weight: 900; font-style: normal;
-      font-size: 22px; color: var(--text);
+      font-size: 18px; color: var(--text);
       letter-spacing: -0.02em;
     }
     .split-text p { font-size: var(--fs-body); line-height: 1.75; color: var(--text-muted); }
@@ -627,7 +620,7 @@
       text-align: center; margin-bottom: 48px;
     }
     .training-label {
-      font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
+      font-size: 15px; font-weight: 700; letter-spacing: 0.12em;
       text-transform: uppercase; color: rgba(255,255,255,0.35);
       margin-bottom: 20px;
     }
@@ -638,8 +631,8 @@
     }
     .training-heading span { color: var(--yellow); }
     .training-desc {
-      font-size: var(--fs-body); line-height: 1.75; color: rgba(221,224,255,0.55);
-      max-width: 580px; margin: 0 auto;
+      font-size: 15px; line-height: 1.75; color: rgba(221,224,255,0.55);
+      max-width: 860px; margin: 0 auto;
     }
     .training-embed-wrap {
       width: calc(100% + 2 * var(--pad));
@@ -666,8 +659,10 @@
     }
 
     /* ─── OUTCOMES ────────────────────────────────────── */
-    .outcomes-section { padding: 80px 80px; }
+    .outcomes-section { padding: 80px var(--pad); }
     .outcomes-inner { max-width: var(--max-w); margin: 0 auto; }
+    .outcomes-section .section-label { max-width: none; display: block; width: 100%; }
+    .outcomes-section .section-label::after { transform: scaleX(1); }
     .outcomes-heading {
       font-size: 37px; font-weight: 900; line-height: 1.2;
       color: var(--text); max-width: 620px; margin-bottom: 24px;
@@ -904,6 +899,65 @@
       -webkit-font-smoothing: antialiased;
       /* base font: 1em = device width / 80 ≈ ~10.75px at 860px */
       font-size: clamp(8px, 1.25vw, 10.75px);
+    }
+
+    /* ── Video walkthrough ── */
+    .walkthrough-video {
+      width: 100%; max-width: 860px;
+      margin: 0 auto;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #071730;
+      border: 1px solid rgba(255,255,255,0.07);
+      box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+    }
+    .walkthrough-video video {
+      width: 100%; display: block;
+      border-radius: 10px;
+    }
+    .walkthrough-placeholder {
+      padding: 80px 32px;
+      text-align: center;
+      color: rgba(255,255,255,0.35);
+      font-size: 15px;
+    }
+    .demo-tabs {
+      display: flex; gap: 4px; justify-content: center;
+      margin-bottom: 20px;
+    }
+    .demo-tab {
+      font-family: inherit; font-size: 14px; font-weight: 400;
+      letter-spacing: 0.04em;
+      color: rgba(210,220,235,0.55);
+      background: none; border: none; cursor: pointer;
+      padding: 8px 20px;
+      border-radius: 6px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .demo-tab:hover { color: rgba(210,220,235,0.85); }
+    .demo-tab-active {
+      color: #ffff00; font-weight: 700;
+      background: rgba(255,255,0,0.08);
+    }
+    .demo-caption {
+      max-width: 860px; margin: 16px auto 0;
+      text-align: center;
+      font-size: 13px; line-height: 1.6;
+      color: rgba(221,224,255,0.4);
+    }
+
+    /* ── Interface proto intro text ── */
+    .interface-proto-intro {
+      max-width: 620px;
+      margin-bottom: 40px;
+    }
+    .interface-proto-intro h3 {
+      font-size: 28px; font-weight: 700; color: #fff;
+      margin-bottom: 12px;
+    }
+    .interface-proto-intro p {
+      font-size: 16px; line-height: 1.6;
+      color: rgba(255,255,255,0.55);
     }
 
     /* ── each screen is absolutely stacked ── */
@@ -1431,32 +1485,84 @@
     }
     .dwell-btn-reminder:hover { opacity: 0.88; }
 
-    /* ── demo caption / step indicator ── */
+    /* ── flow nav (linear workflow steps) ── */
     .proto-steps {
-      display: flex; align-items: center; gap: 24px;
-      margin-top: 24px;
+      display: flex; align-items: center; gap: 16px;
+      margin-top: 20px;
     }
     .proto-step {
-      font-size: 14px; font-weight: 600;
-      color: rgba(255,255,255,0.28);
-      letter-spacing: 0.05em;
+      font-size: 14px; font-weight: 400;
+      color: rgba(210,220,235,0.75);
+      letter-spacing: 0.04em;
       cursor: pointer;
-      transition: color 0.25s ease;
+      transition: color 0.25s ease, font-weight 0.25s ease;
       padding: 4px 0;
       position: relative;
     }
     .proto-step::after {
       content: '';
       position: absolute; bottom: 0; left: 0; right: 0;
-      height: 1.5px; background: var(--yellow);
+      height: 2px; background: #ffff00;
       transform: scaleX(0); transform-origin: left;
       transition: transform 0.3s ease;
     }
-    .proto-step.ps-cur { color: rgba(255,255,255,0.75); }
+    .proto-step.ps-cur {
+      color: #ffff00; font-weight: 700;
+    }
     .proto-step.ps-cur::after { transform: scaleX(1); }
     .proto-step-sep {
-      width: 16px; height: 1px;
-      background: rgba(255,255,255,0.15);
+      font-size: 13px; color: rgba(210,220,235,0.5);
+      user-select: none;
+    }
+
+    /* ── Outcome stats grid ── */
+    .outcomes-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 40px;
+    }
+    .outcome-stat {
+      padding: 24px 0;
+      border-top: 2px solid var(--border);
+    }
+    .outcome-stat-value {
+      font-size: 20px; font-weight: 700; color: var(--text);
+      margin-bottom: 6px;
+    }
+    .outcome-stat-label {
+      font-size: 14px; line-height: 1.5;
+      color: var(--text-muted);
+    }
+    .outcome-stat-label a {
+      color: var(--text);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .outcome-stat-label a:hover { opacity: 0.7; }
+    @media (max-width: 640px) {
+      .outcomes-stats { grid-template-columns: 1fr; gap: 20px; }
+    }
+
+    /* ── GIF showcase placeholders ── */
+    .gif-showcase {
+      border-radius: 10px;
+      overflow: hidden;
+      background: #071730;
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+    .gif-showcase img {
+      width: 100%; display: block;
+      border-radius: 10px 10px 0 0;
+    }
+    .gif-showcase img[src=""] {
+      min-height: 200px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.06));
+    }
+    .gif-caption {
+      padding: 16px 20px;
+      font-size: 13px; line-height: 1.5;
+      color: rgba(255,255,255,0.4);
     }
 
     /* ─── CONTACT MODAL ──────────────────────────────── */
@@ -1606,10 +1712,10 @@
     </div>
     <div class="hero-bg-img"></div>
     <div class="hero-content">
-      <p class="hero-eyebrow">Boston Scientific · AngioJet Platinum</p>
+      <p class="hero-eyebrow">Boston Scientific · AutoElite Console</p>
       <h1>From Complexity to Clarity in Vascular Surgery</h1>
       <div class="hero-bar"></div>
-      <p class="hero-subtitle">Streamlining high-risk thrombectomy procedures with a device interface that enhances safety, reduces cognitive load, and supports confident decision-making in the OR.</p>
+      <p class="hero-subtitle">Designing a touchscreen interface for a surgical thrombectomy device — where a confusing label or missed alert isn't a UX problem, it's a patient safety issue.</p>
     </div>
   </section>
 
@@ -1618,16 +1724,40 @@
   <section class="proto-section" id="training">
     <div class="training-inner" style="padding-bottom: 48px;">
       <div class="training-header fade-up">
-        <p class="training-label">Interactive Prototype</p>
-        <h2 class="training-heading">Experience the <span>AngioJet Platinum</span> interface</h2>
-        <p class="training-desc">Click through the guided procedure flow — setup, mode selection, active thrombectomy, and dwell timing — and feel how the interface moves with the procedure.</p>
+        <p class="training-label">Workflow Demo</p>
+        <h2 class="training-heading">See the <span>AutoElite Console</span> in action</h2>
+        <p class="training-desc">Watch a full procedure flow — from setup and catheter priming through Power Pulse, dwell timing, and Thrombectomy — to see how the interface guides the technologist step by step.</p>
       </div>
     </div>
 
-    <div class="proto-device" id="protoDevice">
+    <!-- Two-tab video switcher -->
+    <div class="demo-tabs fade-up">
+      <button class="demo-tab demo-tab-active" data-video="setup">Setup</button>
+      <button class="demo-tab" data-video="runscreen">Run Screen</button>
+    </div>
+    <div class="walkthrough-video fade-up">
+      <video id="walkthroughVideo" controls preload="metadata" playsinline>
+        <source src="demo-setup.mp4" type="video/mp4">
+      </video>
+      <div class="walkthrough-placeholder" id="videoPlaceholder" style="display:none;">
+        Video coming soon.
+      </div>
+    </div>
+    <p class="demo-caption" id="demoCaption">The guided setup flow — from pump insertion through catheter priming, the interface walks the technologist through each physical step.</p>
 
+    <!--
+    <div class="proto-device" id="protoDevice">
+      <iframe id="axureProto" src="proto/main_menu.html"
+              style="width:1280px;height:800px;border:none;display:block;
+                     transform-origin:top left;
+                     transform:scale(var(--iframe-scale,0.43));
+                     pointer-events:auto;"
+              allowfullscreen></iframe>
+
+      <!-- OLD HAND-CODED SCREENS (hidden, replaced by Axure embed) -->
+      <div style="display:none;">
       <!-- SCREEN 0: Home / Main Menu (§6.1) -->
-      <div class="proto-screen ps-active" id="ps-home">
+      <div class="proto-screen" id="ps-home">
         <div class="ps-body">
           <!-- Power button -->
           <button class="home-power" aria-label="Power">
@@ -1897,20 +2027,10 @@
         </div>
       </div>
 
+    </div><!-- /hidden old screens -->
     </div><!-- /proto-device -->
+    -->
 
-    <!-- Step indicator below device -->
-    <div class="proto-steps">
-      <span class="proto-step ps-cur" data-step="0">Home</span>
-      <span class="proto-step-sep"></span>
-      <span class="proto-step" data-step="1">Setup</span>
-      <span class="proto-step-sep"></span>
-      <span class="proto-step" data-step="2">Select Mode</span>
-      <span class="proto-step-sep"></span>
-      <span class="proto-step" data-step="3">Thrombectomy</span>
-      <span class="proto-step-sep"></span>
-      <span class="proto-step" data-step="4">Dwell Timer</span>
-    </div>
   </section>
 
   <!-- META STRIP -->
@@ -1918,7 +2038,7 @@
     <div class="meta-strip-inner">
       <div>
         <div class="meta-label">My Role</div>
-        <div class="meta-value">Lead Product Designer</div>
+        <div class="meta-value">Product Designer via Insight Product Development</div>
       </div>
       <div>
         <div class="meta-label">Client</div>
@@ -1926,242 +2046,154 @@
       </div>
       <div>
         <div class="meta-label">Platform</div>
-        <div class="meta-value">Touchscreen medical device GUI</div>
+        <div class="meta-value">Embedded touchscreen medical device</div>
       </div>
       <div>
         <div class="meta-label">With</div>
-        <div class="meta-value">Human factors engineers, device engineering team</div>
+        <div class="meta-value">Human factors engineers, device engineering</div>
       </div>
     </div>
   </div>
 
-  <!-- ABOUT (light) -->
+  <!-- THE PROBLEM -->
   <section class="case-section" id="overview">
     <div class="case-section-inner">
-      <p class="section-label">About</p>
+      <span class="section-num">01</span>
+      <p class="section-label">The Problem</p>
 
       <div class="decisions-text-row">
-        <div class="split-text">
-          <h3>Overview</h3>
-          <p>Boston Scientific engaged our team to design the GUI for the AngioJet Platinum — a peripheral thrombectomy device that removes clots from arteries and veins via lytic delivery and active aspiration. Operated by a cardiovascular technologist in the OR and cath lab, while a surgeon directs.</p>
-          <p>What made this project demanding wasn't technical complexity — it was the stakes. A hesitation, a missed alert, or an ambiguous label at the wrong moment isn't just a UX problem. It's a patient safety issue.</p>
+        <div class="split-text fade-left">
+          <h3>A device that left its operator guessing</h3>
+          <p>The AngioJet is a peripheral thrombectomy device — it removes blood clots via lytic delivery and active aspiration. In the OR, a cardiovascular technologist operates the console while a surgeon directs from the sterile field.</p>
+          <p>The existing device gave them a small LCD, six hardware buttons, and no workflow guidance. Techs ran procedures from memory. The interface did nothing to support the sequence.</p>
         </div>
-        <div class="split-text">
-          <h3>The Challenge</h3>
-          <p>The existing device: a small LCD and six hardware buttons. Techs ran procedures entirely from memory, carrying a sequence the interface did nothing to support. The fix wasn't more words and guidance — it was smarter structure.</p>
-          <p>Our job was to design an interface that thinks alongside the technologist, not one they have to think around.</p>
+        <div class="split-text fade-right">
+          <h3>Two users, one screen, opposite needs</h3>
+          <p>The tech operates up close — hands on, decisions fast, attention split between screen and surgeon. The surgeon monitors from across the room — glancing, interpreting, directing.</p>
+          <p>Every screen had to serve <strong>precise hands-on control for the tech</strong> while remaining <strong>instantly readable from two meters away.</strong> No mode switching. No separate views.</p>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- FROM → TO -->
+  <!-- BEFORE → AFTER -->
   <section class="content-section alt from-to-section">
-    <div class="from-to-text">
-      <h2 class="from-to-heading">From a 6-button LCD to a full guided experience</h2>
-      <p class="from-to-intro">The AngioJet Ultra gave technologists a single text readout and a row of unlabeled icons. We designed a touchscreen system from the ground up — guided, phase-by-phase, with clear direction when something goes wrong.</p>
-    </div>
     <div class="comparison-wrap">
       <div class="comparison-item">
         <p class="comparison-label before">Before — AngioJet Ultra</p>
-        <p class="comparison-caption">Small blue LCD, 6 status icons, segment-display timer, 3 physical buttons. No guided workflow, no touch interaction.</p>
+        <p class="comparison-caption">Small LCD, 6 status icons, segment-display timer, 3 physical buttons. No guided workflow.</p>
         <div class="comparison-img fade-up">
           <img src="https://images.dotmed.com/images/listingpics2/4/4/5/0/4450840_2.jpg"
                alt="AngioJet Ultra existing LCD interface" />
         </div>
       </div>
       <div class="comparison-item">
-        <p class="comparison-label after">After — AngioJet Platinum</p>
-        <p class="comparison-caption">Full touchscreen GUI with guided procedure workflow, real-time data visualization, and role-specific displays.</p>
+        <p class="comparison-label after">After — AutoElite Console</p>
+        <p class="comparison-caption">Full touchscreen GUI. Guided procedure flow. Real-time data hierarchy designed for both users.</p>
         <div class="comparison-img fade-up">
           <img src="../20200828/2_Design Guide/High-Fidelity Wireframes/JPGs/Thrombectomy - 2.0.png"
-               alt="AngioJet Platinum redesigned touchscreen interface" />
+               alt="AutoElite redesigned touchscreen interface" />
         </div>
       </div>
     </div>
   </section>
 
-  <!-- S1: KEY INSIGHTS -->
+  <!-- THE SOLUTION -->
   <section class="case-section" id="s1">
     <div class="case-section-inner">
-      <span class="section-num">03</span>
-      <p class="section-label">Key Insights</p>
+      <p class="section-label">The Solution</p>
 
-      <div class="text-two-col">
+      <!-- Approach -->
+      <div class="split" style="margin-bottom:96px;">
         <div class="split-text fade-left">
-          <h3>Technologists don't want more controls — they want to be guided</h3>
-          <p>The assumption was that techs needed a powerful, feature-rich interface. What we found was the opposite. They wanted a system that moved with them — one that said <strong>"you're here, this is what to do next"</strong> rather than "here are all the options, good luck." In a surgical setting, hesitation is a risk factor. The interface had to make the right action obvious without the user having to ask: what do I do right now?</p>
-        </div>
-        <div class="split-text fade-right">
-          <h3>Two users, one screen — with opposite needs</h3>
-          <p>The tech manages the device — hands on, decisions fast, attention split between the screen and the surgeon's instructions. The surgeon monitors from across the room — glancing, interpreting, directing. Every screen had to serve <strong>precise hands-on control for the tech</strong> while remaining <strong>instantly readable from two feet away.</strong></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- S2: AHA! MOMENTS -->
-  <section class="case-section alt" id="s2">
-    <div class="case-section-inner">
-      <span class="section-num">04</span>
-      <p class="section-label">Aha! Moments</p>
-
-      <div class="split">
-        <div class="split-text fade-left">
-          <h3 class="aha">What if we designed the interface around the procedure itself — not the device?</h3>
-          <p>Most medical device UIs organize around features. We organized ours around the procedure: setup → catheter priming → mode selection → active procedure → end. Each phase is a discrete screen state — the interface shows where you are and what to do next. Navigation wasn't about menus. It was about <strong>progression.</strong></p>
+          <h3>Design around the procedure — not the device</h3>
+          <p>Most medical device UIs organize around features. We organized ours around the procedure itself: setup → catheter priming → mode selection → active run → end. Each phase is a discrete screen state. The interface tells you where you are and what to do next.</p>
+          <p>Each screen shows only what's relevant to the current phase — no jumping ahead, no skipping steps. In a high-stakes environment, <strong>a narrower interface is a safer one.</strong></p>
         </div>
         <div class="split-img fade-up">
-          <img src="../20200828/2_Design Guide/High-Fidelity Wireframes/JPGs/Catheter Priming - 1.png" alt="Catheter Priming — step in the guided flow" />
+          <img src="../20200828/2_Design Guide/High-Fidelity Wireframes/JPGs/Catheter Priming - 1.png" alt="Catheter Priming — one step in the guided flow" />
         </div>
       </div>
 
-      <div class="aha-two-col">
-        <div class="split-text fade-left">
-          <h3 class="aha">What do our two different users need to do, when and how?</h3>
-        </div>
-        <div class="split-text fade-right">
-          <p>The tech interacts up close. The surgeon reads from across the room. The hierarchy had to serve both simultaneously — no mode switching, no screen changes. This became the highest-impact design constraint, especially on the run screen.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- S3: KEY DECISIONS -->
-  <section class="case-section" id="s3">
-    <div class="case-section-inner">
-      <span class="section-num">05</span>
-      <p class="section-label">Key Decisions</p>
-
+      <!-- Run Screen -->
       <div class="decisions-text-row">
         <div class="split-text fade-left">
-          <h3>Narrow the options — deliberately</h3>
-          <p>Each screen shows only what's relevant to the current phase — no jumping ahead, no skipping steps. This wasn't about limiting users. It was about <strong>protecting their attention</strong> in a high-stakes environment where decision fatigue is a real risk. A narrowed interface is a safer one.</p>
+          <h3>The run screen: 9 live data points, 7 of them timers</h3>
+          <p>The device's proprietary Power Pulse mode lets surgeons deliver a lytic agent before aspiration — doubling the monitoring load and adding a new decision variable. The run screen had to track two independent procedure modes, each with their own elapsed time and fluid volume, a combined total run time, and a progress bar toward safety thresholds at 240 and 480 seconds.</p>
+          <p>Making that legible for both users simultaneously — without overwhelming either one — was the core design problem.</p>
         </div>
         <div class="split-text fade-right">
-          <h3>Visual hierarchy as a clinical safety decision</h3>
-          <p>The device's proprietary Power Pulse mode lets surgeons deliver a lytic agent before traditional aspiration — a powerful feature that also doubles the monitoring load and adds a new decision variable.</p>
-          <p>The run screen tracks <strong>9 live data points, 7 of them timers.</strong> Making that legible without overwhelming either user was the core visual challenge.</p>
+          <h3>A timer pattern worth patenting</h3>
+          <p>The solution: a dual-mode timer display with color-coded mode indicators, individual and combined run times, and a visual progress bar toward safety limits. The hierarchy lets the tech read precise values up close while the surgeon can read overall status from across the room at a glance.</p>
+          <p>This timer pattern became the subject of a <strong>US patent application filed by Boston Scientific.</strong></p>
         </div>
       </div>
       <div class="decisions-img-full scale-reveal">
-        <img src="../20200828/2_Design Guide/High-Fidelity Wireframes/JPGs/Power Pulse - 1.png" alt="Power Pulse — active procedure with live data hierarchy" />
+        <img src="../20200828/2_Design Guide/High-Fidelity Wireframes/JPGs/Power Pulse - 1.png" alt="Run screen — dual-mode timer with safety progress bar" />
+      </div>
+
+      <!-- GIF: Run screen timer in action -->
+      <div class="gif-showcase fade-up" style="max-width:860px; margin:40px auto 0;">
+        <img src="" alt="Run screen timer — dual mode tracking with safety progress bar" class="gif-placeholder" data-gif="run-screen-timer" />
+        <p class="gif-caption">The patented timer pattern: dual-mode elapsed time, combined total, and visual progress toward safety thresholds.</p>
       </div>
 
     </div>
   </section>
 
-  <!-- S4: THE INTERFACE -->
-  <section class="case-section alt" id="s4">
-    <div class="case-section-inner">
-      <span class="section-num">06</span>
-      <p class="section-label">The Interface</p>
-      <div class="feature-list">
+  <!-- THE PROTOTYPE (dark, inside The Solution narrative) -->
+  <section class="training-section">
+    <div class="training-inner">
+      <div class="training-header fade-up">
+        <p class="training-label">The Prototype</p>
+        <h2 class="training-heading">Explore the <span>guided flow</span></h2>
+        <p class="training-desc">Click through the screens to experience the full procedure — from setup through mode selection, active thrombectomy, and dwell timing.</p>
+      </div>
+    </div>
 
-        <div class="feature-item">
-          <div class="feature-text">
-            <h3>The guided setup flow</h3>
-            <p>Step-by-step sequence with a clear active state and a hint of what's next. No way to skip ahead or miss a step. The interface does the remembering.</p>
-          </div>
-          <div class="screen-player fade-up"
-               data-interval="2800"
-               data-label="Setup &amp; Priming">
-            <span class="sp-label">Setup &amp; Priming</span>
-            <img src="../20200828/2_Design Guide/High-Fidelity Wireframes/JPGs/Setup Guidance - 1.png"    alt="Setup Guidance step 1"   class="sp-active" />
-            <img src="../20200828/2_Design Guide/High-Fidelity Wireframes/JPGs/Setup Guidance - 2.png"    alt="Setup Guidance step 2" />
-            <img src="../20200828/2_Design Guide/High-Fidelity Wireframes/JPGs/Setup Guidance - 3.png"    alt="Setup Guidance step 3" />
-            <img src="../20200828/2_Design Guide/High-Fidelity Wireframes/JPGs/Catheter Priming - 1.png"  alt="Catheter Priming step 1" />
-            <img src="../20200828/2_Design Guide/High-Fidelity Wireframes/JPGs/Catheter Priming - 2.png"  alt="Catheter Priming step 2" />
-            <img src="../20200828/2_Design Guide/High-Fidelity Wireframes/JPGs/Catheter Priming - 3.png"  alt="Catheter Priming step 3" />
-            <button class="sp-btn sp-prev" aria-label="Previous screen">‹</button>
-            <button class="sp-btn sp-next" aria-label="Next screen">›</button>
-            <div class="sp-dots">
-              <span class="sp-dot sp-active"></span><span class="sp-dot"></span>
-              <span class="sp-dot"></span><span class="sp-dot"></span>
-              <span class="sp-dot"></span><span class="sp-dot"></span>
-            </div>
-          </div>
-        </div>
+    <div class="training-inner">
+      <div class="proto-device" id="protoDevice">
+        <iframe id="axureProto" src="proto/main_menu.html"
+                style="width:1280px;height:800px;border:none;display:block;
+                       transform-origin:top left;
+                       transform:scale(var(--iframe-scale,0.43));
+                       pointer-events:auto;"
+                allowfullscreen></iframe>
+      </div>
 
-        <div class="feature-item flip">
-          <div class="feature-text">
-            <h3>Mode selection</h3>
-            <p>A flipping card reveals mode details before confirming. More fluid than a modal, less alarming. Users felt confident in the choice before committing.</p>
-          </div>
-          <div class="screen-player fade-up"
-               data-interval="3000"
-               data-label="Select Mode">
-            <span class="sp-label">Select Mode</span>
-            <img src="../20200828/2_Design Guide/High-Fidelity Wireframes/JPGs/Select Mode - 1.0.png"  alt="Mode selection — initial"    class="sp-active" />
-            <img src="../20200828/2_Design Guide/High-Fidelity Wireframes/JPGs/Select Mode - 1.1.png"  alt="Mode selection — card flip" />
-            <img src="../20200828/2_Design Guide/High-Fidelity Wireframes/JPGs/Select Mode - 1.2.png"  alt="Mode selection — confirmed" />
-            <button class="sp-btn sp-prev" aria-label="Previous screen">‹</button>
-            <button class="sp-btn sp-next" aria-label="Next screen">›</button>
-            <div class="sp-dots">
-              <span class="sp-dot sp-active"></span>
-              <span class="sp-dot"></span>
-              <span class="sp-dot"></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="feature-item">
-          <div class="feature-text">
-            <h3>Active procedure screens</h3>
-            <p>7 timers on one screen — some always visible, some contextual. It shouldn't work. It does.</p>
-            <p>The main timer is patented: dual-progress, tracking per-mode limits and total procedure time simultaneously. Active mode is always clearly surfaced without obscuring the other.</p>
-          </div>
-          <div class="screen-player fade-up"
-               data-interval="2500"
-               data-label="Active Procedure">
-            <span class="sp-label">Active Procedure</span>
-            <img src="../20200828/2_Design Guide/High-Fidelity Wireframes/JPGs/Thrombectomy - 1.png"    alt="Thrombectomy screen"          class="sp-active" />
-            <img src="../20200828/2_Design Guide/High-Fidelity Wireframes/JPGs/Thrombectomy - 2.0.png"  alt="Thrombectomy running" />
-            <img src="../20200828/2_Design Guide/High-Fidelity Wireframes/JPGs/Power Pulse - 1.png"     alt="Power Pulse active" />
-            <img src="../20200828/2_Design Guide/High-Fidelity Wireframes/JPGs/Power Pulse- 2.0.png"    alt="Power Pulse running" />
-            <button class="sp-btn sp-prev" aria-label="Previous screen">‹</button>
-            <button class="sp-btn sp-next" aria-label="Next screen">›</button>
-            <div class="sp-dots">
-              <span class="sp-dot sp-active"></span><span class="sp-dot"></span>
-              <span class="sp-dot"></span><span class="sp-dot"></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="feature-item flip">
-          <div class="feature-text">
-            <h3>Dwell Timer</h3>
-            <p>A collapsible drawer that tracks medicinal liquid time in the vein. Auto-tracking, with a reminder. That's it. The drawer collapses so procedure information stays in focus — feature-forward without the clutter.</p>
-          </div>
-          <div class="screen-player fade-up"
-               data-interval="2600"
-               data-label="Dwell Timer">
-            <span class="sp-label">Dwell Timer</span>
-            <img src="../20200828/2_Design Guide/High-Fidelity Wireframes/JPGs/Dwell Time - 1.0.png"  alt="Dwell Timer — drawer closed"   class="sp-active" />
-            <img src="../20200828/2_Design Guide/High-Fidelity Wireframes/JPGs/Dwell Time - 1.1.png"  alt="Dwell Timer — drawer opening" />
-            <img src="../20200828/2_Design Guide/High-Fidelity Wireframes/JPGs/Dwell Time - 1.2.png"  alt="Dwell Timer — expanded" />
-            <img src="../20200828/2_Design Guide/High-Fidelity Wireframes/JPGs/Dwell Time - 2.png"    alt="Dwell Timer — counting" />
-            <button class="sp-btn sp-prev" aria-label="Previous screen">‹</button>
-            <button class="sp-btn sp-next" aria-label="Next screen">›</button>
-            <div class="sp-dots">
-              <span class="sp-dot sp-active"></span><span class="sp-dot"></span>
-              <span class="sp-dot"></span><span class="sp-dot"></span>
-            </div>
-          </div>
-        </div>
-
+      <div class="proto-steps">
+        <span class="proto-step ps-cur" data-step="main_menu">Start</span>
+        <span class="proto-step-sep">→</span>
+        <span class="proto-step" data-step="setup_guidance">Setup</span>
+        <span class="proto-step-sep">→</span>
+        <span class="proto-step" data-step="readout">Run</span>
+        <span class="proto-step-sep">→</span>
+        <span class="proto-step" data-step="end_procedure">End</span>
       </div>
     </div>
   </section>
 
   <!-- OUTCOMES -->
-  <section class="outcomes-section">
+  <section class="outcomes-section" id="s2">
     <div class="outcomes-inner">
       <p class="section-label">Outcomes</p>
-      <h3 class="outcomes-heading">The design cleared final-round usability testing with zero task errors across both user types.</h3>
-      <p>Both user types completed every task correctly on first attempt — the FDA human factors benchmark. Biggest gains: error recovery speed and setup confidence. Technologists who'd run the old device for years said it felt <strong>"like it was designed for how the procedure actually works."</strong></p>
-      <p style="margin-top:16px;">Delivered: 40+ hi-fi screens, a complete design system, and all documentation for the regulatory pathway.</p>
+      <h3 class="outcomes-heading">Zero task errors in final-round usability testing — across both user types.</h3>
+      <p>Both user types completed every task correctly on first attempt, meeting the FDA human factors benchmark. Technologists who'd run the old device for years said it felt <strong>"like it was designed for how the procedure actually works."</strong></p>
+
+      <div class="outcomes-stats">
+        <div class="outcome-stat">
+          <div class="outcome-stat-value">FDA Cleared</div>
+          <div class="outcome-stat-label">Pre-Market Approval (PMA) granted May 2025</div>
+        </div>
+        <div class="outcome-stat">
+          <div class="outcome-stat-value">US Patent Filed</div>
+          <div class="outcome-stat-label">Run screen timer pattern — <a href="https://patents.justia.com/patent/20240277422" target="_blank" rel="noopener">US 20240277422</a></div>
+        </div>
+        <div class="outcome-stat">
+          <div class="outcome-stat-value">40+ Screens</div>
+          <div class="outcome-stat-label">Complete design system and regulatory documentation</div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -2202,33 +2234,23 @@
 
   <!-- DOT SECTION NAV -->
   <nav class="dot-nav" id="dotNav">
-    <a class="dot-nav-item active" data-idx="0" href="#overview">
-      <span class="dot-nav-label">About</span>
+    <a class="dot-nav-item active" data-idx="0" href="#training">
+      <span class="dot-nav-label">Demo</span>
       <span class="dot-nav-dot"></span>
     </a>
     <span class="dot-nav-connector"></span>
-    <a class="dot-nav-item" data-idx="1" href="#s1">
-      <span class="dot-nav-label">Key Insights</span>
+    <a class="dot-nav-item" data-idx="1" href="#overview">
+      <span class="dot-nav-label">The Problem</span>
       <span class="dot-nav-dot"></span>
     </a>
     <span class="dot-nav-connector"></span>
-    <a class="dot-nav-item" data-idx="2" href="#s2">
-      <span class="dot-nav-label">Aha! Moments</span>
+    <a class="dot-nav-item" data-idx="2" href="#s1">
+      <span class="dot-nav-label">The Solution</span>
       <span class="dot-nav-dot"></span>
     </a>
     <span class="dot-nav-connector"></span>
-    <a class="dot-nav-item" data-idx="3" href="#s3">
-      <span class="dot-nav-label">Key Decisions</span>
-      <span class="dot-nav-dot"></span>
-    </a>
-    <span class="dot-nav-connector"></span>
-    <a class="dot-nav-item" data-idx="4" href="#s4">
-      <span class="dot-nav-label">The Interface</span>
-      <span class="dot-nav-dot"></span>
-    </a>
-    <span class="dot-nav-connector"></span>
-    <a class="dot-nav-item" data-idx="5" href="#training">
-      <span class="dot-nav-label">Prototype</span>
+    <a class="dot-nav-item" data-idx="3" href="#s2">
+      <span class="dot-nav-label">Outcomes</span>
       <span class="dot-nav-dot"></span>
     </a>
   </nav>
@@ -2294,7 +2316,7 @@
     }, { passive: true });
 
     /* ── Dot section nav ── */
-    const dotSectionIds = ['overview','s1','s2','s3','s4','training'];
+    const dotSectionIds = ['training','overview','s1','s2'];
     const dotItems = Array.from(document.querySelectorAll('.dot-nav-item'));
 
     function updateDotNav(idx) {
@@ -2372,244 +2394,119 @@
       });
     }
 
-    /* ── Interactive Prototype Demo ── */
+    /* ── Demo video tab switcher ── */
     (function() {
-      const screens   = ['ps-home','ps-setup','ps-select','ps-th','ps-dwell'];
-      const stepEls   = document.querySelectorAll('.proto-step');
-      let currentStep = 0;
-      let autoTimer   = null;
-
-      // ── Thrombectomy live state ──
-      const PP_PRIOR = 48;           // Power Pulse seconds before thrombectomy
-      let thSec   = 0;
-      let thTotal = PP_PRIOR;
-      let thRunning = false;
-      let thInterval = null;
-
-      // ── Dwell state ──
-      let dwellRunning = false;
-      let dwellSecs = 0;
-      let dwellInterval = null;
-      let togOn = false;
-
-      function showStep(n, skipAuto) {
-        screens.forEach((id, i) => {
-          document.getElementById(id).classList.toggle('ps-active', i === n);
-        });
-        stepEls.forEach((el, i) => el.classList.toggle('ps-cur', i === n));
-        currentStep = n;
-        clearTimeout(autoTimer);
-
-        // Start/stop setup cycling
-        if (n === 1) startSetupCycle(); else stopSetupCycle();
-        if (n === 3) startThrombectomy();
-        if (n !== 3) stopThrombectomy();
-        if (n === 4) openDwell();
-        if (n !== 4) stopDwell();
-
-        if (!skipAuto) scheduleAuto(n);
-      }
-
-      function scheduleAuto(n) {
-        // No auto-advance — user controls all screen transitions
-        clearTimeout(autoTimer);
-      }
-
-      // Step indicator clicks
-      stepEls.forEach(el => {
-        el.addEventListener('click', () => showStep(+el.dataset.step, true));
-      });
-
-      // ── Setup: wireframe image cycling (1→2→3 = panel active shift) ──
-      const setupFrames = document.querySelectorAll('.setup-frame');
-      let setupIdx = 0;
-      let setupCycleTimer;
-      function cycleSetup() {
-        setupFrames.forEach((f,i) => f.classList.toggle('sf-active', i === setupIdx));
-        setupIdx = (setupIdx + 1) % setupFrames.length;
-        setupCycleTimer = setTimeout(cycleSetup, 2000);
-      }
-      function startSetupCycle() {
-        setupIdx = 0;
-        clearTimeout(setupCycleTimer);
-        cycleSetup();
-      }
-      function stopSetupCycle() {
-        clearTimeout(setupCycleTimer);
-      }
-
-      // Setup CTA overlay → Select Mode
-      document.getElementById('setupCta').addEventListener('click', () => {
-        stopSetupCycle();
-        showStep(2, true);
-      });
-
-      // ── Select Mode: card click with flip animation ──
-      document.getElementById('mc-th').addEventListener('click', () => {
-        const card = document.getElementById('mc-th');
-        if (card.classList.contains('mc-selected')) return;
-        card.classList.add('mc-selected');
-        // Reduce non-selected card opacity
-        document.getElementById('mc-pp').style.opacity = '0.5';
-        clearTimeout(autoTimer);
-        autoTimer = setTimeout(() => showStep(3), 1200);
-      });
-      document.getElementById('mc-pp').addEventListener('click', () => {
-        const card = document.getElementById('mc-pp');
-        if (card.classList.contains('mc-selected')) return;
-        card.classList.add('mc-selected');
-        document.getElementById('mc-th').style.opacity = '0.5';
-      });
-      // "Done" button in thrombectomy prompt
-      const mcThDone = document.getElementById('mcThDone');
-      if (mcThDone) {
-        mcThDone.addEventListener('click', (e) => {
-          e.stopPropagation();
-          showStep(3, true);
-        });
-      }
-      function resetCards() {
-        document.getElementById('mc-th').classList.remove('mc-selected');
-        document.getElementById('mc-pp').classList.remove('mc-selected');
-        document.getElementById('mc-th').style.opacity = '';
-        document.getElementById('mc-pp').style.opacity = '';
-      }
-
-      // ── Thrombectomy counters + MRTR bar ──
-      function updateMRTRBar() {
-        // PP contributed teal, TH contributes pink
-        // Total bar represents 0-480sec
-        const ppPct = Math.min((PP_PRIOR / 480) * 100, 100);
-        const thPct = Math.min((thSec / 480) * 100, 100);
-        document.getElementById('th-bar-teal').style.width = ppPct + '%';
-        document.getElementById('th-bar-pink').style.width = thPct + '%';
-        document.getElementById('th-bar-pink').style.left  = ppPct + '%';
-
-        // Color change for TRT number at thresholds
-        const totalEl = document.getElementById('th-total');
-        if (thTotal > 480) {
-          totalEl.classList.remove('warn-yellow');
-          totalEl.classList.add('warn-orange');
-        } else if (thTotal > 240) {
-          totalEl.classList.add('warn-yellow');
-          totalEl.classList.remove('warn-orange');
-        } else {
-          totalEl.classList.remove('warn-yellow', 'warn-orange');
+      const video = document.getElementById('walkthroughVideo');
+      const placeholder = document.getElementById('videoPlaceholder');
+      const caption = document.getElementById('demoCaption');
+      const tabs = document.querySelectorAll('.demo-tab');
+      const videos = {
+        setup: {
+          src: 'demo-setup.mp4',
+          caption: 'The guided setup flow — from pump insertion through catheter priming, the interface walks the technologist through each physical step.'
+        },
+        runscreen: {
+          src: 'demo-runscreen.mp4',
+          caption: 'The run screen in action — dual-mode timer tracking, safety progress bar, dwell timer, and mode switching.'
         }
-      }
-
-      function startThrombectomy() {
-        if (thRunning) return;
-        thRunning = true;
-        updateMRTRBar();
-        thInterval = setInterval(() => {
-          thSec++;
-          thTotal = PP_PRIOR + thSec;
-          document.getElementById('th-sec').textContent   = thSec;
-          document.getElementById('th-cc').textContent    = thSec;
-          document.getElementById('th-total').textContent = thTotal;
-          updateMRTRBar();
-        }, 1000);
-      }
-      function stopThrombectomy() {
-        thRunning = false;
-        clearInterval(thInterval);
-        thSec = 0; thTotal = PP_PRIOR;
-        document.getElementById('th-sec').textContent  = 0;
-        document.getElementById('th-cc').textContent   = 0;
-        document.getElementById('th-total').textContent = PP_PRIOR;
-        document.getElementById('th-total').classList.remove('warn-yellow', 'warn-orange');
-        document.getElementById('th-bar-teal').style.width = '10%';
-        document.getElementById('th-bar-pink').style.width = '0%';
-        document.getElementById('th-bar-pink').style.left  = '10%';
-        resetCards();
-      }
-
-      // Home START button → Setup Guidance
-      document.getElementById('homeStartBtn').addEventListener('click', () => {
-        showStep(1, true);
+      };
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const key = tab.dataset.video;
+          const v = videos[key];
+          tabs.forEach(t => t.classList.remove('demo-tab-active'));
+          tab.classList.add('demo-tab-active');
+          caption.textContent = v.caption;
+          if (v.src) {
+            video.style.display = 'block';
+            placeholder.style.display = 'none';
+            if (!video.querySelector('source').src.endsWith(v.src)) {
+              video.querySelector('source').src = v.src;
+              video.load();
+            }
+          } else {
+            video.style.display = 'none';
+            video.pause();
+            placeholder.style.display = 'block';
+          }
+        });
       });
-
-      // Dwell timer button from run screen footer
-      document.getElementById('dwellNavBtn').addEventListener('click', () => {
-        showStep(4, true);
-      });
-
-      // ── Dwell Timer ──
-      function openDwell() {
-        dwellSecs = 0; dwellRunning = false;
-        updateDwellDisplay();
-        document.getElementById('dwellStart').textContent = 'Start';
-        document.getElementById('dwellStart').classList.remove('running');
-      }
-      function stopDwell() {
-        clearInterval(dwellInterval);
-        dwellRunning = false;
-      }
-      function updateDwellDisplay() {
-        const m = String(Math.floor(dwellSecs / 60)).padStart(2,'0');
-        const s = String(dwellSecs % 60).padStart(2,'0');
-        document.getElementById('dwellDisplay').textContent = m + ':' + s;
-      }
-
-      document.getElementById('dwellToggle').addEventListener('click', () => {
-        togOn = !togOn;
-        document.getElementById('dwellToggle').classList.toggle('tog-on', togOn);
-      });
-
-      document.getElementById('dwellStart').addEventListener('click', () => {
-        if (!dwellRunning) {
-          dwellRunning = true;
-          document.getElementById('dwellStart').textContent = 'Pause';
-          document.getElementById('dwellStart').classList.add('running');
-          dwellInterval = setInterval(() => {
-            dwellSecs++;
-            updateDwellDisplay();
-          }, 1000);
-        } else {
-          dwellRunning = false;
-          clearInterval(dwellInterval);
-          document.getElementById('dwellStart').textContent = 'Resume';
-        }
-      });
-
-      // ── init ──
-      showStep(0);
     })();
 
-    /* ── Screen players ── */
-    document.querySelectorAll('.screen-player').forEach(player => {
-      const imgs = Array.from(player.querySelectorAll('img'));
-      const dots = Array.from(player.querySelectorAll('.sp-dot'));
-      const interval = parseInt(player.dataset.interval || 2500);
-      let current = 0;
-      let timer;
+    /* ── Interactive Prototype — Manual Mode ── */
+    (function() {
+      const device  = document.getElementById('protoDevice');
+      const iframe  = document.getElementById('axureProto');
+      const stepEls = document.querySelectorAll('.proto-step');
 
-      function goTo(n) {
-        imgs[current].classList.remove('sp-active');
-        dots[current].classList.remove('sp-active');
-        current = (n + imgs.length) % imgs.length;
-        imgs[current].classList.add('sp-active');
-        dots[current].classList.add('sp-active');
+      if (!device || !iframe) return;
+
+      /* Scale iframe (1280×800) to fit container */
+      function scaleIframe() {
+        const s = device.offsetWidth / 1280;
+        device.style.setProperty('--iframe-scale', s);
+      }
+      scaleIframe();
+      window.addEventListener('resize', scaleIframe);
+
+      /* Page → step nav mapping */
+      const pageToStep = {
+        main_menu: 'main_menu', setup_guidance: 'setup_guidance',
+        catheter_priming: 'setup_guidance', select_mode: 'setup_guidance',
+        readout: 'readout', end_procedure: 'end_procedure'
+      };
+
+      let currentPage = 'main_menu';
+
+      function getPageFromIframe() {
+        try {
+          const p = iframe.contentWindow.location.pathname;
+          const m = p.match(/\/([^\/]+)\.html$/);
+          return m ? m[1] : null;
+        } catch(e) { return null; }
       }
 
-      function startTimer() {
-        timer = setInterval(() => goTo(current + 1), interval);
+      function updateStepNav() {
+        const s = pageToStep[currentPage] || currentPage;
+        stepEls.forEach(el => el.classList.toggle('ps-cur', el.dataset.step === s));
       }
 
-      function resetTimer() { clearInterval(timer); startTimer(); }
+      function goToScreen(pageName) {
+        currentPage = pageName;
+        iframe.src = 'proto/' + pageName + '.html';
+        updateStepNav();
+      }
 
-      player.querySelector('.sp-prev').addEventListener('click', e => {
-        e.stopPropagation(); goTo(current - 1); resetTimer();
-      });
-      player.querySelector('.sp-next').addEventListener('click', e => {
-        e.stopPropagation(); goTo(current + 1); resetTimer();
-      });
-      player.addEventListener('mouseenter', () => clearInterval(timer));
-      player.addEventListener('mouseleave', startTimer);
+      /* Axure resolves relative URLs against the parent page, not the iframe.
+         This causes 404s. Fix: detect wrong-path loads and redirect to proto/. */
+      const validPages = ['main_menu','setup_guidance','catheter_priming','select_mode','readout','end_procedure'];
 
-      startTimer();
-    });
+      iframe.addEventListener('load', () => {
+        try {
+          const loc = iframe.contentWindow.location;
+          const path = loc.pathname;
+          if (path.indexOf('/proto/') === -1) {
+            const m = path.match(/\/([^\/]+)\.html/);
+            if (m && validPages.includes(m[1])) {
+              iframe.src = 'proto/' + m[1] + '.html' + loc.search;
+              return;
+            }
+          }
+        } catch(e) {}
+
+        const detected = getPageFromIframe();
+        if (detected && detected !== currentPage) {
+          currentPage = detected;
+          updateStepNav();
+        }
+      });
+
+      stepEls.forEach(el => {
+        el.addEventListener('click', () => goToScreen(el.dataset.step));
+      });
+
+      updateStepNav();
+    })();
   </script>
 
   <!-- GET IN TOUCH MODAL -->
