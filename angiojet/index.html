@@ -1736,7 +1736,7 @@
       <button class="demo-tab" data-video="runscreen">Run Screen</button>
     </div>
     <div class="walkthrough-video fade-up">
-      <video id="walkthroughVideo" controls preload="metadata" playsinline>
+      <video id="walkthroughVideo" controls preload="metadata" playsinline autoplay muted>
         <source src="demo-setup.mp4" type="video/mp4">
       </video>
       <div class="walkthrough-placeholder" id="videoPlaceholder" style="display:none;">
@@ -2410,26 +2410,35 @@
           caption: 'The run screen in action — dual-mode timer tracking, safety progress bar, dwell timer, and mode switching.'
         }
       };
-      tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          const key = tab.dataset.video;
-          const v = videos[key];
-          tabs.forEach(t => t.classList.remove('demo-tab-active'));
-          tab.classList.add('demo-tab-active');
-          caption.textContent = v.caption;
-          if (v.src) {
-            video.style.display = 'block';
-            placeholder.style.display = 'none';
-            if (!video.querySelector('source').src.endsWith(v.src)) {
-              video.querySelector('source').src = v.src;
-              video.load();
-            }
-          } else {
-            video.style.display = 'none';
-            video.pause();
-            placeholder.style.display = 'block';
+      function switchTab(key) {
+        const v = videos[key];
+        tabs.forEach(t => t.classList.remove('demo-tab-active'));
+        document.querySelector('.demo-tab[data-video="' + key + '"]').classList.add('demo-tab-active');
+        caption.textContent = v.caption;
+        if (v.src) {
+          video.style.display = 'block';
+          placeholder.style.display = 'none';
+          if (!video.querySelector('source').src.endsWith(v.src)) {
+            video.querySelector('source').src = v.src;
+            video.load();
           }
-        });
+          video.play();
+        } else {
+          video.style.display = 'none';
+          video.pause();
+          placeholder.style.display = 'block';
+        }
+      }
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => switchTab(tab.dataset.video));
+      });
+
+      /* Auto-advance: when Setup ends, switch to Run Screen and autoplay */
+      video.addEventListener('ended', () => {
+        if (video.querySelector('source').src.endsWith('demo-setup.mp4')) {
+          switchTab('runscreen');
+        }
       });
     })();
 
