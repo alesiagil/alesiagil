@@ -616,6 +616,7 @@
     }
     .training-inner {
       max-width: var(--max-w); margin: 0 auto;
+      display: flex; flex-direction: column; align-items: center;
     }
     .training-header {
       text-align: center; margin-bottom: 48px;
@@ -1487,31 +1488,33 @@
 
     /* ── flow nav (linear workflow steps) ── */
     .proto-steps {
-      display: flex; align-items: center; gap: 16px;
-      margin-top: 20px;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      margin-top: 20px; flex-wrap: wrap;
     }
     .proto-step {
-      font-size: 14px; font-weight: 400;
-      color: rgba(210,220,235,0.75);
-      letter-spacing: 0.04em;
+      font-size: 13px; font-weight: 500;
+      color: rgba(210,220,235,0.6);
+      letter-spacing: 0.06em; text-transform: uppercase;
       cursor: pointer;
-      transition: color 0.25s ease, font-weight 0.25s ease;
-      padding: 4px 0;
-      position: relative;
+      padding: 7px 18px;
+      border-radius: 100px;
+      border: 1px solid rgba(210,220,235,0.15);
+      background: rgba(255,255,255,0.04);
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+      user-select: none;
     }
-    .proto-step::after {
-      content: '';
-      position: absolute; bottom: 0; left: 0; right: 0;
-      height: 2px; background: #ffff00;
-      transform: scaleX(0); transform-origin: left;
-      transition: transform 0.3s ease;
+    .proto-step:hover {
+      color: rgba(210,220,235,0.9);
+      border-color: rgba(210,220,235,0.35);
+      background: rgba(255,255,255,0.08);
     }
     .proto-step.ps-cur {
       color: #ffff00; font-weight: 700;
+      border-color: rgba(255,255,0,0.5);
+      background: rgba(255,255,0,0.08);
     }
-    .proto-step.ps-cur::after { transform: scaleX(1); }
     .proto-step-sep {
-      font-size: 13px; color: rgba(210,220,235,0.5);
+      font-size: 13px; color: rgba(210,220,235,0.25);
       user-select: none;
     }
 
@@ -2132,11 +2135,11 @@
         <img src="../20200828/2_Design Guide/High-Fidelity Wireframes/JPGs/Power Pulse - 1.png" alt="Run screen — dual-mode timer with safety progress bar" />
       </div>
 
-      <!-- GIF: Run screen timer in action -->
-      <div class="gif-showcase fade-up" style="max-width:860px; margin:40px auto 0;">
-        <img src="" alt="Run screen timer — dual mode tracking with safety progress bar" class="gif-placeholder" data-gif="run-screen-timer" />
+      <!-- GIF: Run screen timer in action — placeholder hidden until GIF is ready -->
+      <!-- <div class="gif-showcase fade-up" style="max-width:860px; margin:40px auto 0;">
+        <img src="run-screen-timer.gif" alt="Run screen timer — dual mode tracking with safety progress bar" />
         <p class="gif-caption">The patented timer pattern: dual-mode elapsed time, combined total, and visual progress toward safety thresholds.</p>
-      </div>
+      </div> -->
 
     </div>
   </section>
@@ -2425,14 +2428,23 @@
 
       /* Scale iframe (1280×800) to fit container width AND viewport height */
       function scaleIframe() {
-        const NAV_H    = 78;   // fixed nav bar
-        const PAD_V    = 96;   // section top + bottom padding (48 each)
-        const HEADER_H = 210;  // label + heading + desc + margin-bottom
-        const STEPS_H  = 52;   // step nav + margin-top
-        const MARGIN   = 16;   // breathing room
-        const overhead = NAV_H + PAD_V + HEADER_H + STEPS_H + MARGIN;
+        const section  = device.closest('.training-section');
+        const header   = section && section.querySelector('.training-header');
+        const steps    = section && section.querySelector('.proto-steps');
+        const sectionCS = section ? getComputedStyle(section) : null;
+
+        const navH     = 78;
+        const padTop   = sectionCS ? parseFloat(sectionCS.paddingTop)    : 48;
+        const padBot   = sectionCS ? parseFloat(sectionCS.paddingBottom) : 48;
+        const headerH  = header ? (header.offsetHeight + parseFloat(getComputedStyle(header).marginBottom || 0)) : 210;
+        const stepsH   = steps  ? (steps.offsetHeight  + parseFloat(getComputedStyle(steps).marginTop     || 0)) : 52;
+        const margin   = 16;
+
         const maxW = device.parentElement.offsetWidth;
-        const maxH = Math.max(window.innerHeight - overhead, 380); // floor at 380px
+        const maxH = Math.max(
+          window.innerHeight - navH - padTop - padBot - headerH - stepsH - margin,
+          300 // floor so device never collapses
+        );
         const s = Math.min(maxW / 1280, maxH / 800);
         const w = Math.round(1280 * s);
         const h = Math.round(800 * s);
