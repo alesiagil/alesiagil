@@ -2182,45 +2182,7 @@
       startAuto();
     });
 
-    /* ── Soft magnetic scroll snap ── */
-    (function() {
-      const NAV_H        = 80;
-      const THRESHOLD    = 160;  // px from section top to trigger snap
-      const DEBOUNCE     = 480;  // ms after scrolling stops
-      const LOCK_MS      = 900;  // ms to ignore scroll events after snapping
-      const snapIds      = ['s0','s1','s2','s3','s4','training','outcomes'];
-      let snapTimer      = null;
-      let isSnapping     = false;
-
-      function snapTo(el) {
-        const offset = el.getBoundingClientRect().top + window.scrollY - NAV_H;
-        window.scrollTo({ top: offset, behavior: 'smooth' });
-        isSnapping = true;
-        setTimeout(() => { isSnapping = false; }, LOCK_MS);
-      }
-
-      function findTarget() {
-        let best = null, bestDist = Infinity;
-        snapIds.forEach(id => {
-          const el = document.getElementById(id);
-          if (!el) return;
-          const dist = Math.abs(el.getBoundingClientRect().top - NAV_H);
-          if (dist < THRESHOLD && dist < bestDist) {
-            bestDist = dist; best = el;
-          }
-        });
-        return best;
-      }
-
-      window.addEventListener('scroll', () => {
-        if (isSnapping) return;
-        clearTimeout(snapTimer);
-        snapTimer = setTimeout(() => {
-          const target = findTarget();
-          if (target) snapTo(target);
-        }, DEBOUNCE);
-      }, { passive: true });
-    })();
+    /* scroll snap removed */
   </script>
 
   <!-- REQUEST ACCESS MODAL -->

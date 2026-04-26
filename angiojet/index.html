@@ -888,8 +888,7 @@
       margin-bottom: 32px;
     }
     .proto-device {
-      width: 100%; max-width: 860px;
-      aspect-ratio: 1280 / 800;
+      /* Width and height driven by JS scaleIframe() to fit viewport */
       background: var(--aj-blue3, #071730);
       border-radius: 10px;
       overflow: hidden;
@@ -2112,7 +2111,7 @@
           <p>Each screen shows only what's relevant to the current phase — no jumping ahead, no skipping steps. In a high-stakes environment, <strong>a narrower interface is a safer one.</strong></p>
         </div>
         <div class="split-img fade-up">
-          <img src="../20200828/2_Design Guide/High-Fidelity Wireframes/JPGs/Catheter Priming - 1.png" alt="Catheter Priming — one step in the guided flow" />
+          <img src="setup-guidance.gif" alt="3-panel guided setup flow — the interface walks the technologist through each physical step" />
         </div>
       </div>
 
@@ -2287,34 +2286,7 @@
 
     document.querySelectorAll('.section-label').forEach(el => numObserver.observe(el));
 
-    /* ── Soft magnetic scroll snap ── */
-    const snapIds = ['overview', 's1', 's2', 's3', 's4'];
-    let snapDebounce = null;
-    let isSnapping = false;
-
-    window.addEventListener('scroll', () => {
-      if (isSnapping) return;
-      clearTimeout(snapDebounce);
-      snapDebounce = setTimeout(() => {
-        const viewH = window.innerHeight;
-        let best = null, bestDist = Infinity;
-        snapIds.forEach(id => {
-          const el = document.getElementById(id);
-          if (!el) return;
-          const rect = el.getBoundingClientRect();
-          const dist = Math.abs(rect.top - 96);
-          if (dist < viewH * 0.35 && dist < bestDist) {
-            bestDist = dist;
-            best = el;
-          }
-        });
-        if (best) {
-          isSnapping = true;
-          best.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          setTimeout(() => { isSnapping = false; }, 1000);
-        }
-      }, 140);
-    }, { passive: true });
+    /* scroll snap removed */
 
     /* ── Dot section nav ── */
     const dotSectionIds = ['training','overview','s1','s2'];
@@ -2451,9 +2423,21 @@
 
       if (!device || !iframe) return;
 
-      /* Scale iframe (1280×800) to fit container */
+      /* Scale iframe (1280×800) to fit container width AND viewport height */
       function scaleIframe() {
-        const s = device.offsetWidth / 1280;
+        const NAV_H    = 78;   // fixed nav bar
+        const PAD_V    = 96;   // section top + bottom padding (48 each)
+        const HEADER_H = 210;  // label + heading + desc + margin-bottom
+        const STEPS_H  = 52;   // step nav + margin-top
+        const MARGIN   = 16;   // breathing room
+        const overhead = NAV_H + PAD_V + HEADER_H + STEPS_H + MARGIN;
+        const maxW = device.parentElement.offsetWidth;
+        const maxH = Math.max(window.innerHeight - overhead, 380); // floor at 380px
+        const s = Math.min(maxW / 1280, maxH / 800);
+        const w = Math.round(1280 * s);
+        const h = Math.round(800 * s);
+        device.style.width  = w + 'px';
+        device.style.height = h + 'px';
         device.style.setProperty('--iframe-scale', s);
       }
       scaleIframe();
