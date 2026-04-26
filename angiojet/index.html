@@ -2185,16 +2185,16 @@
 
       <div class="outcomes-stats">
         <div class="outcome-stat">
-          <div class="outcome-stat-value">FDA Cleared</div>
-          <div class="outcome-stat-label">Pre-Market Approval (PMA) granted May 2025</div>
+          <div class="outcome-stat-value">Class III PMA</div>
+          <div class="outcome-stat-label">Highest-risk FDA device category — <a href="https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpma/pma.cfm?ID=P980037S094" target="_blank" rel="noopener">P980037S094</a>, approved May 2025</div>
         </div>
         <div class="outcome-stat">
           <div class="outcome-stat-value">US Patent Filed</div>
           <div class="outcome-stat-label">Run screen timer pattern — <a href="https://patents.justia.com/patent/20240277422" target="_blank" rel="noopener">US 20240277422</a></div>
         </div>
         <div class="outcome-stat">
-          <div class="outcome-stat-value">40+ Screens</div>
-          <div class="outcome-stat-label">Complete design system and regulatory documentation</div>
+          <div class="outcome-stat-value">2 User Types</div>
+          <div class="outcome-stat-label">Technologist and surgeon — validated independently, zero errors each</div>
         </div>
       </div>
     </div>
@@ -2426,30 +2426,12 @@
 
       if (!device || !iframe) return;
 
-      /* Scale iframe (1280×800) to fit container width AND viewport height */
+      /* Scale iframe (1280×800) to fill container width, max 1100px */
       function scaleIframe() {
-        const section  = device.closest('.training-section');
-        const header   = section && section.querySelector('.training-header');
-        const steps    = section && section.querySelector('.proto-steps');
-        const sectionCS = section ? getComputedStyle(section) : null;
-
-        const navH     = 78;
-        const padTop   = sectionCS ? parseFloat(sectionCS.paddingTop)    : 48;
-        const padBot   = sectionCS ? parseFloat(sectionCS.paddingBottom) : 48;
-        const headerH  = header ? (header.offsetHeight + parseFloat(getComputedStyle(header).marginBottom || 0)) : 210;
-        const stepsH   = steps  ? (steps.offsetHeight  + parseFloat(getComputedStyle(steps).marginTop     || 0)) : 52;
-        const margin   = 16;
-
-        const maxW = device.parentElement.offsetWidth;
-        const maxH = Math.max(
-          window.innerHeight - navH - padTop - padBot - headerH - stepsH - margin,
-          300 // floor so device never collapses
-        );
-        const s = Math.min(maxW / 1280, maxH / 800);
-        const w = Math.round(1280 * s);
-        const h = Math.round(800 * s);
-        device.style.width  = w + 'px';
-        device.style.height = h + 'px';
+        const maxW = Math.min(device.parentElement.offsetWidth, 1100);
+        const s = maxW / 1280;
+        device.style.width  = Math.round(1280 * s) + 'px';
+        device.style.height = Math.round(800  * s) + 'px';
         device.style.setProperty('--iframe-scale', s);
       }
       scaleIframe();
