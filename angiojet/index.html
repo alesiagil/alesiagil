@@ -523,6 +523,20 @@
     }
     .aha-two-col:last-child { margin-bottom: 0; }
 
+    /* Workflow step list */
+    .workflow-steps {
+      list-style: none; padding: 0; margin: 14px 0 20px;
+    }
+    .workflow-steps li {
+      font-size: var(--fs-body); color: var(--text-muted); line-height: 1.75;
+      padding-left: 22px; position: relative; margin-bottom: 2px;
+    }
+    .workflow-steps li::before {
+      content: '→';
+      position: absolute; left: 0;
+      color: var(--pink); font-weight: 700;
+    }
+
     /* Feature list */
     .feature-list {}
     .feature-item {
@@ -568,6 +582,8 @@
       transition: opacity 0.55s ease;
       display: block;
     }
+    /* Use on players where the image must never be cropped */
+    .screen-player.sp-contain img { object-fit: contain; }
     .screen-player img.sp-active { opacity: 1; }
     /* Prev / Next buttons */
     .sp-btn {
@@ -923,21 +939,29 @@
       font-size: 15px;
     }
     .demo-tabs {
-      display: flex; gap: 4px; justify-content: center;
-      margin-bottom: 20px;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      margin-bottom: 20px; flex-wrap: wrap;
     }
     .demo-tab {
-      font-family: inherit; font-size: 14px; font-weight: 400;
-      letter-spacing: 0.04em;
-      color: rgba(210,220,235,0.55);
-      background: none; border: none; cursor: pointer;
-      padding: 8px 20px;
-      border-radius: 6px;
-      transition: color 0.2s, background 0.2s;
+      font-family: inherit; font-size: 13px; font-weight: 500;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: rgba(210,220,235,0.6);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(210,220,235,0.15);
+      cursor: pointer;
+      padding: 7px 18px;
+      border-radius: 100px;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+      user-select: none;
     }
-    .demo-tab:hover { color: rgba(210,220,235,0.85); }
+    .demo-tab:hover {
+      color: rgba(210,220,235,0.9);
+      border-color: rgba(210,220,235,0.35);
+      background: rgba(255,255,255,0.08);
+    }
     .demo-tab-active {
       color: #ffff00; font-weight: 700;
+      border-color: rgba(255,255,0,0.5);
       background: rgba(255,255,0,0.08);
     }
     .demo-caption {
@@ -1487,9 +1511,45 @@
     .dwell-btn-reminder:hover { opacity: 0.88; }
 
     /* ── flow nav (linear workflow steps) ── */
+    /* Wrapper so the hint overlays the proto-device without being clipped by it */
+    .proto-device-wrap {
+      position: relative;
+      width: 100%;
+    }
+
+    /* Prototype hotspot hint */
+    @keyframes hintPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.4; transform: scale(0.65); }
+    }
+    @keyframes hintFadeOut {
+      to { opacity: 0; pointer-events: none; }
+    }
+    .proto-hint {
+      position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+      z-index: 20;
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(5,7,27,0.88);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,0,0.35);
+      border-radius: 100px;
+      padding: 8px 18px;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--yellow);
+      white-space: nowrap;
+      pointer-events: none;
+      animation: hintFadeOut 0.6s ease 5s forwards;
+    }
+    .proto-hint-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--yellow); flex-shrink: 0;
+      animation: hintPulse 1.1s ease-in-out infinite;
+    }
+
     .proto-steps {
       display: flex; align-items: center; justify-content: center; gap: 8px;
-      margin-top: 20px; flex-wrap: wrap;
+      margin-bottom: 20px; flex-wrap: wrap;
     }
     .proto-step {
       font-size: 13px; font-weight: 500;
@@ -1718,7 +1778,7 @@
       <p class="hero-eyebrow">Boston Scientific · AutoElite Console</p>
       <h1>From Complexity to Clarity in Vascular Surgery</h1>
       <div class="hero-bar"></div>
-      <p class="hero-subtitle">Designing a touchscreen interface for a surgical thrombectomy device — where a confusing label or missed alert isn't a UX problem, it's a patient safety issue.</p>
+      <p class="hero-subtitle">Designing a touchscreen interface for a surgical thrombectomy device. A confusing label or missed alert isn't a UX problem, it's a patient safety issue.</p>
     </div>
   </section>
 
@@ -1729,7 +1789,7 @@
       <div class="training-header fade-up">
         <p class="training-label">Workflow Demo</p>
         <h2 class="training-heading">See the <span>AutoElite Console</span> in action</h2>
-        <p class="training-desc">Watch a full procedure flow — from setup and catheter priming through Power Pulse, dwell timing, and Thrombectomy — to see how the interface guides the technologist step by step.</p>
+        <p class="training-desc">Watch a full procedure flow: from setup and catheter priming through Power Pulse, dwell timing, and Thrombectomy, to see how the interface guides the technologist step by step.</p>
       </div>
     </div>
 
@@ -1746,7 +1806,7 @@
         Video coming soon.
       </div>
     </div>
-    <p class="demo-caption" id="demoCaption">The guided setup flow — from pump insertion through catheter priming, the interface walks the technologist through each physical step.</p>
+    <p class="demo-caption" id="demoCaption">The guided setup flow: from pump insertion through catheter priming, the interface walks the technologist through each physical step.</p>
 
     <!--
     <div class="proto-device" id="protoDevice">
@@ -2067,12 +2127,12 @@
       <div class="decisions-text-row">
         <div class="split-text fade-left">
           <h3>A device that left its operator guessing</h3>
-          <p>The AngioJet is a peripheral thrombectomy device — it removes blood clots via lytic delivery and active aspiration. In the OR, a cardiovascular technologist operates the console while a surgeon directs from the sterile field.</p>
+          <p>The AngioJet is a peripheral thrombectomy device that removes blood clots via lytic delivery and active aspiration. In the OR, a cardiovascular technologist operates the console while a surgeon directs from the sterile field.</p>
           <p>The existing device gave them a small LCD, six hardware buttons, and no workflow guidance. Techs ran procedures from memory. The interface did nothing to support the sequence.</p>
         </div>
         <div class="split-text fade-right">
           <h3>Two users, one screen, opposite needs</h3>
-          <p>The tech operates up close — hands on, decisions fast, attention split between screen and surgeon. The surgeon monitors from across the room — glancing, interpreting, directing.</p>
+          <p>The tech operates up close: hands on, decisions fast, attention split between screen and surgeon. The surgeon monitors from across the room, glancing, interpreting, directing.</p>
           <p>Every screen had to serve <strong>precise hands-on control for the tech</strong> while remaining <strong>instantly readable from two meters away.</strong> No mode switching. No separate views.</p>
         </div>
       </div>
@@ -2083,7 +2143,7 @@
   <section class="content-section alt from-to-section">
     <div class="comparison-wrap">
       <div class="comparison-item">
-        <p class="comparison-label before">Before — AngioJet Ultra</p>
+        <p class="comparison-label before">Before: AngioJet Ultra</p>
         <p class="comparison-caption">Small LCD, 6 status icons, segment-display timer, 3 physical buttons. No guided workflow.</p>
         <div class="comparison-img fade-up">
           <img src="https://images.dotmed.com/images/listingpics2/4/4/5/0/4450840_2.jpg"
@@ -2091,7 +2151,7 @@
         </div>
       </div>
       <div class="comparison-item">
-        <p class="comparison-label after">After — AutoElite Console</p>
+        <p class="comparison-label after">After: AutoElite Console</p>
         <p class="comparison-caption">Full touchscreen GUI. Guided procedure flow. Real-time data hierarchy designed for both users.</p>
         <div class="comparison-img fade-up">
           <img src="../20200828/2_Design Guide/High-Fidelity Wireframes/JPGs/Thrombectomy - 2.0.png"
@@ -2106,40 +2166,59 @@
     <div class="case-section-inner">
       <p class="section-label">The Solution</p>
 
-      <!-- Approach -->
-      <div class="split" style="margin-bottom:96px;">
+      <!-- 01 — Procedure-first navigation -->
+      <div class="split" style="margin-bottom:88px;">
         <div class="split-text fade-left">
-          <h3>Design around the procedure — not the device</h3>
-          <p>Most medical device UIs organize around features. We organized ours around the procedure itself: setup → catheter priming → mode selection → active run → end. Each phase is a discrete screen state. The interface tells you where you are and what to do next.</p>
-          <p>Each screen shows only what's relevant to the current phase — no jumping ahead, no skipping steps. In a high-stakes environment, <strong>a narrower interface is a safer one.</strong></p>
+          <h3>Follow the procedure, not the device</h3>
+          <p>Most medical device GUIs organize around features and settings menus. We organized ours around the clinical workflow itself:</p>
+          <ol class="workflow-steps">
+            <li>Setup</li>
+            <li>Catheter priming</li>
+            <li>Mode selection</li>
+            <li>Active run</li>
+            <li>End</li>
+          </ol>
+          <p>Each phase maps to a single, locked screen state. The interface always tells you where you are and what comes next. Each screen shows only what's relevant at that moment: no reaching ahead, no buried steps. In a high-stakes environment, <strong>a narrower interface is a safer one.</strong></p>
         </div>
         <div class="split-img fade-up">
-          <img src="setup-guidance.gif" alt="3-panel guided setup flow — the interface walks the technologist through each physical step" />
+          <img src="setup-guidance.gif" alt="3-panel guided setup flow: the interface walks the technologist through each physical step" />
         </div>
       </div>
 
-      <!-- Run Screen -->
-      <div class="decisions-text-row">
+      <!-- 02 — The run screen -->
+      <div class="split-text fade-left" style="max-width:600px; margin-bottom:40px;">
+        <h3>9 live data points, 7 of them timers, and a patent</h3>
+        <p>Power Pulse mode introduced a lytic delivery phase before active aspiration, adding a second procedure mode and significantly increasing the cognitive load mid-procedure. The run screen tracked both modes simultaneously: individual timers, fluid volumes, a combined total, and a safety progress bar with two contextual thresholds at 240 and 480 seconds depending on blood flow.</p>
+        <p>The dual-mode timer display was distinctive enough that Boston Scientific filed a US patent application on it. The color-coded mode indicators, hierarchical time tracking, and contextual safety progress bar were all cited as core elements of the invention.</p>
+      </div>
+      <div class="decisions-img-full scale-reveal" style="margin-bottom:88px;">
+        <img src="run-screen-callouts.png" alt="Run screen: dual-mode timer with safety progress bar and callout annotations" />
+      </div>
+
+      <!-- 03 — Built-in training -->
+      <div class="split">
         <div class="split-text fade-left">
-          <h3>The run screen: 9 live data points, 7 of them timers</h3>
-          <p>The device's proprietary Power Pulse mode lets surgeons deliver a lytic agent before aspiration — doubling the monitoring load and adding a new decision variable. The run screen had to track two independent procedure modes, each with their own elapsed time and fluid volume, a combined total run time, and a progress bar toward safety thresholds at 240 and 480 seconds.</p>
-          <p>Making that legible for both users simultaneously — without overwhelming either one — was the core design problem.</p>
+          <h3>Training built into the product, not bolted on</h3>
+          <p>The tutorial menu standardizes how procedure information reaches the team. Every tech learns from the same source: the actual interface, on the actual device, in the context where they'll use it. Learning in context is faster, sticks better, and reduces the gap between training and doing.</p>
+          <p>It's also always current and always at hand. No manuals to track down, no version uncertainty. In a regulated clinical environment where teams need to act fast and act right, having authoritative guidance embedded in the device is more than a convenience.</p>
         </div>
-        <div class="split-text fade-right">
-          <h3>A timer pattern worth patenting</h3>
-          <p>The solution: a dual-mode timer display with color-coded mode indicators, individual and combined run times, and a visual progress bar toward safety limits. The hierarchy lets the tech read precise values up close while the surgeon can read overall status from across the room at a glance.</p>
-          <p>This timer pattern became the subject of a <strong>US patent application filed by Boston Scientific.</strong></p>
+        <div class="screen-player sp-contain fade-up" data-interval="2800">
+          <img src="proto/images/tutorial/u23.png" class="sp-active" alt="Tutorial step 1: setup guidance" />
+          <img src="proto/images/tutorial/u24.png" alt="Tutorial step 2" />
+          <img src="proto/images/tutorial/u25.png" alt="Tutorial step 3" />
+          <img src="proto/images/tutorial/u26.png" alt="Tutorial step 4" />
+          <img src="proto/images/tutorial/u27.png" alt="Tutorial step 5" />
+          <button class="sp-btn sp-prev" aria-label="Previous">&#8249;</button>
+          <button class="sp-btn sp-next" aria-label="Next">&#8250;</button>
+          <div class="sp-dots">
+            <span class="sp-dot sp-active"></span>
+            <span class="sp-dot"></span>
+            <span class="sp-dot"></span>
+            <span class="sp-dot"></span>
+            <span class="sp-dot"></span>
+          </div>
         </div>
       </div>
-      <div class="decisions-img-full scale-reveal">
-        <img src="run-screen-callouts.png" alt="Run screen — dual-mode timer with safety progress bar and callout annotations" />
-      </div>
-
-      <!-- GIF: Run screen timer in action — placeholder hidden until GIF is ready -->
-      <!-- <div class="gif-showcase fade-up" style="max-width:860px; margin:40px auto 0;">
-        <img src="run-screen-timer.gif" alt="Run screen timer — dual mode tracking with safety progress bar" />
-        <p class="gif-caption">The patented timer pattern: dual-mode elapsed time, combined total, and visual progress toward safety thresholds.</p>
-      </div> -->
 
     </div>
   </section>
@@ -2150,20 +2229,11 @@
       <div class="training-header fade-up">
         <p class="training-label">The Prototype</p>
         <h2 class="training-heading">Explore the <span>guided flow</span></h2>
-        <p class="training-desc">Click through the screens to experience the full procedure — from setup through mode selection, active thrombectomy, and dwell timing.</p>
+        <p class="training-desc">Click through the screens to experience the full procedure: setup through mode selection, active thrombectomy, and dwell timing.</p>
       </div>
     </div>
 
     <div class="training-inner">
-      <div class="proto-device" id="protoDevice">
-        <iframe id="axureProto" src="proto/main_menu.html"
-                style="width:1280px;height:800px;border:none;display:block;
-                       transform-origin:top left;
-                       transform:scale(var(--iframe-scale,0.43));
-                       pointer-events:auto;"
-                allowfullscreen></iframe>
-      </div>
-
       <div class="proto-steps">
         <span class="proto-step ps-cur" data-step="main_menu">Start</span>
         <span class="proto-step-sep">→</span>
@@ -2173,6 +2243,21 @@
         <span class="proto-step-sep">→</span>
         <span class="proto-step" data-step="end_procedure">End</span>
       </div>
+
+      <div class="proto-device-wrap">
+        <div class="proto-device" id="protoDevice">
+          <iframe id="axureProto" src="proto/main_menu.html"
+                  style="width:1280px;height:800px;border:none;display:block;
+                         transform-origin:top left;
+                         transform:scale(var(--iframe-scale,0.43));
+                         pointer-events:auto;"
+                  allowfullscreen></iframe>
+        </div>
+        <div class="proto-hint" id="protoHint">
+          <span class="proto-hint-dot"></span>
+          Click the menu buttons to navigate
+        </div>
+      </div>
     </div>
   </section>
 
@@ -2180,7 +2265,7 @@
   <section class="outcomes-section" id="s2">
     <div class="outcomes-inner">
       <p class="section-label">Outcomes</p>
-      <h3 class="outcomes-heading">Zero task errors in final-round usability testing — across both user types.</h3>
+      <h3 class="outcomes-heading">Zero task errors in final-round usability testing, across both user types.</h3>
       <p>Both user types completed every task correctly on first attempt, meeting the FDA human factors benchmark. Technologists who'd run the old device for years said it felt <strong>"like it was designed for how the procedure actually works."</strong></p>
 
       <div class="outcomes-stats">
@@ -2204,7 +2289,7 @@
         <a class="case-card" href="/p/matchx">
           <div class="case-card-img" style="background:#0d2137;"></div>
           <h3>MatchX</h3>
-          <p>Revolutionizing Organ Transplant Analytics — a unified histocompatibility platform.</p>
+          <p>Revolutionizing Organ Transplant Analytics: a unified histocompatibility platform.</p>
         </a>
         <a class="case-card" href="#">
           <div class="case-card-img" style="background:#1a0d30;"></div>
@@ -2375,11 +2460,11 @@
       const videos = {
         setup: {
           src: 'demo-setup.mp4',
-          caption: 'The guided setup flow — from pump insertion through catheter priming, the interface walks the technologist through each physical step.'
+          caption: 'The guided setup flow: from pump insertion through catheter priming, the interface walks the technologist through each physical step.'
         },
         runscreen: {
           src: 'demo-runscreen.mp4',
-          caption: 'The run screen in action — dual-mode timer tracking, safety progress bar, dwell timer, and mode switching.'
+          caption: 'The run screen in action: dual-mode timer tracking, safety progress bar, dwell timer, and mode switching.'
         }
       };
       function switchTab(key) {
@@ -2491,6 +2576,48 @@
 
       updateStepNav();
     })();
+
+    /* ── Prototype hint dismiss on first click ── */
+    (() => {
+      const hint = document.getElementById('protoHint');
+      const device = document.getElementById('protoDevice');
+      if (hint && device) {
+        device.addEventListener('click', () => {
+          hint.style.animation = 'hintFadeOut 0.3s ease forwards';
+        }, { once: true });
+      }
+    })();
+
+    /* ── Screen-player carousel ── */
+    document.querySelectorAll('.screen-player').forEach(player => {
+      const imgs = Array.from(player.querySelectorAll('img'));
+      const dots = Array.from(player.querySelectorAll('.sp-dot'));
+      const interval = parseInt(player.dataset.interval || 2500);
+      let current = 0;
+      let timer;
+
+      function goTo(n) {
+        imgs[current].classList.remove('sp-active');
+        dots[current] && dots[current].classList.remove('sp-active');
+        current = (n + imgs.length) % imgs.length;
+        imgs[current].classList.add('sp-active');
+        dots[current] && dots[current].classList.add('sp-active');
+      }
+
+      function startAuto() {
+        clearInterval(timer);
+        timer = setInterval(() => goTo(current + 1), interval);
+      }
+
+      player.querySelector('.sp-prev') && player.querySelector('.sp-prev').addEventListener('click', e => {
+        e.stopPropagation(); goTo(current - 1); startAuto();
+      });
+      player.querySelector('.sp-next') && player.querySelector('.sp-next').addEventListener('click', e => {
+        e.stopPropagation(); goTo(current + 1); startAuto();
+      });
+
+      startAuto();
+    });
   </script>
 
   <!-- GET IN TOUCH MODAL -->
@@ -2538,7 +2665,7 @@
       <div class="modal-success" id="contactSuccess">
         <div class="modal-success-check">✓</div>
         <h3>Message sent.</h3>
-        <p>Thanks for reaching out —<br>I'll get back to you shortly.</p>
+        <p>Thanks for reaching out.<br>I'll get back to you shortly.</p>
       </div>
     </div>
   </div>

@@ -1199,8 +1199,11 @@
     modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
     // ── Password Modal
-    // Set your password here ↓
-    const PORTFOLIO_PASSWORD = 'Ale$1@';
+    const CASE_STUDY_PASSWORDS = {
+      'AutoElite Console':   '@ut0elite',
+      'Next Gen Apheresis':  '$0l0',
+      'Next Gen Blood Bank': 'repl1c@nt',
+    };
     const CASE_STUDY_URLS = {
       'Next Gen Apheresis':  '/solo',
       'AutoElite Console':   '/angiojet',
@@ -1227,7 +1230,7 @@
       document.body.style.overflow = '';
     }
     function checkPassword() {
-      if (pwInput.value === PORTFOLIO_PASSWORD) {
+      if (pwInput.value === CASE_STUDY_PASSWORDS[_pwProject]) {
         window.location.href = CASE_STUDY_URLS[_pwProject] || '#';
       } else {
         pwError.style.display = 'block';
