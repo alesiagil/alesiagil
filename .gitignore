@@ -1,3 +1,6 @@
 .DS_Store
 Thumbs.db
 *.log
+
+# Plaintext sources of encrypted pages (never publish)
+_private/

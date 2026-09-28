@@ -2358,6 +2358,10 @@
     }
     function closePasswordModal() { pwModal.classList.remove('open'); document.body.style.overflow = ''; }
     function checkPassword() {
+      if (_pwProject === 'Next Gen AngioJet') { // encrypted page verifies the password itself
+        try { sessionStorage.setItem('ag_pw_autoelite', pwInput.value); } catch (e) {}
+        window.location.href = '/angiojet/'; return;
+      }
       if (pwInput.value === PORTFOLIO_PASSWORD) { window.location.href = CASE_STUDY_URLS[_pwProject] || '#'; }
       else { pwError.style.display = 'block'; pwInput.value = ''; pwInput.focus(); }
     }
