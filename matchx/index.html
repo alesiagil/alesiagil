@@ -1873,19 +1873,6 @@
     <div class="more-inner">
       <p class="more-heading">More case studies</p>
       <div class="cases-grid">
-        <a class="case-card" href="#" onclick="openModal('Next Gen AngioJet'); return false;">
-          <div class="case-card-img">
-            <img src="../thumbnails/angiojet-thumbnail.png" alt="Next Gen AngioJet — password protected" />
-            <div class="lock-overlay">
-              <svg viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="1" y="6" width="10" height="8" rx="1.5" stroke="currentColor" stroke-width="1.4"/>
-                <path d="M3.5 6V4a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-              </svg>
-            </div>
-          </div>
-          <h3>Next Gen AngioJet</h3>
-          <p>From Complexity to Clarity in Vascular Surgery — streamlining high-risk thrombectomy procedures with a device interface that enhances safety, reduces cognitive load, and supports confident decision-making in the OR.</p>
-        </a>
         <a class="case-card" href="#" onclick="openModal('Next Gen Apheresis'); return false;">
           <div class="case-card-img">
             <img src="../thumbnails/solo-thumbnail.png" alt="Next Gen Apheresis — password protected" />
@@ -2343,7 +2330,7 @@
 
     // ── Password Modal
     const PORTFOLIO_PASSWORD = 'Ale$1@';
-    const CASE_STUDY_URLS = { 'Next Gen Apheresis': '/solo', 'Next Gen AngioJet': '/angiojet', 'Next Gen Blood Bank': '/replicant' };
+    const CASE_STUDY_URLS = { 'Next Gen Apheresis': '/solo', 'Next Gen Blood Bank': '/replicant' };
     let _pwProject = '';
     const pwModal   = document.getElementById('passwordModal');
     const pwInput   = document.getElementById('pwInput');
@@ -2358,10 +2345,6 @@
     }
     function closePasswordModal() { pwModal.classList.remove('open'); document.body.style.overflow = ''; }
     function checkPassword() {
-      if (_pwProject === 'Next Gen AngioJet') { // encrypted page verifies the password itself
-        try { sessionStorage.setItem('ag_pw_autoelite', pwInput.value); } catch (e) {}
-        window.location.href = '/angiojet/'; return;
-      }
       if (pwInput.value === PORTFOLIO_PASSWORD) { window.location.href = CASE_STUDY_URLS[_pwProject] || '#'; }
       else { pwError.style.display = 'block'; pwInput.value = ''; pwInput.focus(); }
     }

@@ -334,7 +334,7 @@
     .card-cta:hover { gap: 12px; }
     .card-cta:hover::after { transform: scaleX(1); }
 
-    /* ─── HALF CARDS (Apheresis / Blood Banking / AngioJet) ─ */
+    /* ─── HALF CARDS (Apheresis / Blood Banking) ─ */
     .card-half {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -364,7 +364,7 @@
       position: absolute; inset: 0;
     }
 
-    /* NDA cards (Apheresis, AngioJet, Blood Bank) — blurred with rounded mask */
+    /* NDA cards (Apheresis, Blood Bank) — blurred with rounded mask */
     .card-nda .card-image {
       border-radius: 12px;
       overflow: visible; /* lock overlay must not be clipped */
@@ -896,33 +896,8 @@
 
       <hr class="work-divider" />
 
-      <!-- ── Card 2: AutoElite Console — image right (password protected) ── -->
-      <article class="case-card card-half flip card-nda">
-        <button class="card-full-link" onclick="openModal('AutoElite Console')" aria-label="Request access to AutoElite Console"></button>
-        <div class="card-image">
-          <img src="../thumbnails/angiojet-thumbnail.png"
-               alt="AutoElite thrombectomy system console interface, password protected"
-               loading="lazy" />
-          <div class="lock-overlay">
-            <svg width="20" height="20" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="1" y="6" width="10" height="8" rx="1.5" stroke="currentColor" stroke-width="1.4"/>
-              <path d="M3.5 6V4a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-            </svg>
-          </div>
-        </div>
-        <div class="card-content">
-          <p class="card-eyebrow">Cardiovascular Intervention</p>
-          <h2 class="card-title">AutoElite Console</h2>
-          <p class="card-subtitle">From Complexity to Clarity in Vascular Surgery</p>
-          <p class="card-desc">Designing a touchscreen interface for a surgical thrombectomy device. A confusing label or missed alert isn't a UX problem, it's a patient safety issue.</p>
-          <button class="card-cta-request" onclick="openModal('AutoElite Console')">Request Access →</button>
-        </div>
-      </article>
-
-      <hr class="work-divider" />
-
       <!-- ── Card 3: Next Gen Apheresis — image left ── -->
-      <article class="case-card card-half card-nda card-apheresis">
+      <article class="case-card card-half flip card-nda card-apheresis">
         <button class="card-full-link" onclick="openModal('Next Gen Apheresis')" aria-label="Request access to Next Gen Apheresis"></button>
         <div class="card-image">
           <img src="../thumbnails/solo-thumbnail.png"
@@ -947,7 +922,7 @@
       <hr class="work-divider" />
 
       <!-- ── Card 4: Next Gen Blood Bank — image right ── -->
-      <article class="case-card card-half flip card-blood-bank card-nda">
+      <article class="case-card card-half card-blood-bank card-nda">
         <button class="card-full-link" onclick="openModal('Next Gen Blood Bank')" aria-label="Request access to Next Gen Blood Bank"></button>
         <div class="card-image">
           <img src="../thumbnails/replicant-thumbnail.png"
@@ -1205,7 +1180,6 @@
     };
     const CASE_STUDY_URLS = {
       'Next Gen Apheresis':  '/solo',
-      'AutoElite Console':   '/angiojet',
       'Next Gen Blood Bank': '/replicant',
     };
 
@@ -1228,8 +1202,7 @@
       pwModal.classList.remove('open');
       document.body.style.overflow = '';
     }
-    // AutoElite is encrypted: hand the password to /angiojet/, which verifies it by decrypting
-    const ENCRYPTED_CASE_STUDIES = { 'AutoElite Console': { key: 'ag_pw_autoelite', url: '/angiojet/' } };
+    const ENCRYPTED_CASE_STUDIES = {};
     function checkPassword() {
       const enc = ENCRYPTED_CASE_STUDIES[_pwProject];
       if (enc) {
@@ -1256,7 +1229,7 @@
       openPasswordModal(proj);
     });
 
-    // Open Request Access modal from a link like /work/?request=AutoElite%20Console
+    // Open Request Access modal from a link like /work/?request=Next%20Gen%20Apheresis
     (function () {
       const req = new URLSearchParams(location.search).get('request');
       if (req && CASE_STUDY_URLS[req]) openModal(req);

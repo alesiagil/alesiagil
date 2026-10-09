@@ -4,3 +4,7 @@ Thumbs.db
 
 # Plaintext sources of encrypted pages (never publish)
 _private/
+
+# AutoElite case study: kept locally only, not published
+angiojet/
+thumbnails/angiojet-thumbnail.png
